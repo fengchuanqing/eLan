@@ -1,0 +1,70 @@
+<!--pages/Order/myorder/myorder.wxml-->
+<!-- <text>pages/Order/myorder/myorder.wxml</text> -->
+<view class="container">
+  <van-tabs id="tabs" active="{{ active }}" bind:click="changeTabs" custom-class="tabs" ellipsis="{{false}}">
+    <van-tab title="全部" name="0"></van-tab>
+    <van-tab title="已下单" name="1"></van-tab>
+    <van-tab title="待发货" name="3"></van-tab>
+    <van-tab title="已发货" name="4"></van-tab>
+    <van-tab title="待收（提）货" name="4"></van-tab>
+    <van-tab title="已完成" name="5"></van-tab>
+  </van-tabs>
+  <view class="container_body">
+    <view class="myorder_item" wx:for="{{orderList}}" wx:key='idx'>
+      <view class="m_header">
+        <text>{{item.full_name}}</text>
+        <text class="{{item.order_status==='5'?'grey':'orange'}}">{{item.order_status==='1'?'已下单':item.order_status==='3'?'待发货':item.order_status==='4'&&(item.distribution=='自提'||item.distribution=='活动')?'待提货':item.order_status==='4'&&item.distribution=='快递配送'?'待收货':item.order_status==='5'?'已完成':'商家取消订单'}}</text>
+      </view>
+      <view class="m_main">
+        <view wx:for="{{item.goodSizeList}}" wx:key="index" wx:for-item="goods" class="goods">
+          <view>
+            <image src="{{item.hdtp?pic+item.hdtp:pic+goods.sptp[0]}}"></image>
+          </view>
+          <view>
+            <p>{{item.activity_name?item.activity_name:goods.name}}</p>
+            <p>{{item.introduction?item.introduction:goods.trait}}</p>
+            <view class="gg" wx:if="{{!item.activity_name}}">
+              <text>{{goods.sizeName}}</text>
+              <text>x{{goods.num}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="m_bottom">
+        <view wx:if="{{item.order_status==='5'&&item.evaluation_state==='0'}}" bindtap="goEvaluate" data-item="{{item}}">去评价</view>
+        <view wx:if="{{item.order_status==='5'}}" data-id="{{item.id}}" bindtap="delOrder">删除订单
+        </view>
+        <view bindtap="GoDetail" data-id="{{item.id}}">查看详情</view>
+        <view wx:if="{{item.order_status==='4'}}" style="background-color:#428ffc;color:#fff;" bindtap="confirmOrder" data-item="{{item}}" data-id="{{item.id}}">确认收货</view>
+      </view>
+    </view>
+    <view class="noLists" wx:if="{{orderList.length===0}}">暂无订单~</view>
+  </view>
+  <van-dialog id="van-dialog" />
+  <van-overlay show="{{ showEvaluate }}">
+    <view class="evaluate_box">
+      <view class="evaluate_box_close">
+        <van-icon name="cross" color="#e0e0e0" bind:click="closeDialog" />
+      </view>
+      <view class="evaluate_box_tit">我的评价</view>
+      <view class="evaluate_main">
+        <!-- <image src="{{item.hdtp?pic+item.hdtp:pic+item.sptp[0]}}"></image> -->
+        <image src="{{currentShop.hdtp?pic+currentShop.hdtp:pic+currentShop.goodSizeList[0].sptp[0]}}"></image>
+        <view class="evaluate_info">
+          <view class="evaluate_name">{{currentShop.fullName?currentShop.fullName:currentShop.full_name}}</view>
+          <text>{{currentShop.activity_name?currentShop.activity_name:currentShop.goodSizeList[0].name}}</text>
+          <view class="rate">
+            <text>评分：</text>
+            <van-rate value="{{ evaluateVal }}" size="{{ 22 }}" color="#ffd21e" void-icon="star" void-color="#eee" bind:change="onChange" />
+          </view>
+        </view>
+      </view>
+      <view class="evaluate_box_describe">商品描述</view>
+      <textarea cols="30" rows="10" value="{{describeVal}}" placeholder-class="textarea" placeholder="请从多角度客观评价" bindinput="bindTextAreaBlur"></textarea>
+      <view class="evaluate_box_btn">
+        <view class="evaluate_box_cancel" bindtap="closeDialog">取消</view>
+        <view class="evaluate_box_submit" bindtap="submitEvaluate">提交</view>
+      </view>
+    </view>
+  </van-overlay>
+</view>

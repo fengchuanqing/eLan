@@ -1,0 +1,39 @@
+/* message/pages/message/message.wxss */
+.container{
+    margin-top: 31rpx;
+    box-shadow: 0rpx 0rpx 24rpx 0rpx 
+    rgba(47, 111, 247, 0.1);
+}
+.empty{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.empty image{
+    width: 305rpx;
+    height: 416rpx;
+}
+.list{
+    margin: 0 28rpx;
+    border-bottom: solid 1rpx #e8e9ec;
+    font-size: 32rpx;
+    color: #363a44;
+    /* height: 110rpx;
+    line-height: 110rpx; */
+    padding: 28rpx 0;
+}
+.container view .star {
+    color: #e63633;
+}
+.container view>text{
+    display: block;
+}
+.container view>text:nth-child(2){
+    font-size: 24rpx;
+    margin-top: 5rpx;
+}
+.date{
+    color: #b3b5b9;
+}

@@ -1,0 +1,19 @@
+<view class="nav-box">
+  <view class="nav font28">
+    <view class="nav-item {{curNavItem===0?'nav-item-act':''}}" bindtap="changeNav" data-idx="{{0}}">跟着模型学习</view>
+    <view class="nav-item {{curNavItem===1?'nav-item-act':''}}" bindtap="changeNav" data-idx="{{1}}">跟着示范户学习</view>
+    <view class="nav-item {{curNavItem===2?'nav-item-act':''}}" bindtap="changeNav" data-idx="{{2}}">小兰预测</view>
+  </view>
+</view>
+<view>
+  <block wx:if="{{curNavItem===0}}">
+    <Model></Model>
+  </block>
+  <block wx:elif="{{curNavItem===1}}">
+    <Demonstrator></Demonstrator> 
+  </block>
+  <block wx:else>
+    <Forecast farmRz="{{farmRz}}" mainMessage="{{information}}"></Forecast>
+  </block>
+</view>
+<authentication show="{{showAuthentication}}" url="{{authUrl}}" content="为了更好的体验以及权限请你完善更多的信息"></authentication>

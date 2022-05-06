@@ -1,0 +1,86 @@
+/* pages/countryside/addFinish/addFinish.wxss */
+
+.container {
+    background: #fff;
+    margin-top: 24rpx;
+    font-size: 24rpx;
+    color: #363a44;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+image {
+    width: 157rpx;
+    height: 178rpx;
+    margin: 24rpx 0;
+}
+
+.h3 {
+    font-size: 40rpx;
+    font-weight: 800;
+    color: #363a44;
+    width: 100%;
+    text-align: center;
+}
+
+.hint {
+    margin: 24rpx;
+    font-size: 28rpx;
+    color: #686b73;
+}
+
+.tagList {
+    width: 100%;
+    padding: 0 55rpx 65rpx;
+    display: grid;
+    grid-template-columns: repeat(3, 32%);
+    grid-column-gap: 1.33%;
+}
+
+.item {
+    margin-bottom: 30rpx;
+}
+.tag{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    /* padding: 0 30rpx; */
+    background-color: #e8e9ec;
+    border-radius: 31rpx;
+    height: 61rpx;
+}
+.active{
+    background: #428ffc;
+    color: #fff;
+}
+.item image{
+    width: 20rpx;
+    height: 20rpx;
+    margin-right: 15rpx;
+}
+.item text{
+    margin-right: 7rpx;
+}
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 8%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.text {
+    width: 686rpx;
+    height: 96rpx;
+    background-color: #428ffc;
+    border-radius: 48rpx;
+    font-size: 36rpx;
+    color: #fff;
+    font-weight: 800;
+    text-align: center;
+    line-height: 96rpx;
+}

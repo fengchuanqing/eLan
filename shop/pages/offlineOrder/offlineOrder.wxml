@@ -1,0 +1,23 @@
+<view class="page">
+  <view class="none" wx:if="{{orderList.length===0}}">
+    <image src="/shop/static/img/none.png"></image>
+    <view>亲，暂无线下订单~</view>
+  </view>
+  <view class="orderList" wx:else>
+    <view class="orderItem" wx:for="{{orderList}}" wx:key="index">
+      <view class="name">
+        <text>订单姓名：</text>{{item.name}}
+      </view>
+      <view class="name">
+        <text>下单金额：</text>{{item.money}}元
+      </view>
+      <view class="name">
+        <text>商品名称：</text>{{item.commodity_name}}
+      </view>
+      <view class="name">
+        <text>时间：</text>{{item.sj}}
+      </view>
+    </view>
+  </view>
+<navigator class="add" url="/shop/pages/addOfflineOrder/addOfflineOrder" open-type="navigate">添加订单</navigator>
+</view>

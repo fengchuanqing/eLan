@@ -1,0 +1,86 @@
+<view class="nyyd">
+  <view class="nyyd_r2">
+    <view class="nyyd_tag">
+      <view class="nyyd_name">{{obj.bt}}</view>
+      <van-tag color="#00b578" text-color="#ffffff" custom-class="nyyd_tag_item">{{obj.zt==='0'?'待交易':'已交易'}}</van-tag>
+    </view>
+    <view class="nyyd_py">
+      <text>{{obj.jg}}</text>
+      <text>{{obj.nx}}年</text>
+    </view>
+    <view class="nyyd_py">
+      <view class="ms">{{obj.mj}}</view>
+      <view class="nyyd_md_r">
+        <van-icon name="location-o" color="#428ffc" />{{obj.region_name}}
+      </view>
+    </view>
+    <view class="temp_time">
+      <view class="temp_time_l">
+        <image class="eye" src="/gylz/img/icon_eyes.png"></image>{{obj.ckcs}}次
+      </view>
+      <view class="temp_time_l">
+        <image class="clock" src="/gylz/img/icon_time.png"></image>{{obj.fbsj}}
+      </view>
+    </view>
+  </view>
+</view>
+<view class="con">
+  <van-cell-group>
+    <van-cell title="所在地区" value="{{obj.tdqy}}" />
+    <van-cell title="土地用途" value="{{obj.lxmc}}" />
+    <van-cell title="面积大小" value="{{obj.mj}}亩" />
+    <van-cell title="需求年限" value="{{obj.nx}}年" />
+    <van-cell title="流转类型" value="{{obj.lzfs}}" />
+  </van-cell-group>
+</view>
+<block wx:if="{{obj.zt==='0'}}">
+  <view class="con xq">
+    <view class="xq_tit">需求介绍</view>
+    <view class="xq_con">
+      {{obj.msjs}}
+    </view>
+  </view>
+</block>
+<block wx:else>
+  <view class="jbxx_tit">交易信息</view>
+  <van-cell-group custom-class="jbnr">
+    <van-cell title="提交时间" value="{{jyObj.fbsj}}" />
+    <van-cell title="签订时间" value="{{jyObj.lzsj}}" />
+    <van-cell title="实际面积大小" value="{{jyObj.sjmj}}亩" />
+    <van-cell title="实际流转年限" value="{{jyObj.sjnx}}年" />
+    <van-cell title="状态" value="已流转" value-class="orange" />
+  </van-cell-group>
+</block>
+<view class="foot" wx:if="{{showFoot}}">
+  <view class="foot_item">
+    <image src="/gylz/img/icon_user.png"></image>
+    <text>{{obj.mjia}}</text>
+  </view>
+  <view class="foot_item" bindtap="bindWechat">
+    <image class="wechat" src="/gylz/img/icon_wechat.png"></image>
+    <text>微信号</text>
+  </view>
+  <view class="makePhone" bindtap="showDia">
+    <image src="/gylz/img/icon_phone.png"></image>拨打电话
+  </view>
+</view>
+<van-overlay show="{{ show }}" z-index='100'>
+  <view class="phonePop">
+    <view class="phonePop_tit">手机号</view>
+    <view class="phoneNum">{{obj.mjlxfs}}</view>
+    <view class="phonePop_btn">
+      <view class="cancel" bindtap="onClose">取消</view>
+      <view class="confirm" bindtap="makePhone">确定拨打</view>
+    </view>
+  </view>
+</van-overlay>
+<van-overlay show="{{ wechartShow }}" z-index='100'>
+  <view class="phonePop">
+    <view class="phonePop_tit">微信号</view>
+    <view class="phoneNum">{{obj.vx}}</view>
+    <view class="phonePop_btn">
+      <view class="cancel" bindtap="onWechatClose">关闭</view>
+      <view class="confirm" bindtap="makeWechat">复制</view>
+    </view>
+  </view>
+</van-overlay>

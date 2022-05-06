@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+
+  },
+  "navigationBarTitleText": "地块详情",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#ffffff"
+}

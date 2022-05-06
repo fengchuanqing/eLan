@@ -1,0 +1,144 @@
+.page {
+  /* background-color: #f5f6f7; */
+  padding: 32rpx 0;
+}
+
+.uploadBox {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 34rpx;
+  padding: 0 32rpx;
+}
+
+.imgList {
+  width: 150rpx;
+  height: 150rpx;
+  position: relative;
+  margin-left: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.imgList image {
+  width: 100%;
+  height: 100%;
+}
+
+.imgList .zt {
+  width: 80rpx;
+  height: 32rpx;
+  background-color: rgba(0, 0, 0, .5);
+  border-radius: 16rpx;
+  line-height: 32rpx;
+  text-align: center;
+  position: absolute;
+  right: 4rpx;
+  bottom: 10rpx;
+  font-size: 20rpx;
+  color: #ffffff;
+}
+
+.imgList .zt image {
+  width: 18rpx;
+  height: 14rpx;
+  margin-right: 5rpx;
+}
+
+.title {
+  font-size: 30rpx;
+  color: #222222;
+  /* margin-top: 40rpx; */
+  padding: 32rpx;
+}
+
+.date {
+  padding: 32rpx;
+  width: 100%;
+  display: flex;
+  margin-top: 20rpx;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.date_name {
+  width: 100rpx;
+}
+
+.date_right {
+  width: 80%;
+  text-align: right;
+  font-size: 30rpx;
+  color: #222222;
+}
+
+.date_right text {
+  display: inline-block;
+  color: #999999;
+}
+
+view.van-checkbox {
+  justify-content: flex-end;
+}
+
+.btn-area {
+  display: flex;
+  padding: 0 32rpx;
+  justify-content: space-between;
+  margin-top: 50rpx;
+}
+
+.btn-area button {
+  width: 338rpx !important;
+  height: 72rpx;
+  background-color: #ffffff;
+  border-radius: 36rpx;
+  border: solid 1rpx #428ffc;
+  padding: 0;
+  line-height: 72rpx;
+  color: #428ffc;
+  font-weight: normal;
+  margin: 0 !important;
+}
+
+.btn-area button:first-child {
+  background-color: #428ffc;
+  color: #ffffff;
+}
+
+.te_ri {
+  justify-content: flex-end;
+}
+
+.wrapper {
+  background-color: #ffffff;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.wrapper image {
+  width: 100%;
+}
+.weui-cells {
+  display: flex;
+  padding: 15rpx 36rpx;
+  justify-content: space-between;
+}
+
+.rules{
+  padding: 0 30rpx;
+  background-color: #ffffff;
+}
+.ruleItemBox{
+  margin-bottom: 19rpx;
+}
+.addBox image{
+  width: 37rpx;
+	height: 37rpx;
+}
+.ruleItem{
+  /* background-color: rgba(66,143,252,.1); */
+  margin-left: 5rpx;
+}

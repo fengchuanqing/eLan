@@ -1,0 +1,33 @@
+/* pages/Receiving/addaddress/addaddress.wxss */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+.box {
+  width: 92%;
+  margin: 0 auto;
+  padding: 20rpx 0;
+}
+
+.a_bottom {
+  width: 100%;
+  margin-top: 100rpx;
+}
+.van-cell__value{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #323233 !important;
+    font-size: 28rpx;
+}
+.a_bottom>view {
+margin: 0 auto;
+  width: 90%;
+  height: 96rpx;
+  line-height: 96rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #428ffc ;
+  border-radius: 48rpx;
+}

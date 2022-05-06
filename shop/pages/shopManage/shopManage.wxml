@@ -1,0 +1,91 @@
+<view class="page">
+  <van-tabs active="{{ active }}" bind:change="onChange" color="#428ffc">
+    <van-tab title="已上架"></van-tab>
+    <van-tab title="已下架"></van-tab>
+  </van-tabs>
+  <view class="screenBox" bindtap="showPopup">
+    <text>筛选</text>
+  </view>
+  <view class="none" wx:if="{{shopList.length===0}}">
+    <image src="/shop/static/img/none.png"></image>
+    <view>亲，暂无添加商品~</view>
+  </view>
+  <view wx:else>
+    <view class="activityList">
+      <view class="item" wx:for="{{shopList}}" wx:key="index">
+        <navigator url="/shop/pages/shopDetail/shopDetail?id={{item.id}}" open-type="navigate">
+          <view class="status">
+            <text>{{active===0?'已上架':'已下架'}}</text>
+            <text>{{item.time}}</text>
+          </view>
+          <view class="item_con">
+            <image src="{{img+item.logo}}"></image>
+            <view class="info">
+              <view class="name">{{item.name}}</view>
+              <view class="pro">{{item.trait}}</view>
+              <!-- <view class="pro address">{{item.origin}}</view> -->
+              <view class="more" catchtap="showMore" data-idx="{{index}}">
+                <text>··</text>
+                <view class="btnBox" wx:if="{{showMore&&active===1&&showItem===index}}">
+                  <view class="btn">
+                    <navigator url="/shop/pages/addShop/addShop?id={{item.id}}">
+                      <image src="/shop/static/icons/icon/edit.png"></image>
+                      <text>编辑</text>
+                    </navigator>
+                  </view>
+                  <view class="btn" bindtap="grounding" data-id="{{item.id}}">
+                    <image src="/shop/static/icons/icon/up.png"></image>
+                    <text>上架</text>
+                  </view>
+                  <view class="btn" bindtap="delete" data-id="{{item.id}}">
+                    <image src="/shop/static/icons/icon/del.png"></image>
+                    <text>删除</text>
+                  </view>
+                </view>
+                <view class="btnBox" wx:if="{{showMore&&active===0&&showItem===index}}">
+                  <view class="btn">
+                    <navigator url="/shop/pages/shopDetail/shopDetail?id={{item.id}}">
+                      <image src="/shop/static/icons/icon/chakan.png"></image>
+                      <text>查看</text>
+                    </navigator>
+                  </view>
+                  <view class="btn" bindtap="undercarriage" data-id="{{item.id}}">
+                    <image src="/shop/static/icons/icon/down.png"></image>
+                    <text>下架</text>
+                  </view>
+                  <view class="btn" bindtap="sortClick" data-id="{{item.id}}">
+                    <image src="/shop/static/icons/icon/sort_02.png"></image>
+                    <text>排序设置</text>
+                  </view>
+                </view>
+              </view>
+              <view class="price">￥{{item.jg}}</view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+
+  <navigator class="add" url="/shop/pages/addShop/addShop" open-type="navigate">新增商品</navigator>
+</view>
+<van-popup show="{{ screenPop }}" position="bottom" bind:close="onClose" closeable custom-style="height: 35%">
+  <view class="pop_con">
+    <!-- <view class="tit">商品类型</view>
+    <view class="tags">
+      <text class="{{lx_act===0?'tag_act':''}}" bindtap="changeLxTag" data-type="{{0}}">三品一标</text>
+      <text class="{{lx_act===1?'tag_act':''}}" bindtap="changeLxTag" data-type="{{1}}">有机化</text>
+      <text class="{{lx_act===2?'tag_act':''}}" bindtap="changeLxTag" data-type="{{2}}">本地商品</text>
+    </view> -->
+    <!-- <view class="tit">状态</view>
+    <view class="tags">
+      <text class="{{zt_act===1?'tag_act':''}}" bindtap="changeZtTag" data-type="{{1}}">已上架</text>
+      <text class="{{zt_act===0?'tag_act':''}}" bindtap="changeZtTag" data-type="{{0}}">已下架</text>
+    </view> -->
+    <view class="tit">商品名称</view>
+    <view class="shopName">
+      <input type="text" value="{{shopName}}" placeholder="请输入商品名称关键字" bindinput="shopNameInput" />
+    </view>
+    <view class="confirm" bindtap="confirm">确认</view>
+  </view>
+</van-popup>

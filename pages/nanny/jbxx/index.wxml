@@ -1,0 +1,37 @@
+<view class="container">
+    <view class="title">基本信息</view>
+    <view class="item">
+        <van-cell-group>
+            <van-field value="{{ jdxx }}" label="基地信息" placeholder="请输入基地名称" input-align="right" bind:change="onChange1" />
+        </van-cell-group>
+    </view>
+    <view class="item">
+        <van-cell-group>
+            <van-field value="{{ jdgm }}" label="基地规模" placeholder="请输入规模（亩）" input-align="right" bind:change="onChange2" />
+        </van-cell-group>
+    </view>
+    <view class="item">
+        <van-cell-group>
+            <van-field value="{{ jdjs }}" label="基地介绍" placeholder="请输入内容" input-align="right" bind:change="onChange3" />
+        </van-cell-group>
+    </view>
+    <view class="item">
+        <van-cell-group>
+            <van-cell title="基地主要品种" is-link value="{{activePinzhong}}" bindtap="openPop" />
+        </van-cell-group>
+    </view>
+    <view class="item">
+        <van-cell-group>
+            <van-cell title="地址" is-link value="{{activDizhi}}" bindtap="openPop2" />
+        </van-cell-group>
+    </view>
+
+    <view class="pinji" bindtap="queren">确认</view>
+    <van-toast id="van-toast" />
+    <van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;" bind:close="onClose">
+        <van-picker columns="{{ columns }}" bind:change="onChange" />
+    </van-popup>
+    <van-popup show="{{ show2 }}" position="bottom" custom-style="height: 40%;" bind:close="onClose">
+        <van-area area-list="{{ areaList }}" bind:confirm="confirmSSQ" bind:cancel="onClose" />
+    </van-popup>
+</view>

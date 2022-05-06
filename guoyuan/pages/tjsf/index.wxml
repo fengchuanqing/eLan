@@ -1,0 +1,49 @@
+<view class="container">
+    <view class="header-tabs">
+        <view class="header-ul">
+            <view class="header-li" wx:for="{{headerTabs}}" wx:for-index="idx" wx:key="idx" data-id="{{idx}}" bindtap="headerChangeTab">
+                <image src="{{domain+item.src}}"> </image>
+                <text class="{{active == idx?'active':''}}">{{item.text}}</text>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{true}}">
+        <view class="flex-col section_4">
+            <view class="flex-row group">
+                <image src="/guoyuan/assets/16385277517309977500.png" class="image_2" />
+                <text decode="decode" class="text_5">目标产量</text>
+            </view>
+            <view class="flex-row group_1">
+                <van-cell title="树龄" is-link value="{{treeAge}}" bindtap="treeAgePopup" border="{{false}}" />
+                <van-field model:value="{{ msVal }}" label="农作物亩数" input-align="right" placeholder="农作物亩数" border="{{ false }}" bind:change="changeMs" />
+                <van-field model:value="{{ czVal }}" label="目标产量" input-align="right" placeholder="请输入（亩/斤）" border="{{ false }}" bind:change="changeCz" />
+            </view>
+        </view>
+        <view class="jy">建议输入目标产量{{treeAge==='7-10年'?'1200斤~1440斤':treeAge==='10-25年'?'1500斤~1800斤':'2000斤~2400斤'}}之间</view>
+        <view class="flex-col section_4">
+            <view class="flex-row group_4">
+                <image src="/guoyuan/assets/16385277519843483891.png" class="image_3" />
+                <text decode="decode" class="text_11">施肥方案</text>
+            </view>
+            <!-- <van-cell title="作物期间" is-link value="{{state}}" bindtap="showPopup" />
+            <van-cell title="推荐肥料" />
+            <van-cell title="肥料名称" value="{{curSfObj.lx}}" /> -->
+            <view class="value">
+            <text>推荐用量</text>
+            <text>{{curSfObj.sl}}</text>
+            </view>
+            <!-- <van-cell title-width="140rpx"  title="推荐用量" value="{{curSfObj.sl}}" input-class="wid90" /> -->
+        </view>
+    </view>
+
+    <view wx:if="{{false}}" class="kkry">
+        <image src="/guoyuan/assets/kkry.png" />
+    </view>
+    <van-popup show="{{ show }}" bind:close="onClose" position="bottom" custom-style="height: 40%;">
+        <van-picker columns="{{ columns }}" bind:change="onChange" />
+    </van-popup>
+    <van-popup show="{{ showTreeAge }}" bind:close="onClose" position="bottom" custom-style="height: 40%;">
+        <van-picker columns="{{ treeColumns }}" bind:change="onTreeChange" />
+    </van-popup>
+
+</view>

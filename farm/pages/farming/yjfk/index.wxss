@@ -1,0 +1,52 @@
+.container {
+    margin-top: 30rpx;
+    background-color: #fff;
+    padding: 30rpx 0;
+}
+
+.title {
+    padding-left: 30rpx;
+    font-size: 36rpx;
+    font-weight: 500;
+    line-height: 88rpx;
+    font-stretch: normal;
+    letter-spacing: 0rpx;
+    color: #363a44;
+}
+.nscz_box {
+    display: flex;
+     flex-wrap: wrap;
+}
+.nscz_box view{
+    margin: 20rpx;
+	width: 208rpx;
+	height: 66rpx;
+    background-color: #b3b5b9;
+	border-radius: 33rpx;
+    font-size: 32rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 65rpx;
+	letter-spacing: 0rpx;
+    color: #ffffff;
+    text-align: center;
+}
+.active {
+    background-color: #428ffc!important;
+}
+.queren {
+    position: fixed;
+    bottom: 3%;
+    left: 4%;
+    width: 689rpx;
+	height: 108rpx;
+	background-color: #428ffc;
+    border-radius: 54rpx;
+    font-size: 36rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 108rpx;
+	letter-spacing: 0rpx;
+    color: #ffffff;
+    text-align: center;
+}

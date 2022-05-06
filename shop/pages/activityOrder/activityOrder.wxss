@@ -1,0 +1,333 @@
+/* pages/Order/myorder/myorder.wxss */
+/* @import '/wx-weapp-tool/bluetoothConnectionTemplate/index.wxss'; */
+.myorder_item {
+  background-color: #ffffff;
+  width: 100%;
+  padding: 32rpx 0;
+  margin: 20rpx 0;
+}
+
+.m_header {
+  width: 92%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+.m_header .orange{
+  font-size: 26rpx;color: #3377ff;
+}
+.m_header .grey{
+  font-size: 26rpx;color: #999999;
+}
+
+.myorder_item>.m_header>text:nth-child(1) {
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 42rpx;
+  letter-spacing: 0rpx;
+  color: #666666;
+}
+
+.m_main {
+  width: 92%;
+  display: flex;
+  margin: 20rpx auto;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.m_main>view>image {
+  width: 158rpx;
+  height: 158rpx;
+  margin-right: 15rpx;
+}
+
+.m_main>view:nth-child(2)>p {
+  display: block;
+}
+
+.m_main>view:nth-child(2)>p:nth-child(1) {
+  width: 262rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 26rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 48 rpx;
+  letter-spacing: 0rpx;
+  color: #141414;
+}
+
+.m_main>view:nth-child(2)>p:nth-child(2),
+.m_main>view:nth-child(2)>p:nth-child(3) {
+  width: 452rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 48rpx;
+  letter-spacing: 0rpx;
+  color: #666666;
+}
+
+.m_bottom {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.m_bottom>input {
+  padding: 0;
+  width: 160rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  text-align: center;
+  border-radius: 45rpx;
+  border: solid 2rpx #c9c9c9;
+  margin-right: 20rpx;
+  z-index: 0;
+  /* pointer-events: none; */
+}
+
+.van-tabs__line:nth-child(1) {
+  background-color: transparent !important;
+}
+
+.van-tab--active {
+  color: #3377ff !important;
+}
+
+.sx_space {
+  padding-bottom: 85rpx;
+}
+
+.sx {
+  /* z-index: 999; */
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+}
+
+.sx>text {
+  font-size: 26rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0rpx;
+  color: #222222;
+  top: 20%;
+  line-height: 85rpx;
+  position: relative;
+}
+
+.sx>text::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: -35rpx;
+  top: 12rpx;
+  border-top: 15rpx solid #666666;
+  border-left: 15rpx solid transparent;
+  border-right: 15rpx solid transparent;
+  border-bottom: 15rpx solid transparent;
+}
+
+.van-dialog__footer {
+  justify-content: space-around;
+}
+
+/* 筛选弹窗 */
+.sx_tk_box {
+  width: 94%;
+  margin: 0 auto;
+}
+
+.s_t_b_x {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.s_t_b_x>image {
+  width: 28rpx;
+  height: 28rpx;
+  padding: 25rpx;
+}
+
+.s_t_b_title {
+  font-size: 30rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  font-weight: 700;
+  padding-bottom: 25rpx;
+  letter-spacing: 0rpx;
+  color: #222222;
+}
+
+.page_list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.page_items {
+  margin: 16rpx 12rpx;
+  width: 158rpx;
+  height: 58rpx;
+  background-color: #eff2f9;
+  border-radius: 29rpx;
+  font-size: 26rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 58rpx;
+  letter-spacing: 0rpx;
+  text-align: center;
+  position: relative;
+}
+
+.page-section-gap checkbox {
+  display: none;
+}
+
+label checkbox[aria-checked="true"] {
+  border: 1px solid #3377ff;
+  color: #3377ff;
+}
+
+label checkbox[aria-checked="true"]+text {
+  color: #3377ff;
+  border: 1px solid #3377ff;
+  position: absolute;
+  width: 158rpx;
+  height: 58rpx;
+  border-radius: 29rpx;
+  left: 0;
+  top: 0;
+}
+
+/* 多选以上 */
+.time_cho>view {
+  width: 684rpx;
+  height: 78rpx;
+  position: relative;
+}
+
+.time_cho>view>input {
+  margin: 20rpx 0;
+  height: 100%;
+  background-color: #f6f6f6;
+  border-radius: 10rpx 6rpx 6rpx 6rpx;
+  padding-left: 185rpx;
+  font-size: 26rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 30rpx;
+	letter-spacing: 0rpx;
+	color: #999999;
+}
+
+.time_cho>view>text {
+  position: absolute;
+  left: 15rpx;
+  top: 28%;
+  font-size: 26rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0rpx;
+  color: #222222;
+}
+.time_cho>view>image {
+  position: absolute;
+  z-index: 2;
+  right: 45rpx;
+  top: 25%;
+  width: 40rpx;
+	height: 40rpx;
+}
+.s_t_b_queren {
+  margin-top: 55rpx;
+  width: 691rpx;
+  height: 89rpx;
+  line-height: 89rpx;
+  background-image: linear-gradient(-90deg, 
+		#3377ff 0%, 
+		#4c88ff 100%), 
+	linear-gradient(
+		#3377ff, 
+		#3377ff);
+	background-blend-mode: normal, 
+		normal;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0rpx;
+  color: #ffffff;
+  text-align: center;
+}
+/* 填写物流 */
+.show_wl {
+  width: 600rpx;
+  height: 550rpx;
+  margin: 40% auto;
+  background-color: #ffff;
+  position: relative;
+}
+
+.s_w_title {
+  width: 100%;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 109rpx;
+  letter-spacing: 0rpx;
+  color: #222222;
+}
+
+.sw_margin {
+  width: 86%;
+  margin: 0 auto;
+}
+
+.sw_margin>input {
+  background-color: #f6f6f6;
+  text-align: center;
+  width: 100%;
+  height: 85rpx;
+  font-size: 32rpx;
+}
+
+.s_w_bottom {
+  width: 100%;
+  height: 88rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  /* border-top: 0.5px solid #e9e3e3; */
+  font-size: 28rpx;
+  display: flex;
+  text-align: center;
+}
+
+.s_w_bottom>input {
+  width: 50%;
+  height: 100%;
+  color: #999999;
+}
+
+.s_w_bottom>input:nth-child(2) {
+  color: #3377ff;
+}
+view .van-tabs__nav{
+  justify-content: space-around;
+}
+view .van-tab{
+  flex: unset;
+}
+.noLists{
+  text-align: center;
+  color: #999999;
+  padding-top: 50rpx;
+  background-color: #fff;
+}

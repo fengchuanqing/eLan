@@ -1,0 +1,16 @@
+view,navigator {
+  box-sizing: border-box;
+}
+
+.font28 {
+  font-size: 28rpx;
+}
+
+.boxShadow {
+  box-shadow: 0rpx 2rpx 24rpx 0rpx rgba(47, 111, 247, 0.16);
+}
+page{
+  background-color: #f6f7f8;
+  color: #363a44;
+}
+

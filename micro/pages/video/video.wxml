@@ -1,0 +1,6 @@
+<!--pages/micro/video/video.wxml-->
+<view class="video">
+  <video wx:if="{{videoKey}}" src="{{img+url}}" custom-cache="{{false}}" autoplay="{{true}}"></video>
+  <video wx:else src="{{url}}" custom-cache="{{false}}" autoplay="{{true}}"></video>
+  <view>{{bt}}</view>
+</view>

@@ -1,0 +1,251 @@
+/************************************************************
+** 请将全局样式拷贝到项目的全局 CSS 文件或者当前页面的顶部 **
+** 否则页面将无法正常显示                                  **
+************************************************************/
+
+page {
+    width: 100vw;
+    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+        'Droid Sans', 'Helvetica Neue', 'Microsoft Yahei', sans-serif;
+}
+
+view,
+image,
+text {
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.justify-start {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.justify-center {
+    display: flex;
+    justify-content: center;
+}
+
+.justify-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.justify-evenly {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.justify-around {
+    display: flex;
+    justify-content: space-around;
+}
+
+.justify-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.items-start {
+    display: flex;
+    align-items: flex-start;
+}
+
+.items-center {
+    display: flex;
+    align-items: center;
+}
+
+.items-end {
+    display: flex;
+    align-items: flex-end;
+}
+
+van-field {
+    --cell-background-color: transparent;
+}
+
+van-field .van-field__body {
+    width: 100%;
+}
+
+van-checkbox .van-checkbox__label,
+van-radio .van-radio__label {
+    padding-left: 0;
+    flex: 1 1 auto;
+}
+
+van-checkbox .van-checkbox--horizontal,
+van-radio .van-radio--horizontal {
+    margin-right: 0;
+}
+
+van-search {
+    --search-padding: 0;
+}
+
+.top-section {
+    padding: 0 30rpx;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 24rpx rgba(47, 111, 247, 0.1);
+}
+
+.icon {
+    margin-top: 5rpx;
+    width: 15rpx;
+    height: 26rpx;
+}
+
+.equal-division-item {
+    flex: 1 1 254rpx;
+    padding: 10rpx 36rpx;
+    width: 254rpx;
+}
+
+.text_6 {
+    align-self: center;
+    color: rgb(66, 143, 252);
+    font-size: 32rpx;
+    line-height: 30rpx;
+    white-space: nowrap;
+}
+
+.text_8 {
+    margin-top: 26rpx;
+    align-self: flex-end;
+    color: rgb(54, 58, 68);
+    font-size: 32rpx;
+    line-height: 30rpx;
+    white-space: nowrap;
+}
+
+.page {
+    background-color: rgb(246, 247, 248);
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.group {
+    padding-bottom: 32rpx;
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+.button {
+    margin: 484rpx 32rpx 0 29rpx;
+    padding: 37rpx 0;
+    color: rgb(255, 255, 255);
+    font-size: 36rpx;
+    line-height: 34rpx;
+    white-space: nowrap;
+    background-color: rgb(66, 143, 252);
+    border-radius: 54rpx;
+}
+
+.divider {
+    background-color: rgb(255, 255, 255);
+    height: 1rpx;
+}
+
+.group_2 {
+    padding-top: 31rpx;
+}
+
+.view_1 {
+    margin-top: 26rpx;
+}
+
+.group_3 {
+    padding: 34rpx 0 37rpx;
+}
+
+.group_5 {
+    padding: 38rpx 0 41rpx;
+    border-top: solid 6rpx rgb(232, 233, 236);
+}
+
+.text-wrapper {
+    padding: 31rpx 0 35rpx;
+    color: rgb(54, 58, 68);
+    font-size: 36rpx;
+    line-height: 34rpx;
+    white-space: nowrap;
+    border-bottom: solid 6rpx rgb(232, 233, 236);
+}
+
+.group_7 {
+    padding: 40rpx 0 49rpx;
+}
+
+.text_1 {
+    color: rgb(54, 58, 68);
+    font-size: 32rpx;
+    line-height: 30rpx;
+    white-space: nowrap;
+}
+
+.group_4 {
+    color: rgb(66, 143, 252);
+    font-size: 32rpx;
+    line-height: 30rpx;
+    white-space: nowrap;
+}
+
+.text_3 {
+    color: rgb(54, 58, 68);
+    font-size: 32rpx;
+    line-height: 30rpx;
+    white-space: nowrap;
+}
+
+.group_6 {
+    color: rgb(66, 143, 252);
+    font-size: 32rpx;
+    line-height: 30rpx;
+    white-space: nowrap;
+}
+
+.group_8 {
+    padding-top: 2rpx;
+    flex: 1 1 auto;
+    position: relative;
+}
+
+.image_5 {
+    margin-left: 40rpx;
+    align-self: center;
+}
+
+.image-wrapper_1 {
+    width: 108rpx;
+    height: 108rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #428ffc;
+    border-radius: 50%;
+}
+
+.equal-division {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.image_4 {
+    width: 71rpx;
+    height: 51rpx;
+}

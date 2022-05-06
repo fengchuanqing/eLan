@@ -1,0 +1,88 @@
+<canvas id="shopCanvas" type="2d"></canvas>
+<view class="container">
+  <image class="header_img" src="{{domain+imgList[0]}}" mode="widthFix"></image>
+  <view class="list">
+    <view class="item radius">
+      <view class="title">{{form.activity_name}}</view>
+      <view class="black">销量：{{form.xl}}</view>
+      <view class="fenxinag" bindtap="OpenHb">
+        <image src="/specialZone/assets/fx-icon.png"></image>
+        <text>分享</text>
+      </view>
+    </view>
+    <view class="business">
+      <image src="{{domain+form.dpfm}}"></image>
+      <view>
+        <view class="business_name">{{form.full_name}}</view>
+        <view class="business_rate">
+          评分：
+          <van-rate value="{{form.pf}}" allow-half='{{true}}' void-icon="star" readonly />
+        </view>
+      </view>
+    </view>
+    <view class="business_address">
+      <view class="">地址：{{form.address}}</view>
+    </view>
+  </view>
+  <view class="middle">
+    图文详情</view>
+  <view style="margin-bottom: 150rpx;">
+    <block wx:for="{{imgList}}" wx:key="index">
+      <image class="header_img" src="{{domain+item}}" mode="widthFix"></image>
+    </block>
+  </view>
+  <!-- <text class="padd_all tw_text">
+    <rich-text nodes="{{form.content}}"></rich-text>
+  </text> -->
+  <view class="bottom" style="padding-bottom: {{bottomLift}}px;">
+    <view class="shouye" bindtap="Godetail" data-index="1" data-url="/specialZone/pages/index/index">
+      <image src="/specialZone/assets/shouye.png"></image>
+      <text>首页</text>
+    </view>
+    <view class="lxdz" bindtap="OpenWeixin">
+      <view>联系店主</view>
+    </view>
+    <view class="ljxd" bindtap="Godetail" data-url="/specialZone/pages/activityOrder/activityOrder?id={{form.store_id}}&hdfm={{imgList[0]}}&full_name={{form.activity_name}}&hdid={{_id}}&introduction={{form.introduction}}">
+      <view>立即下单</view>
+    </view>
+  </view>
+  <!-- 联系店主弹出层 -->
+  <van-overlay show="{{ show3 }}" bind:click="onClickHide">
+    <view class="wrapper">
+      <view class="block" catch:tap="noop">
+        <view class="close_box">
+          <image class="close" bindtap="onCancel" src="/specialZone/assets/x.png"></image>
+        </view>
+        <!-- <view class="grey_text">商家微信</view>
+        <view class="sjrx">
+          <text>{{wechat}}</text>
+          <input bindtap="GoCopy" class="center" type="button" value="复制微信" disabled />
+        </view> -->
+        <view class="grey_text">商家热线</view>
+        <view class="sjrx">
+          <text>{{mobile}}</text>
+          <input bindtap="GoPhone" class="center" type="button" value="拨打电话" disabled />
+        </view>
+      </view>
+    </view>
+  </van-overlay>
+  <!-- 分享海报 -->
+  <van-overlay show="{{ show5 }}" bindtap="onClickHide">
+    <view class="wrapper">
+      <view class="block3" catch:tap="Preservation">
+        <image class="hb_ym" src="{{domain+imgList[0]}}"></image>
+        <view class="text_list">
+          <view>
+            <view>{{form.activity_name}}</view>
+            <!-- <view>三品一标 | 有机化 | 本地特产</view> -->
+            <view>长按或扫一扫打开小程序</view>
+          </view>
+          <image class="xcx_ewm" src="{{ewmImg}}"></image>
+        </view>
+        <view class="hb_bottom">
+          <view catchtap="Preservation">保存海报</view>
+        </view>
+      </view>
+    </view>
+  </van-overlay>
+</view>

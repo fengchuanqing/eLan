@@ -1,0 +1,41 @@
+<view class="lb">
+  <view class="lb_l">
+    <text>*</text>类别
+  </view>
+  <view class="lb_r">
+    <view class="lb_r_item" bindtap="changeLb" data-idx="{{0}}">
+      <view class="yuan {{curLb===0?'cur_yuan':''}}"></view>图文
+    </view>
+    <view class="lb_r_item" bindtap="changeLb" data-idx="{{1}}">
+      <view class="yuan {{curLb===1?'cur_yuan':''}}"></view>视频
+    </view>
+  </view>
+</view>
+<van-field label="标题" model:value="{{ titVal }}" title-width="100rpx" input-align="right" placeholder="加入一个吸引人的标题吧（15字之内)" border="{{ false }}" label-class="label"   error-message="{{errMessage}}"  bind:blur="checked"/>
+<view class="content">
+  <view class="content_t">分享内容</view>
+  <van-field model:value="{{ message }}" type="textarea" placeholder="点击输入您分享的内容" autosize border="{{ false }}" maxlength="{{200}}" bind:input="bindText" />
+  <text>{{conNum}}/100</text>
+</view>
+<view class="addImgVideo">
+  <view class="title">
+    {{curLb===0?'添加图片':'添加视频'}}
+    <view class="suggest" wx:if="{{curLb===1}}">
+      建议添加3~6个视频
+    </view>
+  </view>
+
+  <view class="video">
+    <van-uploader max-size="524288000" file-list="{{ fileList }}" accept="{{curLb===0?'image':'video'}}" deletable="{{true}}" multiple="{{false}}"  use-before-read
+  bind:before-read="beforeRead" bind:after-read="afterReadNjz" bind:delete="delete" preview-size="100">
+      <view class="uploaderK">
+        <view class="icon">+</view>
+      </view>
+    </van-uploader>
+  </view>
+</view>
+<view class="footer">
+  <view class="text" bindtap="navTo">
+    确认发布
+  </view>
+</view>

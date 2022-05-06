@@ -1,0 +1,24 @@
+<!--pages/countryside/addFinish/addFinish.wxml-->
+<view>
+    <view class="container">
+        <image src="/assets/images/home/renxiang.png"></image>
+        <view class="h3">
+            还差一步就发布成功啦
+        </view>
+        <view class="hint">
+            为您的田园相册添加一个主题吧
+        </view>
+        <view class="tagList">
+            <view class="item" wx:for="{{tagList}}" wx:key="index">
+                <view class="tag {{selected==item.lx?'active':''}}"  bindtap="selected" data-id="{{item.lx}}">
+                    <image src="/assets/images/home/check.png" wx:if="{{selected==index}}"></image><text wx:if="{{selected!=item.id}}">+</text>{{item.lx}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view class="text" bindtap="navTo">
+            完成
+        </view>
+    </view>
+</view>

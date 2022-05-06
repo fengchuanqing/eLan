@@ -1,0 +1,86 @@
+<view class="container">
+  <view class="item">
+    <view class="i_img">
+      <image src="{{domain+hdfm}}"></image>
+    </view>
+    <view class="i_text">
+      <view>{{full_name}}</view>
+      <view>{{introduction||''}}</view>
+    </view>
+    <view class="right_back" bindtap="GoDetail">
+      <image src="/specialZone/assets/right-jiantou.png"></image>
+    </view>
+  </view>
+  <view wx:if="{{!hideContain}}">
+    <!-- 采摘游 -->
+    <van-cell-group>
+      <van-field model:value="{{ peopleNum }}" label="人数" placeholder="请输入人数（位）" input-align="right" />
+    </van-cell-group>
+    <!-- 自提 -->
+    <van-cell-group>
+      <van-field model:value="{{ username }}" label="姓名" placeholder="请输入姓名" input-align="right" />
+      <van-field model:value="{{ tel }}" label="联系方式" placeholder="请输入联系电话" input-align="right"  bind:blur="check3" />
+    </van-cell-group>
+    <!--  自提以上-->
+    <van-cell-group>
+      <!-- <van-field model:value="{{ orderNum }}" label="下单数量" placeholder="请输入下单数量（斤）" input-align="right"/> -->
+      <van-field model:value="{{ payMoney }}" label="付款金额" placeholder="请输入付款金额" input-align="right"  bind:blur="check2" />
+    </van-cell-group>
+    <van-cell title="付款凭证上传" size="large"  bindtap="OpenUpload">
+      <view>
+        <image src="{{domain+imgSrc}}" style="width:45rpx;height:50rpx"></image>
+      </view>
+    </van-cell>
+  </view>
+  <!-- 底部 -->
+  <view class="bottom" style="padding-bottom: {{bottomLift}}px;">
+    <view bindtap="OpenEwm">联系店主付款</view>
+    <view bindtap="buyShop">
+      立即下单
+    </view>
+  </view>
+  <!-- 联系店主弹出层 -->
+  <van-overlay show="{{ show3 }}" bind:click="onClickHide">
+    <view class="wrapper">
+      <view class="block" catch:tap="noop">
+        <view class="close_box">
+          <image class="close" bindtap="onCancel" src="/specialZone/assets/x.png"></image>
+        </view>
+        <view class="codeBox">
+          <view class="codeItem">
+            <image src="{{domain+skm}}"	show-menu-by-longpress="{{true}}"></image>
+            <text>扫码付款</text>
+          </view>
+          <view class="codeItem">
+            <image src="{{domain+wechat}}"	show-menu-by-longpress="{{true}}"></image>
+            <text>添加微信</text>
+          </view>
+        </view>
+        <view class="grey_text">商家热线</view>
+        <view class="sjrx">
+          <text>{{mobile}}</text>
+          <input bindtap="GoPhone" class="center" type="button" value="拨打电话" />
+        </view>
+      </view>
+    </view>
+  </van-overlay>
+  <!-- 上传凭证弹出层 show4-->
+  <van-overlay show="{{ show4 }}">
+    <view class="wrapper">
+      <view class="block2">
+        <view class="close_box">
+          <image class="close" bindtap="onCancel" src="/specialZone/assets/x.png" style="right:-30rpx"></image>
+        </view>
+        <view class="fkpz">付款凭证
+        </view>
+        <view class="up_view">
+          <van-uploader file-list="{{ fileList }}" deletable="{{ true }}" max-count="1" catch:after-read="afterRead"
+            bind:delete="delFile">
+          </van-uploader>
+        </view>
+        <view class="qrsc" bindtap="onClickHide">确认上传</view>
+      </view>
+    </view>
+  </van-overlay>
+
+</view>

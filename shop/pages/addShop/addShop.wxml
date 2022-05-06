@@ -1,0 +1,129 @@
+<view class="page">
+  <form catchsubmit="formSubmit">
+    <van-field label="商品名称" required size="large" value="{{ form.name }}" placeholder="请输入商品名称" border="{{ false }}" bind:input="nameInput" />
+    <view class="uploadBox">
+      <!-- 克隆 item -->
+      <view id="{{kelong.id}}" class="imgList kelong" hidden='{{!showkelong}}' style='top:{{kelong.top}}px;left:{{kelong.left}}px'>
+        <image src="{{kelong.nameIcon}}"></image>
+      </view>
+      <view class="imgList" wx:for="{{imgList}}" data-index="{{index}}" wx:key='index' bind:touchstart='dragStart' catch:touchmove='dragMove' bind:touchend='dragEnd'>
+        <text class="close" catchtap="delImg" data-idx="{{index}}">×</text>
+        <image src="{{img+item}}"></image>
+        <view class="zt" wx:if="{{index===0}}">
+          <image src="/shop/static/icons/icon/img.png"></image>主图
+        </view>
+      </view>
+      <view class="uploadBtn" wx:if="{{imgList.length<6}}" bindtap="chooseImg">
+        <image src="/shop/static/icons/icon/canmera.png"></image>
+        <text>添加主图等</text>
+      </view>
+    </view>
+    <view class="tip">可上传主图1张，其他图片1-5张，长按图片可拖拽调整顺序。<text>注：上传图片比例为1:1</text></view>
+    <view class="rules">
+      <view class="ruleItemBox" wx:for="{{ruleList}}" wx:key="*this">
+        <van-field required size="large" class="ruleItem" value="{{ ruleList[index].sizeName }}" center clearable label="商品规格" placeholder="请输入" border="{{ false }}" bindinput="addGg" data-id="{{index}}" input-align="right" />
+        <van-field required size="large" class="ruleItem" value="{{ ruleList[index].prince }}" type="digit" center clearable label="商品价格" placeholder="0.00" border="{{ false }}" input-align="right" bindinput="addJg" data-id="{{index}}" use-right-icon-slot bind:blur='jjTo'>
+          <view slot="right-icon">元</view>
+        </van-field>
+      </view>
+    </view> 
+    <van-cell required title="商品分类" size="large" is-link value="{{form.type}}" arrow-direction="{{flShow?'down':''}}" border="{{false}}" bindtap="onFlShow" />
+    <van-popup show="{{ flShow }}" position="bottom">
+      <van-picker show-toolbar title="标题" columns="{{ columns }}" bind:cancel="onFlClose" bind:confirm="onFlConfirm" />
+    </van-popup>
+    <van-cell title="商品标签" size="large" is-link value="{{form.shopTag}}" arrow-direction="{{tagShow?'down':''}}" border="{{false}}" bindtap="onTagShow" />
+    <van-popup show="{{ tagShow }}" bind:close="onTagClose" position="bottom" closeable custom-style="height: 50%">
+      <view class="pop_con">
+        <view class="tit">商品标签</view>
+        <view class="tags">
+          <block wx:for="{{tagColumns}}" wx:key="index">
+            <text class="{{item.checked?'tag_act':''}}" bindtap="changeLxTag" data-idx="{{index}}" data-item="{{item}}">{{item.name}}</text>
+          </block>
+          <!-- <text class="{{lx_act==='质量过关'?'tag_act':''}}" bindtap="changeLxTag" data-type="质量过关">质量过关</text>
+          <text class="{{lx_act==='环境优美'?'tag_act':''}}" bindtap="changeLxTag" data-type="环境优美">环境优美</text> -->
+        </view>
+        <view class="tit">自定义标签</view>
+        <view class="shopName">
+          <input type="text" value="{{shopName}}" bindinput="tagInput" placeholder="请输入标签名字" />
+        </view>
+        <view class="confirm" bindtap="confirm">确认</view>
+      </view>
+    </van-popup>
+    <view class="shopType">
+      <view class="shopType_tit">
+        <text>*</text>商品下单支持配送类型
+      </view>
+      <view class="shopType_con">
+        <text class="{{type_act==='1'?'type_act':''}}" bindtap="changeType" data-type="1">物流发货</text>
+        <text class="{{type_act==='2'?'type_act':''}}" bindtap="changeType" data-type="2">自提</text>
+        <text class="{{type_act==='3'?'type_act':''}}" bindtap="changeType" data-type="3">全部</text>
+      </view>
+    </view>
+    <!-- 新品 -->
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="page-section-title">是否为新品</view>
+      <radio-group bindchange="radioChange">
+        <label class="weui-cell weui-check__label" wx:for="{{items}}" wx:key="index">
+          <radio value="{{item.value}}" checked='{{item.check}}' />{{item.name}}
+        </label>
+      </radio-group>
+    </view>
+
+    <!-- <van-cell required title="店铺地址" is-link size="large" value="{{form.address}}" border="{{false}}"
+      arrow-direction="{{addressShow?'down':''}}" bindtap="onAddressShow" />
+    <van-popup show="{{ addressShow }}" bind:close="onAddressClose" position="bottom">
+      <van-area area-list="{{ areaList }}" bind:confirm='confirmArea' bind:cancel='cancelArea' />
+    </van-popup> -->
+    <!-- <van-cell title="商品详情页" label="（此项非必填）" is-link size="large" bindtap="OpenUpload" border="{{false}}">
+      <view>
+        <image src="{{img+shopCoverImg}}" style="width:45rpx;height:50rpx"></image>
+      </view>
+    </van-cell> -->
+    <van-field label="商品说明" size="large" value="{{ form.explain }}" placeholder="请输入商品说明" border="{{ false }}" bind:input="explainInput" />
+    <view class="title">下单须知说明</view>
+    <view class="date">
+      <view class="date_name">有效期</view>
+      <view class="date_right">
+        <text bindtap="onDisplay" data-type="{{0}}">{{form.startDate}}</text> 截止至 <text bindtap="onDisplay" data-type="{{1}}">{{form.endDate}}</text>
+      </view>
+    </view>
+    <van-calendar show="{{ showDate }}" show-confirm="{{false}}" color="#428ffc" bind:close="onClose" bind:confirm="onConfirm" />
+    <view class="dateTip">截止日期不填表示长期有效</view>
+
+    <van-cell title="下单前请添加微信" size="large" border="{{false}}">
+      <van-checkbox bind:change="onChange" value="{{form.checkbox1}}" shape="square" />
+    </van-cell>
+    <van-cell title="支付凭证勿忘" size="large" border="{{false}}">
+      <van-checkbox bind:change="onChange2" value="{{form.checkbox2}}" shape="square" />
+    </van-cell>
+    <van-cell title="具体解释权归店家所有" size="large" border="{{false}}">
+      <van-checkbox bind:change="onChange3" value="{{form.checkbox3}}" shape="square" />
+    </van-cell>
+    <van-cell title="不承担费用" size="large" border="{{false}}">
+      <van-checkbox bind:change="onChange4" value="{{form.checkbox4}}" shape="square" />
+    </van-cell>
+    <van-field size="large" value="{{ form.bcsm }}" placeholder="下单须知补充说明" border="{{ false }}" bind:input="bcsmInput" />
+
+    <view class="title title1">商家联系方式</view>
+    <van-field required label="客服电话" size="large" value="{{ form.phone }}" placeholder="请输入客服电话" border="{{ false }}" bind:input="phoneInput" />
+    <!-- <van-field required label="微信号" size="large" value="{{ form.wechat }}" placeholder="请输入微信号" border="{{ false }}" bind:input="wechatInput" /> -->
+    <van-cell title="收款码" required is-link size="large">
+      <view>
+        <image src=" {{img + skmSrc}}" style="width:45rpx;height:50rpx;border-radius: 50%;">
+        </image>
+      </view>
+    </van-cell>
+
+    <van-cell title="微信号" required is-link size="large">
+      <view>
+        <image src="{{img + wxhSrc}}" style="width:45rpx;height:50rpx;border-radius: 50%;"></image>
+      </view>
+    </van-cell>
+    <view class="btn-area" wx:if="{{sjShow}}">
+      <button formType="submit">上架</button>
+      <!-- <button>效果预览</button> -->
+    </view>
+  </form>
+  <van-dialog id="van-dialog" />
+</view>

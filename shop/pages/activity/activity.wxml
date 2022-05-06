@@ -1,0 +1,59 @@
+<view class="page">
+  <van-tabs active="{{ active }}" bind:change="onChange" color="#428ffc">
+    <van-tab title="已上架"></van-tab>
+    <van-tab title="已下架"></van-tab>
+  </van-tabs>
+  <view class="none" wx:if="{{activityList.length===0}}">
+    <image src="/shop/static/img/none.png"></image>
+    <view>亲，暂无活动~</view>
+  </view>
+  <view class="activityList">
+    <view class="item" wx:for="{{activityList}}" wx:key="index">
+      <navigator url="/shop/pages/activityDetail/activityDetail?id={{item.id}}">
+        <view class="status">
+          <text>{{active===1?'已下架':'已上架'}}</text>
+          <text>{{item.time}}</text>
+        </view>
+        <view class="item_con">
+          <image src="{{img+item.img_url}}"></image>
+          <view class="info">
+            <view class="name">{{item.activity_name}}</view>
+            <view class="pro">{{item.introduction}}</view>
+            <view class="more" catchtap="showMore" data-idx="{{index}}">
+              <text>··</text>
+              <view class="btnBox" wx:if="{{showMore&&active===1&&showItem===index}}">
+                <view class="btn">
+                  <navigator url="/shop/pages/addActivity/addActivity?id={{item.id}}">
+                    <image src="/shop/static/icons/icon/edit.png"></image>
+                    <text>编辑</text>
+                  </navigator>
+                </view>
+                <view class="btn" catchtap="grounding" data-id="{{item.id}}">
+                  <image src="/shop/static/icons/icon/up.png"></image>
+                  <text>上架</text>
+                </view>
+                <view class="btn" catchtap="delActivity" data-id="{{item.id}}">
+                  <image src="/shop/static/icons/icon/del.png"></image>
+                  <text>删除</text>
+                </view>
+              </view>
+              <view class="btnBox" wx:if="{{showMore&&active===0&&showItem===index}}">
+                <view class="btn">
+                  <navigator url="/shop/pages/activityDetail/activityDetail?id={{item.id}}">
+                    <image src="/shop/static/icons/icon/chakan.png"></image>
+                    <text>查看</text>
+                  </navigator>
+                </view>
+                <view class="btn" catchtap="undercarriage" data-id="{{item.id}}">
+                  <image src="/shop/static/icons/icon/down.png"></image>
+                  <text>下架</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>
+<navigator class="add" url="/shop/pages/addActivity/addActivity" open-type="navigate">添加活动</navigator>

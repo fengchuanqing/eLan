@@ -1,0 +1,102 @@
+<view>
+  <view class="search">
+    <van-search value="{{ value }}" shape="round" placeholder="搜索" bind:click-input="searchShop" bind:clear="" disabled />
+    <van-icon name="shopping-cart-o" size="26"  bindtap="goShop"/>
+  </view>
+  <view class=" section_2">
+    <swiper indicator-dots indicator-color="rgba(255,255,255,1)" indicator-active-color="rgb(66,143,252)" autoplay class="swiper">
+      <block wx:for="{{banner}}" wx:key="index">
+        <swiper-item>
+          <view class="swiper-item">
+            <image src="{{img2+item.ggtp}}"></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="nav">
+      <view>
+        <image src="/specialZone/assets/dfpt.png"></image>
+        <text>地方平台</text>
+      </view>
+      <view>
+        <image src="/specialZone/assets/zyhz.png"></image>
+        <text>政务合作</text>
+      </view>
+      <view>
+        <image src="/specialZone/assets/tscp.png"></image>
+        <text>特色产品</text>
+      </view>
+      <view>
+        <image src="/specialZone/assets/zczc.png"></image>
+        <text>政策支持</text>
+      </view>
+    </view>
+  </view>
+  <view class="section_3">
+    <navigator url="/specialZone/pages/xpcx/xpcx">
+      <image src="/specialZone/assets/xpcx.png"></image>
+      <text>新品尝鲜</text>
+    </navigator>
+    <navigator url="/specialZone/pages/storeList/storeList">
+      <image src="/specialZone/assets/jxsj.png"></image>
+      <text>精选商家</text>
+    </navigator>
+    <navigator url="/specialZone/pages/smkg/smkg">
+      <image src="/specialZone/assets/smkg.png"></image>
+      <text>扫码快购 </text>
+    </navigator>
+    <navigator url="/specialZone/pages/activityList/activityList">
+      <image src="/specialZone/assets/hdzq.png"></image>
+      <text>活动展区</text>
+    </navigator>
+  </view>
+  <view class="section_4">
+    <view class="h3">
+      <view>热销特色产品</view>
+      <text bindtap="navTo" data-url="{{'/specialZone/pages/rxcp/rxcp'}}">更多>></text>
+    </view>
+    <view class="content">
+      <navigator wx:for="{{rxcpList}}" wx:key="index" url="/specialZone/pages/shopDetail/shopDetail?id={{item.spid}}" hover-class="none" class="item">
+        <image src="{{item.img[0]}}"></image>
+        <view class="h4">{{item.name}}
+          <text>{{item.goodsSizeList[0].size_name}}</text>
+        </view>
+        <view class="text">
+          <view class="flex-center">
+            <image src="/specialZone/assets/icsj.png"></image>
+            <view class="">{{item.full_name}}</view>
+          </view>
+          <view class="prince">￥{{item.goodsSizeList[0].prince}}</view>
+          <!-- <view class="btn">
+            购买
+          </view> -->
+        </view>
+      </navigator>
+    </view>
+  </view>
+  <view class="section_5">
+    <view class="h3">
+      <view>精选商家</view>
+      <text></text>
+    </view>
+    <view class="jxList">
+      <navigator wx:for="{{jxsjList}}" wx:key="index" id="{{'sj'+item.dpid}}" class="jxItem" url="/specialZone/pages/storeDetail/storeDetail?id={{item.dpid}}&headPortrait={{item.dpfm}}&storeName={{item.full_name}}&evaluate=2">
+        <image src="{{img+item.dpfm}}" class="jxItem_bj" ></image>
+        <image src="/specialZone/assets/icon_tip1.png" class="jxItem_tip"></image>
+        <view class="jxItem_info">
+          <view class="jxItem_name">{{item.full_name}}</view>
+          <view class="jxItem_zy">主营：{{item.commodity}}</view>
+          <view class="jxItem_jg">
+            <view class="jxItem_jg_l">
+              <text>{{item.qsj}}</text>元
+            </view>
+            <view class="jxItem_jg_r">
+              <text>起</text>
+              <view class="jxItem_jg_r_j">></view>
+            </view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>

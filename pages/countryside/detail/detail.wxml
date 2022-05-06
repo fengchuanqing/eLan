@@ -1,0 +1,75 @@
+<!--pages/countryside/detail/detail.wxml-->
+<view>
+    <swiper wx:if="{{list}}" class="swiperList" indicator-dots="true" autoplay="true" interval="3000" duration="500" indicator-active-color="#428ffc" indicator-color="#fff">
+        <block wx:for="{{list}}" wx:key="*this">
+            <swiper-item  >
+                <image wx:if="{{plData.lb=='图片'}}" src="{{item}}" bindtap="preview" data-src="{{item}}" mode="widthFix"></image>
+                <video wx:if="{{plData.lb=='视频'}}" src="{{item}}" ></video>
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="message" wx:if="{{list}}">
+        <image src="{{plData.yhtx}}"></image>
+        <view>
+            <view>{{plData.xm?plData.xm:plData.nc}}</view>
+            <view>{{plData.shsj}}</view>
+        </view>
+    </view>
+    <view class="onlyText" wx:else>
+        <image src="{{plData.yhtx}}"></image>
+        <view>
+            <view>{{plData.xm?plData.xm:plData.nc}}</view>
+            <view>{{plData.shsj}}</view>
+        </view>
+    </view>
+    <view class="content">
+        <view class="h3">{{plData.bt}}</view>
+        <view class="text">{{plData.nr}}</view>
+        <view class="comment"><text>评论</text>
+            <view>{{plData.pls}}</view>
+        </view>
+        <view class="commentList">
+            <view class="item" wx:for="{{plList}}" wx:key="index">
+                <image src="{{item.yhtx}}"></image>
+                <view class="commentMessage">
+                    <view class="personM">
+                        <view class="row1">
+                            <text>{{item.xm?item.xm:item.nc}}</text>
+                            <view bindtap="bindzanpl" data-index="{{index}}" data-id="{{item.id}}">{{item.dzs}}
+                                <image class="zan" src="/assets/icons/icon_zan.png" wx:if="{{item.sfdz==0}}" />
+                                <image class="zan" src="/assets/icons/icon_zan_act.png" wx:else />
+                            </view>
+                        </view>
+                        <view>{{item.sj}}</view>
+                    </view>
+                    <view class="pltext">
+                        <view>{{item.hfnr}}</view>
+                        <view class="reply"><text></text><text bindtap="reply" data-index="{{index}}" data-item="{{item}}" data-hfdj="{{2}}" data-id="{{item.id}}">回复</text></view>
+                        <view class="fpl" wx:for="{{item.fpl}}" wx:key="*this" wx:for-item="it" wx:for-index="i">
+                            <text>{{it.mc}}</text>回复<text>{{it.hfmc}}</text>:{{it.hfnr}}
+                            <view class="reply"><text></text><text bindtap="reply" data-it="{{it}}" data-id="{{item.id}}" data-index="{{index}}" data-lj="{{3}}"  data-hfdj="{{2}}" data-item="{{item}}">回复</text></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view bindtap="answer">
+            <image src="/assets/images/home/shuru.png"></image> 快来写回答
+        </view>
+        <button open-type="share" class="btnShare">
+            <image bindtap="onShareAppMessage" src="/assets/images/home/wx.png"></image>
+        </button>
+        <image src="/assets/icons/icon_zan.png" wx:if="{{plData.sfdz==0}}" bindtap="bindzan"></image>
+        <image src="/assets/icons/icon_zan_act.png" wx:else bindtap="bindzan"></image><text>{{plData.dzs}}</text>
+    </view>
+    <view class="popup" wx:if="{{show}}" class="pop" bindtap="close">
+        <view class="send">
+            <textarea auto-focus="auto" model:value="{{comment}}" confirm-type="send" auto-height maxlength="-1" placeholder="{{hint}}" adjust-position="{{true}}"></textarea>
+            <button class="fabiao" bindtap="send">
+                发表
+            </button>
+        </view>
+    </view>
+</view>

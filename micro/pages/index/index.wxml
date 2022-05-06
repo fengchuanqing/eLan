@@ -1,0 +1,71 @@
+<!--pages/micro/index/index.wxml-->
+<view>
+    <view class="nav">
+        <view wx:for="{{navList}}" wx:key="index" bindtap="navTo" data-nav="{{item.nav}}" data-y="{{item.y}}">
+            <view class="bgk">
+                <image src="{{item.img}}"></image>
+            </view>
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+    <view class="container mhjq">
+        <view class="h3"><text>梅好24节气</text> <text bindtap="navTo" data-nav="{{'/micro/pages/mhjq/mhjq'}}">查看更多>></text></view>
+        <view class="content">
+            <view class="muban" bindtap="navToDetails" data-url="{{'/micro/pages/mhjqDetails/mhjqDetails?id='+jieqi.id+'&mz='+jieqi.mz+'&jqyw='+jieqi.jqyw}}">
+                <image src="{{img+jieqi.tp}}"></image>
+                <view class="text">
+                    <view><text>{{jieqi.mz}}</text>
+                        <text>节气</text>
+                    </view>
+                    <view>{{jieqi.jqyw}}</view>
+                    <view><text>{{jieqi.nl}}</text><text>{{jieqi.zq}}</text></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="container lysm">
+        <view class="h3"><text>老余说梅</text> <text bindtap="navTo" data-nav="{{'/micro/pages/lysm/lysm'}}">查看更多>></text></view>
+        <view class="content">
+            <view class="mubanly" wx:for="{{lyList}}" wx:key="index" bindtap="navTolysm" data-dz="{{item.spdz}}" data-bt="{{item.spbt}}" data-lj="{{item.lj}}">
+                <image src="{{img+item.fm}}"></image>
+                <!-- <video src="{{img+item.spdz}}" controls="{{false}}" show-center-play-btn="{{false}}"></video> -->
+                <view class="text">{{item.spbt}}</view>
+            </view>
+        </view>
+
+    </view>
+    <view class="container bctk">
+        <view class="h3"><text>病虫图库</text> <text bindtap="navTo" data-nav="{{'/micro/pages/bctk/bctk'}}">查看更多>></text></view>
+        <view class="content">
+            <view class="muban" wx:for="{{bcList}}" wx:key="index" bindtap="navToDetails" data-url="{{'/micro/pages/bctkDetails/bctkDetails?id='+item.id}}">
+                <image src="{{img2+item.tp}}"></image>
+                <view class="text">
+                    <view><text>{{item.mc}}</text>
+                    </view>
+                    <view><text>{{item.lxmc}}</text> </view>
+                    <view>
+                        {{item.whzz}}</view>
+                </view>
+            </view>
+        </view>
+
+    </view>
+    <view class="container zj">
+        <view class="h3"><text>专家</text> <text bindtap="navTo" data-y="{{true}}" data-nav="{{'/micro/pages/zj/zj?url=https://szsn.lx.gov.cn/zlb/&mobile='+mobile+'/#/Expert/expertHome'}}">查看更多>></text></view>
+        <view class="content">
+            <view class="mubanzj" wx:for="{{zjList}}" wx:key="index" bindtap="navTo" data-y="{{true}}" data-nav="{{'/micro/pages/zj/zj?url=https://szsn.lx.gov.cn/zlb/&mobile='+mobile+'/#/commitProblem/'+item.expert_id}}">
+                <image src="{{img+item.expert_photo}}" mode="aspectFit"></image>
+                <view><text class="name">{{item.expert_name}}</text>
+                    <view>
+                        <image src="/micro/assets/tiwen.png"></image>
+                        <text>向他提问</text>
+                    </view>
+                </view>
+                <text>擅长领域：{{item.question_name}}</text>
+            </view>
+
+        </view>
+
+    </view>
+</view>
+<authentication show="{{showAuthentication}}" url="{{authUrl}}"></authentication>

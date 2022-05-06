@@ -1,0 +1,30 @@
+<view class="flex-col page">
+    <view class="flex-col group">
+        <view class="divider">
+        </view>
+        <view class="flex-col section_2" wx:if="{{false}}">
+            <view class="list">
+                <view class="list-item flex-col" wx:key="*this" wx:for-item="item" wx:for-index="i" wx:for="{{listOM69HIJk}}">
+                    <view class="top-group flex-row">
+                        <view class="left-text-wrapper flex-col">
+                            <image class="list-item-image" src="/farm/assets/16394655127948911867.png"></image>
+                            <text decode="decode" class="text_1">2021-11-11 13：11:11</text>
+                        </view>
+                    </view>
+                    <view class="flex-row">
+                        <view class="equal-division-item flex-col">
+                            <text decode="decode" class="text_5">大棚监控摄像头1</text>
+                            <view class="bottom-group flex-row">
+                                <image src="/farm/assets/16394655129361018095.png" class="icon" />
+                                <text decode="decode" class="text_7">马涧镇下社村路口</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="zwdk" wx:if="{{true}}">
+            <image src="/farm/assets/kkry.png"></image>
+        </view>
+    </view>
+</view>

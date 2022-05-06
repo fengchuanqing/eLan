@@ -1,0 +1,8 @@
+<view>
+  <van-field label="订单姓名：" model:value="{{ name }}" placeholder="请输入姓名" required />
+  <van-field label="下单金额：" type="number" model:value="{{ money }}" required placeholder="请输入下单金额" use-button-slot>
+    <text slot="button">元</text>
+  </van-field>
+  <van-field label="商品名称：" required model:value="{{ commodityName }}" placeholder="请输入商品名称" />
+  <view class="add" bindtap="submit">添加订单</view>
+</view>

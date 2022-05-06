@@ -1,0 +1,47 @@
+<view class="page">
+  <form catchsubmit="formSubmit">
+    <view class="title">基本信息</view>
+    <van-cell title="活动名称" size="large" value="{{form.activity_name}}" border="{{false}}" />
+    <van-cell title="活动说明" size="large" value="{{form.introduction}}" border="{{false}}" />
+    <van-cell title="店铺地址" size="large" value="{{form.address}}" border="{{false}}" />
+    <view class="title" style="padding-left: 14rpx;">主图</view>
+    <view class="uploadBox">
+      <view class="imgList">
+        <image src="{{img+imgUrl}}" bindtap="imgPop" data-item="{{imgUrl}}"></image>
+      </view>
+    </view>
+    <view class="ortherImg">其他图片</view>
+    <view class="uploadBox">
+      <view class="imgList" wx:for="{{imgList}}" data-index="{{index}}" wx:key='index'>
+        <image src="{{img+item}}" bindtap="imgPop" data-item="{{item}}"></image>
+      </view>
+    </view>
+    <view class="title">下单须知说明</view>
+    <view class="date">
+      <view class="date_name">有效期</view>
+      <view class="date_right">
+        <text>{{form.begin_time}}</text> 截止至 <text>{{form.end_time}}</text>
+      </view>
+    </view>
+    <view class="dateTip">截止日期不填表示长期有效</view>
+    <van-cell title="购买须知" size="large" value="{{form.notice}}" border="{{false}}" />
+
+    <view class="title">商家联系方式</view>
+    <van-cell title="客服电话" size="large" value="{{form.telephone}}" border="{{false}}" />
+    <van-cell title="微信号" size="large" value="{{form.vx}}" border="{{false}}" />
+    <view class="btn-area" wx:if="{{form.state==='1'}}">
+      <button bindtap="grounding" da>重新上架</button>
+      <button>
+        <navigator url="/pages/MerchantCenter/addActivity/addActivity?id={{form.id}}">编辑</navigator>
+      </button>
+    </view>
+    <view class="btn-area te_ri" wx:else>
+      <button bindtap="undercarriage">下架</button>
+    </view>
+  </form>
+</view>
+<van-overlay show="{{ imgShow }}" bind:click="onClickHide">
+  <view class="wrapper">
+    <image src="{{domain+imgPopSrc}}"></image>
+  </view>
+</van-overlay>

@@ -1,0 +1,158 @@
+<swiper indicator-dots indicator-color="rgba(255,255,255,1)" indicator-active-color="#ffffff" autoplay class="swiper" wx:if="{{swiperList.length}}">
+  <block wx:for="{{swiperList}}" wx:key="index">
+    <swiper-item bindtap="navTo" data-index="{{index}}" data-id="{{item.jqlxid}}">
+      <view class="swiper-item">
+        <image src="{{ domain2+item.ggtp}}"></image>
+      </view>
+    </swiper-item>
+  </block>
+</swiper>
+<view class="notices boxShadow font28">
+  <view class="notices-left">
+    <text>小兰</text>动态
+  </view>
+  <view class="notices-right">
+    <swiper  class="notices-swiper" interval="{{3000}}">
+      <block wx:for="{{noticesList}}" wx:key="index">
+        <swiper-item>
+          <view class="notices-swiper-item">
+          <!-- <rich-text nodes="{{item.bt}}"></rich-text> -->
+            <text>{{item.bt}}</text>
+            <text>{{item.sj}}</text>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>
+<view class="temp boxShadow">
+  <view class="temp-tit">
+    <text>种好果</text>
+    <image src="/assets/images/home/line.png"></image>
+  </view>
+  <view class="temp-con1">
+    <view class="temp-con-left1">
+      <view class="temp-con-item1" bindtap="goNext" data-url="/pages/studyPlant/studyPlant/index">
+        <image src="/assets/images/home/plantStudy.png"></image>
+      </view>
+      <view class="temp-con-item1" bindtap="goNext" data-url="/micro/pages/index/index">
+        <image src="/assets/images/home/micro.png"></image>
+      </view>
+    </view>
+    <view class="temp-con-right1">
+      <view class="temp-con-item3" bindtap="goNext" data-url="/pages/nanny/nanny/index">
+        <view class="img">
+          <image src="/assets/images/home/wbm.png"></image>
+        </view>
+        <view class="temp-con-item3-name">
+          微保姆
+          <!-- <text class="">保姆</text> -->
+        </view>
+      </view>
+      <view class="temp-con-item3" bindtap="goNext" data-url="/gylz/pages/index/index">
+        <view class="img">
+          <image src="/assets/images/home/hylz.png"></image>
+        </view>
+
+        <view class="temp-con-item3-name">
+          土地流转
+          <!-- <text class="color1">流转</text> -->
+        </view>
+      </view>
+      <view class="temp-con-item3" bindtap="goNext" data-url="/guoyuan/pages/guoyuan/index">
+        <view class="img">
+          <image src="/assets/images/home/gygj.png"></image>
+
+        </view>
+
+        <view class="temp-con-item3-name">
+          果园管家
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="openShop" bindtap="openShop" wx:if="{{shopShow}}">
+  <image src="/assets/images/home/home_ktsp.png"></image>
+</view>
+<view class="temp boxShadow">
+  <view class="temp-tabs">
+    <view class="{{curTemTab===0?'temp-tab-act':''}}" bindtap="changTempTab" data-idx="{{0}}">
+      <text>办好事</text>
+      <image wx:if="{{curTemTab===0}}" src="/assets/images/home/line.png"></image>
+    </view>
+    <view class="{{curTemTab===1?'temp-tab-act':''}}" bindtap="changTempTab" data-idx="{{1}}">
+      <text>服好务</text>
+      <image wx:if="{{curTemTab===1}}" src="/assets/images/home/line.png"></image>
+    </view>
+  </view>
+  <view class="temp-con" wx:if="{{curTemTab===0}}">
+    <view class="temp-con-left">
+      <view class="temp-con-item4" bindtap="navToUrl" data-url="https://szsn.lx.gov.cn/zlb/&mobile={{mobile}}#/insurance" data-y="{{true}}">
+        <image src="/assets/images/home/home_zcbx.png"></image>
+        <view class="temp-con-item4-name">
+          政策
+          <text>保险</text>
+        </view>
+      </view>
+      <view class="temp-con-item4" bindtap="navToUrl" data-url="https://szsn.lx.gov.cn/zlb/&mobile={{mobile}}#/brandManage" data-y="{{true}}">
+        <image src="/assets/images/home/home_bssq.png"></image>
+        <view class="temp-con-item4-name">
+          标识
+          <text class="">申请</text>
+        </view>
+      </view>
+    </view>
+    <view class="temp-con-right">
+      <view class="temp-con-item5" bindtap="navToUrl" data-url="https://szsn.lx.gov.cn/zlb/&mobile={{mobile}}#/appeal" data-y="{{true}}">
+        <image src="/assets/images/home/home_mssq.png"></image>
+        <view class="temp-con-item5-name">
+          码上诉求
+        </view>
+      </view>
+      <view class="temp-con-item5" bindtap="goXmsb">
+        <image src="/assets/images/home/home_xmsb.png"></image>
+        <view class="temp-con-item5-name">
+          项目申报
+        </view>
+      </view>
+      <view class="temp-con-item5">
+        <image src="/assets/images/home/home_qdgd.png"></image>
+        <view class="temp-con-item5-name">
+          期待更多
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="temp2-con" wx:if="{{curTemTab===1}}">
+    <view class="service">
+      <block wx:for="{{serviceList}}" wx:key="index">
+        <view class="service-item">
+          <navigator class="navigator">
+            <image src="{{domain2 +item.tplj}}"></image>
+            <view class="service-text font28" bindtap="navToUrl" data-url="{{item.lx==='1'?'https://szsn.lx.gov.cn/zlb/#/fzdetails&articleId='+item.id:'https://szsn.lx.gov.cn/zlb/&mobile='+uopenid+'#/PolicyDetails&id='+item.id}}"> 
+              <view wx:if="{{item.lx==='1'}}">{{item.sj}}</view>
+              <view>{{item.bt}}</view>
+            </view>
+            <view class="service-type {{item.lx==='1'?'fzbz':'zczx'}}" bindtap="navToUrl" data-url="{{item.lx==='1'?'https://szsn.lx.gov.cn/zlb/#/fangzai':'https://szsn.lx.gov.cn/zlb/&mobile='+uopenid+'#/Policy'}}">{{item.lx==='1'?'防灾避灾':'政策资讯'}}</view>
+          </navigator>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+<view class="funny boxShadow">
+  <view class="temp-tit">
+    <text>兰溪日子有戏有味</text>
+    <image src="/assets/images/home/line.png"></image>
+  </view>
+  <view class="funny-list font28" wx:if="{{funnyList.length}}">
+    <block wx:for="{{funnyList}}" wx:key="index">
+      <navigator class="funny-item" url="/micro/pages/park/park?type={{item.mc=='马涧风情园'?0:item.mc=='采摘游线路'?2:3}}">
+        <image src="{{domain+item.tplj}}"></image>
+        <view>{{item.mc}}</view>
+      </navigator>
+    </block>
+  </view>
+</view>
+<authentication show="{{showAuthentication}}" url="{{authUrl}}"></authentication>

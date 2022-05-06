@@ -1,0 +1,90 @@
+<view class="page">
+  <view class="top">
+    <view class="user">
+      <image src="{{inFo.dpfm?img+inFo.dpfm:inFo.yhtx}}" class="photo"></image> 
+      <view class="name">
+        <view class="author">
+          <text>{{inFo.full_name?inFo.full_name:inFo.name}} </text>
+          <van-icon name="arrow" />
+        </view>
+        <text>分享数：{{inFo.fxl}}</text>
+        <text>点击量：{{inFo.djl}}</text>
+      </view>
+    </view>
+    <image src="/shop/static/icons/icon/qiu.png" class="share" bindtap="OpenShop"></image>
+  </view>
+  <view class="title">
+    <view class="title_left">
+      <view class="title_item" bindtap="ByOrder">
+        <text class="{{isByOrder?'isActive':''}}">订单量</text>
+        <image src="/shop/static/icons/icon/sort.png"></image>
+      </view>
+      <!-- <view class="title_item">
+        <text>品牌</text>
+        <image src="/shop/static/icons/icon/sort.png"></image>
+      </view> -->
+    </view>
+    <!-- <view class="title_right">
+      <image src="/shop/static/icons/icon/icon_01.png"></image>
+    </view> -->
+  </view>
+  <view class="shopList">
+    <view class="shopItem" wx:for="{{orderList}}" wx:key="index">
+      <view class="shopImage">
+        <image src="{{img+item.logo}}"></image>
+      </view>
+      <view class="shopInfo">
+        <view class="shopTitle">{{item.name}}</view>
+        <view class="shopTag">
+          <van-tag round type="primary" plain color="#666666" text-color="#666666" class="tag" wx:if="{{ite}}" wx:for="{{item.traitArr}}" wx:key="index" wx:for-item="ite">{{ite}}</van-tag>
+        </view>
+        <view class="shopPrice">
+          <view class="num" wx:if="{{item.type == '活动'}}">已参与：{{item.dealed}}人</view>
+          <view class="num" wx:else>已下单：{{item.dealed}}人</view>
+          <image src="/shop/static/icons/icon/icon_qiu.png" bindtap="OpenHb" data-item="{{item}}"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <tabBar tabOfficerActive='{{false}}' tabWorkbenchActive="{{false}}"></tabBar>
+  <!-- 分享海报 -->
+  <van-overlay show="{{ show5 }}" bindtap="onClickHide">
+    <view class="wrapper">
+      <view class="block3">
+        <image class="hb_ym" src="{{img+currentShop.img}}"></image>
+        <view class="text_list">
+          <view>
+            <view>【{{currentShop.name}}】</view>
+            <view wx:if="{{!currentShop.activityName}}">{{currentShop.goodsList[0].trait}}</view>
+            <view>长按或扫一扫打开小程序</view>
+          </view>
+          <image class="xcx_ewm" src="{{ewmImg}}"></image>
+        </view>
+        <view class="hb_bottom" data-type="myStorecavas2" catchtap="Preservation">
+          保存海报
+        </view>
+      </view>
+    </view>
+  </van-overlay>
+  <!-- 分享店铺 -->
+  <van-overlay show="{{ show3 }}" bindtap="onShopHide">
+    <view class="wrapper">
+      <view class="block3">
+        <image class="hb_ym" src="{{inFo.dpfm?img+inFo.dpfm:inFo.yhtx}}"></image>
+        <view class="text_list">
+          <view>
+            <view>【{{inFo.full_name?inFo.full_name:inFo.name}}】</view>
+            <view>三品一标 | 有机化 | 本地特产</view>
+            <view>长按或扫一扫打开小程序</view>
+          </view>
+          <image class="xcx_ewm" src="{{ewmImg}}"></image>
+        </view>
+        <view class="hb_bottom" catchtap="Preservation" data-type="myStorecavas">
+          保存海报
+        </view>
+      </view>
+    </view>
+  </van-overlay>
+</view>
+<canvas id="shopCanvas" type="2d"></canvas>
+<canvas id="storeCanvas" type="2d"></canvas>

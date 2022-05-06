@@ -1,0 +1,89 @@
+<view class="flex-col page">
+    <view class="flex-col group">
+        <view class="divider">
+        </view>
+        <view class="flex-col section_2">
+            <map wx:if="{{mapShow}}" class="section_2_bg" bindtap="bindmaptap" bindmarkertap="bindmarkertap" polygons="{{polygon}}" longitude="{{dw.lon}}" latitude="{{dw.lat}}" scale="10" markers="{{markers}}" /> 
+
+            <!-- <image src="/farm/assets/16394458362334404527.png" class="section_2_bg" /> -->
+            <view class="justify-between section_3">
+                <view class="flex-row group_1">
+                    <image src="/farm/assets/16394521599364595198.png" class="icon" />
+                    <input bindinput="GetKeyWord" decode="decode" class="text_1" placeholder="请输入关键词" />
+                </view>
+                <text decode="decode" class="text_2" bindtap="GoSearch">搜索</text>
+            </view>
+            <!-- 预警图标 -->
+            <!-- <image src="/farm/assets/16394607787263949915.png" class="image_2" /> -->
+        </view>
+        <view class="flex-col section_4">
+            <view class="flex-col">
+                <block>
+                    <view class="list-item flex-col">
+                        <view class="top-group flex-row">
+                            <text decode="decode">{{bottomData.cqcbdsl}}台</text>
+                            <text decode="decode" class="text_4">{{bottomData.wsbsl}}台</text>
+                            <text decode="decode" class="text_5">{{bottomData.jdsl}}个</text>
+                        </view>
+                        <view class="bottom-group flex-row">
+                            <view class="flex-col group_3">
+                                <text decode="decode">虫情测报灯</text>
+                                <image src="/farm/assets/16394607786274557870.png" class="image_3" />
+                            </view>
+                            <text decode="decode" class="text_7">温室宝</text>
+                            <image src="/farm/assets/16394607784631459317.png" class="image_4" />
+                            <text decode="decode" class="text_8">基地</text>
+                        </view>
+                    </view>
+                    <view class="list-divider" wx:if="{{i !== 1}}">
+                    </view>
+                </block>
+                <view class="bottom_jd" wx:for="{{bottomData.jdxq}}" wx:key="i">
+                    <view>{{item.jdmc}}</view>
+                    <view>{{item.xxdz}}</view>
+                    <view>纬度 <text>{{item.wd}}</text> 经度 <text>{{item.jd}}</text></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 温室宝预警弹窗 -->
+    <view class="yjtk" wx:if="{{wsbShow}}">
+        <view class="section_yj">
+            <text class="section_yj_x" bindtap="closeX">X</text>
+            <view>
+                <view class="yj_title">预警信息</view>
+                <view class="yj_title2" wx:if="{{wsbxx.zt != '正常'}}">异常</view>
+            </view>
+            <view class="yj_title3">传感信息</view>
+            <view class="yj_item">
+                <view class="yj_title4"><text>空气湿度：</text><text>{{wsbxx.kqsd}}%</text></view>
+                <view class="yj_title4"><text>空气温度：</text><text>{{wsbxx.kqwd}}℃</text></view>
+                <view class="yj_title4"><text>土壤水分：</text><text>{{wsbxx.trsf}}%</text></view>
+                <view class="yj_title4"><text> 土壤温度：</text><text>{{wsbxx.trwd}}℃</text></view>
+                <view class="yj_title4"><text>光照强度：</text><text>{{wsbxx.gzqd}}Lux</text></view>
+            </view>
+            <view class="yj_title3">基本信息</view>
+            <view class="yj_item2">
+                <view class="yj_title4"><text>所属基地：</text><text>{{jdxx.jdmc}}</text></view>
+                <view class="yj_title4"><text>地块名称：</text><text>{{jdxx.dkmc}}</text></view>
+                <view class="yj_title4"><text>详细地址：</text><text>{{jdxx.xxdz}}</text></view>
+                <view class="yj_title4"><text> 纬度：</text><text>{{jdxx.wd}}</text></view>
+                <view class="yj_title4"><text> 经度：</text><text>{{jdxx.jd}}</text></view>
+            </view>
+        </view>
+    </view>
+    <!-- 虫情测报灯预警弹窗 -->
+    <view class="qctk" wx:if="{{cbdShow}}">
+        <view class="section_yj">
+            <text class="section_yj_x" bindtap="closeX">X</text>
+            <view>
+                <view class="yj_title">虫情信息</view>
+                <view class="qc_ul">
+                    <view class="qc_li" wx:for="{{cbdData}}" wx:key="i">
+                        <image src="{{item.img_url}}" alt="" />
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

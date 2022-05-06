@@ -1,0 +1,151 @@
+<view class="model">
+  <view class="model-gjjs">
+    <!-- <view class="model-gjjs-tit">关键技术</view> -->
+    <view class="model-gjjs-con-box">
+      <view class="content">
+        <view class="mubanly" wx:for="{{jsList}}" wx:key="index" bindtap="navTolysm" data-dz="{{item.spdz}}" data-bt="{{item.lxmc}}" data-lj="{{item.lj}}">
+          <!-- <video class="video" src="{{domain2+item.spdz}}" controls="{{false}}" show-center-play-btn="{{false}}"></video> -->
+          <image class="video" src="{{domain2+item.fm}}"></image>
+          <view class="text">{{item.lxmc}}</view>
+        </view>
+      </view>
+      <!-- <view class="model-gjjs-con">
+        <block wx:for="{{jsList}}" wx:key="index">
+          <navigator class="model-gjjs-item" url="{{item.id?'/micro/pages/lysm/lysm?active='+item.id:'/micro/pages/index/index'}}">
+            <view class="model-gjjs-item-name">{{item.lxmc}}</view>
+            点击学习
+          </navigator>
+        </block>
+      </view> -->
+    </view>
+  </view>
+  <view class="swiperBox">
+    <van-icon name="arrow-left" custom-class="arrow arrow_l" bindtap="prevItem" />
+    <swiper class="model-swiper" current="{{curSwiper}}" bindchange="changeZq" style="height: {{swiperH}}rpx;">
+      <block wx:for="{{growthList}}" wx:key="index" wx:for-item="it">
+        <swiper-item>
+          <view class="model-top">
+            <image src="{{domain+it.tplj}}" class="model-top-image"></image>
+            <view class="model-top-info">
+              <view class="{{growthItemId===it.id?'model-top-tit':''}} font28">{{it.zq}}</view>
+              <view class="model-top-con">
+                <view class="model-top-item">
+                  大棚温度: <text class="model-top-item-du">{{it.kqwd?it.kqwd+'℃':'暂无要求'}}</text>
+                </view>
+                <view class="model-top-item">
+                  相对湿度: <text class="model-top-item-du">{{it.kqsd?it.kqsd+'%':'暂无要求'}}</text>
+                </view>
+                <view class="model-top-item">
+                  土壤温度: <text class="model-top-item-du">{{it.trwd?it.trwd+'℃':'暂无要求'}}</text>
+                </view>
+                <view class="model-top-item">
+                  土壤含水量: <text class="model-top-item-du">{{it.trsf?it.trsf+'%':'暂无要求'}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="model-growth">
+            <view class="model-growth-box">
+              <block wx:for="{{growthStatus}}" wx:key="index">
+                <view class="model-growth-item {{curGrowthItem===it.id?'growth-act':''}}" bindtap="changeGrowth" data-idx="{{it.id}}">
+                  <view class="model-growth-yuan"></view>
+                  <view class="model-growth-con">
+                    <view class="model-growth-item-top">
+                      <text class="model-growth-item-name">{{it.zq}}</text>
+                      <text>{{it.kssj+'~'+it.jssj}}</text>
+                    </view>
+                    <view class="model-growth-item-info">
+                      <view class="fei" wx:if="{{it.zq==='休眠期'||it.zq==='幼果及膨大期'}}">肥：{{it.sf}}</view>
+                      <view class="fei">关键技术：
+                        <block wx:for="{{it.zqgjjs}}"  wx:key="index" wx:for-item="t">
+                          <text style="text-decoration: underline;" bindtap="navTolysm" data-dz="{{t.spdz}}"  data-bt="{{t.spbt}}">{{t.mc}}</text>,
+                        </block>
+                        <view class="model-study-tj-r" bindtap="showGjjs">{{isGjjs?'展开':'收起'}}</view>
+                      </view>
+                      <view hidden="{{isGjjs}}">
+                        <block wx:if="{{it.zq==='休眠期'}}">
+                          <view class="fei">树干涂白：（选用硫磺悬浮剂+乙蒜素）</view>
+                          <view class="fei">清园：全园喷药（选用药剂：石硫合剂、矿物油、松脂酸钠）</view>
+                          <view class="fei">修剪：专剪小枝，不锯大枝（去重叠枝、疏直立枝、留斜生枝、疏密生枝、删交叉枝、去枯枝病枝），培养凹凸树形。</view>
+                          <view class="fei">基肥：羊粪每株50斤，或生物有机肥每株10-15斤+腐殖酸1-2斤，沟施覆土；播撒冬季绿肥（苜蓿、光叶苕子、白三叶等）；喷施叶面肥（硼、钼、锌、磷酸二氢钾）</view>
+                        </block>
+                        <block wx:if="{{it.zq==='开花期'}}">
+                          <view class="fei">人工采集雄花粉 ：将开放雄花粉抖落于干燥干净的塑料或玻璃容器内，常温密封干燥保存</view>
+                          <view class="fei">人工授粉：选择晴天13-15时，棚内温度25-30℃，相对湿度低于65%时进行，将少量花粉置于干燥纸上，用吹风机吹风授粉；分2次授粉：40-60%雌花开放时第1次；5-7天后补授粉一次</view>
+                        </block>
+                        <block wx:if="{{it.zq==='幼果及膨大期'}}">
+                          <view class="fei">壮果肥 ：硫酸钾2-3斤/株，10-15天滴灌一次，喷施叶面肥（补含钾肥的营养液）</view>
+                          <view class="fei">疏果：果径达到0.5cm时开始第一次疏果，间隔7-10天进行疏果，每个结果枝留1-2个果</view>
+                          <view class="fei">病虫害防控：在禁药期前（采前30天)开展凋萎病、粉虱防治，选用矿物油等生物农药；禁药期（4月15日-6月25日）</view>
+                        </block>
+                        <block wx:if="{{it.zq==='转色及成熟期'}}">
+                          <view class="fei">果实采收：及时清理落果、病果和杂草；分批、适时采收， 荸荠种、东魁杨梅紫黑最佳 </view>
+                        </block>
+                        <block wx:if="{{it.zq==='花芽分化期'}}">
+                          <view class="fei">揭膜：揭去顶膜，露天管理</view>
+                          <view class="fei">修剪：采后进行大枝修剪，剪除徒长枝、骑马枝，衰弱 树重剪，促发新枝，树高控制在3.5米以内，伤口涂膜泰保护。</view>
+                        </block>
+                      </view>
+                    </view>
+                    <view class="model-growth-btn" wx:if="{{growthItemId===it.id&&isConfirm}}" bindtap="showConfirm">确认</view>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <van-icon name="arrow" custom-class="arrow arrow_r" bindtap="nextItem" />
+  </view>
+
+  <view class="model-study-grade">
+    <image class="model-study-honor" src="/assets/icons/honor.png"></image>
+    <view class="model-study-con">
+      <view class="model-study-name">{{study.grad}}</view>
+      <view class="model-study-pro">
+        <progress class="model-study-pro-left" percent="{{study.percent}}" border-radius="12rpx" color="#428ffc" active stroke-width="24rpx" /> 学习吻合度 <text style="color: #428ffc;">{{study.percent}}%</text>
+      </view>
+    </view>
+  </view>
+  <view class="model-study-tj">
+    <image class="model-study-honor" src="/assets/icons/tj.png"></image>
+    <view class="model-study-tj-t">我的统计</view>
+    <view class="model-study-tj-r" bindtap="openDate">{{!showDate?'展开':'收起'}}
+      <van-icon name="arrow" />
+    </view>
+  </view>
+  <view hidden="{{!showDate}}">
+    <calendar></calendar>
+    <view class="model-recode">
+      <block wx:if="{{recodeList.length}}">
+        <block wx:for="{{recodeList}}" wx:key="index">
+          <view class="model-recode-item">
+            <view class="model-recode-item-yuan"></view>
+            <text class="model-recode-item-text">辛勤打卡</text>
+            <text class="model-recode-item-text">{{item.dlsj}}</text>
+          </view>
+        </block>
+      </block>
+      <block wx:else>
+        <view class="model-recode-none">哦哦，有点懈怠了，下次按时来学习，加油哦</view>
+      </block>
+    </view>
+
+  </view>
+
+  <!-- 确认弹窗 -->
+  <van-overlay show="{{ showConfirm }}">
+    <view class="wrapper">
+      <view class="wrapper-con font28">
+        <block wx:for="{{options}}" wx:key="index">
+          <view class="select-item {{item.isCheck?'select-act':''}}" bindtap="selectItem" data-idx="{{index}}">{{item.nsczlx}}</view>
+        </block>
+      </view>
+      <view class="wrapper-btn">
+        <view class="wrapper-confirm" bindtap="onCloseWork">取消</view>
+        <view class="wrapper-confirm" bindtap="onConfirmWork">确认</view>
+      </view>
+    </view>
+  </van-overlay>
+</view>

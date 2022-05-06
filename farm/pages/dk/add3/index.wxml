@@ -1,0 +1,44 @@
+<view class="flex-col page">
+  <view class="flex-col group">
+    <view class="divider">
+      <map class="section_2_bg" bindtap="bindmaptap" polygons="{{polygon}}" longitude="{{dw.lon}}" latitude="{{dw.lat}}" scale="6.5" markers="{{markers}}" />
+    </view>
+    <view class="flex-col">
+      <view class="justify-between section_3" wx:if="{{columns.length > 0}}">
+        <van-field bindtap="GetJd" disabled required class="fieldWidth" value="{{ ssjd }}" right-icon="arrow" label="所属基地" placeholder="请输入所属基地" input-align="right" />
+      </view>
+      <view class="flex-col section_4">
+        <text decode="decode" class="text_8">田块信息（必填）</text>
+        <view class="group_3 flex-row view_1">
+          <van-field required disabled class="fieldWidth" value="{{ params.dkwz }}" label="地块位置" placeholder="请输入地块位置" input-align="right" />
+        </view>
+
+        <view class="justify-between group_3">
+          <van-field required disabled class="fieldWidth" value="{{ params.dkmj + '亩' }}" label="地块面积" placeholder="请输入地块面积" input-align="right" />
+        </view>
+
+        <view class="justify-between group_3">
+          <van-field required class="fieldWidth" bind:input="GetDkmc" value="{{ params.dkmc }}" label="地块名称" placeholder="请输入地块名称" input-align="right" />
+        </view>
+        <view class="group_3 justify-between">
+          <van-field required class="fieldWidth" bind:input="GetZwmc" value="{{ params.zwmc }}" label="作物名称" placeholder="请输入作物名称" input-align="right" />
+
+        </view>
+        <view class="justify-between group_3">
+          <van-field required disabled bindtap="changeShow" class="fieldWidth" bind:input="GetNclx" value="{{ params.nclx }}" label="农场类型" placeholder="请输入农场类型" input-align="right" />
+        </view>
+        <van-popup show="{{ categoryShow }}" bind:close="categoryClose" position="bottom">
+          <van-picker columns="{{ categoryColumns }}" show-toolbar bind:cancel="categoryClose" bind:confirm="categoryChange" />
+        </van-popup>
+
+      </view>
+    </view>
+    <view class="button_bottom">
+      <text bindtap="quxiao">取消</text><text bindtap="queren">确认</text>
+    </view>
+  </view>
+  <van-overlay class="pickerZz" show="{{ show }}">
+    <van-picker class="pickerPosi" show-toolbar bind:cancel="onCancel" bind:confirm="onConfirm" columns="{{ columns }}" bind:change="onChange" />
+  </van-overlay>
+
+</view>

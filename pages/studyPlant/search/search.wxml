@@ -1,0 +1,21 @@
+<view>
+    <!-- <input style="border:1px solid black;" bindinput="getsuggest" value="{{backfill}}"></input> -->
+    <van-search value="{{backfill}}" label="地址" placeholder="请输入搜索关键词" use-action-slot bind:change="getsuggest">
+    </van-search>
+    <!--关键词输入提示列表渲染-->
+    <view wx:for="{{suggestion}}" wx:key="index">
+        <!--绑定回填事件-->
+        <view>
+            <!--根据需求渲染相应数据-->
+            <!--渲染地址title-->
+            <view style="text-align:center;" bindtap="backfill" id="{{index}}">{{item.title}}</view>
+            <!--渲染详细地址-->
+            <view style="font-size:12px;color:#666;text-align:center;">{{item.addr}}</view>
+        </view>
+    </view>
+    <view class="btn">
+        <view class="buttom" bindtap="changeAddress">
+            保存
+        </view>
+    </view>
+</view>

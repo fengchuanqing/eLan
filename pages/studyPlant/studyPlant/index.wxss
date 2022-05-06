@@ -1,0 +1,25 @@
+.nav-box{
+  padding: 18rpx 32rpx 25rpx;
+	background-color: #ffffff;
+}
+.nav{
+  height: 57rpx;
+	border-radius: 4rpx;
+  border: solid 1rpx #428ffc;
+  display: flex;
+}
+.nav-item{
+  height: 55rpx;
+  line-height: 55rpx;
+  width: 33.33%;
+  border-right: solid 1rpx #428ffc;
+  text-align: center;
+  color: #428ffc;
+}
+.nav-item:last-child{
+  border-right: none;
+}
+.nav-item-act{
+  color: #ffffff !important;
+  background-color: #428ffc;
+}

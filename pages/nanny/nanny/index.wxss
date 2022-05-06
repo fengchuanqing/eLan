@@ -1,0 +1,358 @@
+/* pages/nanny/nanny/index.wxss */
+
+.nanny {
+  width: 750rpx;
+  height: 1000rpx;
+  background-color: #F7F8FA;
+  position: relative;
+}
+
+/* 四切换头部 */
+.nanny_top {
+  width: 100%;
+  height: 88rpx;
+  /* background-color: red; */
+}
+
+.van-tab--active .van-ellipsis {
+  color: #428FFC;
+
+}
+
+/* 02农资店下 */
+.express_one {
+  width: 100%;
+  height: 170rpx;
+  /* border: 1px solid pink; */
+  margin-top: 30rpx;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 24px 0px rgba(47, 111, 247, 0.1);
+  background-color: #fff;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.express_one_left {
+  width: 30%;
+  height: 190rpx;
+  box-sizing: border-box;
+  /* display: inline-block; */
+  float: left;
+}
+
+.imgs_one {
+  width: 100%;
+  height: 100%;
+}
+
+.express_one_right {
+  width: 90%;
+  /* height: 190rpx; */
+  /* box-sizing: border-box; */
+  /* display: inline-block; */
+  /* float: right; */
+}
+
+.rowone {
+  line-height: 60rpx;
+}
+
+.tapone {
+  margin-right: 20rpx;
+}
+
+.zhel_one {
+  width: 120rpx;
+  /* height: 150rpx; */
+  /* background-color: pink; */
+}
+
+#bot_one {
+  width: 128rpx;
+  height: 48rpx;
+  font-size: 65rpx;
+}
+
+/* 01农资店上 */
+
+
+
+
+/* 01快递点下 */
+.express_two {
+  width: 750rpx;
+  height: 260rpx;
+  /* border: 1px solid pink; */
+  margin-top: 30rpx;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 24px 0px rgba(47, 111, 247, 0.1);
+  background-color: #fff;
+  padding: 20rpx;
+  position: relative;
+}
+
+.express_two_left {
+  width: 30%;
+  height: 190rpx;
+  box-sizing: border-box;
+  padding-top: 15rpx;
+  /* display: inline-block; */
+  float: left;
+}
+
+.imgs_two {
+  width: 100%;
+  height: 100%;
+}
+
+.express_two_right {
+  width: 70%;
+  height: 190rpx;
+  box-sizing: border-box;
+  float: right;
+}
+
+.rowtwo {
+  line-height: 60rpx;
+}
+
+.zhel_two {
+  width: 120rpx;
+  height: 150rpx;
+  /* background-color: pink; */
+  position: absolute;
+  top: 35rpx;
+  right: 20rpx;
+}
+
+#bot_two {
+  width: 128rpx;
+  height: 48rpx;
+  font-size: 65rpx;
+}
+
+/* 02快递点上 */
+
+/* 服务队下 */
+.express_thr {
+  width: 750rpx;
+  height: 230rpx;
+  /* border: 1px solid pink; */
+  margin-top: 30rpx;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 24px 0px rgba(47, 111, 247, 0.1);
+  background-color: #fff;
+  padding: 20rpx;
+  position: relative;
+}
+
+.express_thr_left {
+  width: 30%;
+  height: 190rpx;
+  box-sizing: border-box;
+  /* display: inline-block; */
+  float: left;
+}
+
+.imgs_thr {
+  width: 100%;
+  height: 100%;
+}
+
+.express_thr_right {
+  width: 70%;
+  height: 190rpx;
+  box-sizing: border-box;
+  /* display: inline-block; */
+  float: right;
+}
+
+.rowthr {
+  line-height: 60rpx;
+}
+
+.tapthr {
+  margin-right: 20rpx;
+}
+
+/* .zhel_thr{
+  width: 140rpx;
+  height: 150rpx;
+  position: absolute;
+  top: 40rpx;
+  right: 30rpx;
+}
+.bot_thr{
+  width: 128rpx;
+  height: 48rpx;
+  font-size: 65rpx;
+} */
+
+.zhel_thr {
+  width: 140rpx;
+  height: 150rpx;
+  /* background-color: pink; */
+  position: absolute;
+  top: 40rpx;
+  right: 30rpx;
+}
+
+#bot_thr {
+  width: 128rpx;
+  height: 48rpx;
+  font-size: 65rpx;
+}
+
+.pinjia {
+  /* position: absolute; */
+  position: fixed;
+  bottom: 60rpx;
+  left: 30rpx;
+  width: 686rpx;
+  height: 80rpx;
+  font-size: 36rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #428EFC;
+  border-radius: 60rpx;
+  line-height: 80rpx;
+  /* z-index: 999999; */
+}
+
+.start {
+  position: absolute;
+  top: 30rpx;
+  left: 20rpx;
+  width: 150rpx;
+  height: 38rpx;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0rpx 20rpx 20rpx 0;
+  /* 左上、右上、右下、左下 */
+  line-height: 28rpx;
+}
+
+/* 服务队上 */
+
+
+/* 02保鲜库下 */
+.express_four {
+  width: 750rpx;
+  height: 230rpx;
+  /* border: 1px solid pink; */
+  margin-top: 30rpx;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 24px 0px rgba(47, 111, 247, 0.1);
+  background-color: #fff;
+  padding: 20rpx;
+  position: relative;
+}
+
+.express_four_left {
+  width: 30%;
+  height: 190rpx;
+  box-sizing: border-box;
+  /* display: inline-block; */
+  float: left;
+}
+
+.imgs_four {
+  width: 100%;
+  height: 100%;
+}
+
+.express_four_right {
+  width: 70%;
+  height: 190rpx;
+  box-sizing: border-box;
+  /* display: inline-block; */
+  float: right;
+}
+
+.rowfour {
+  line-height: 60rpx;
+}
+
+.tapfour {
+  margin-right: 20rpx;
+}
+
+.zhel_four {
+  width: 120rpx;
+  height: 150rpx;
+  /* background-color: pink; */
+  position: absolute;
+  top: 40rpx;
+  right: 30rpx;
+}
+
+#bot_four {
+  width: 128rpx;
+  height: 48rpx;
+  font-size: 65rpx;
+}
+
+/* 01农资店上 */
+
+/* 弹框 */
+.fwdCon {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 0 32rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.fwd_list{
+  height: 600rpx;
+  overflow: auto;
+}
+.fwd_list::-webkit-scrollbar{
+  /* display: none; */
+}
+.fwd_item {
+  padding: 32rpx 0;
+  border-bottom: 1rpx solid #e8e9ec;
+  display: flex;
+  width: 100%;
+}
+
+.fwd_item>image{
+  width: 196rpx;
+	height: 196rpx;
+  background-color: #27c9d5;
+}
+.fwd_item_r{
+  margin-left: 27rpx;
+}
+.fwd_item_r_name{
+  font-size: 36rpx;
+}
+.fwd_item_r_p{
+  font-size: 32rpx;
+  color: #686a73;
+  margin: 34rpx 0;
+}
+.fwd_item_r_d{
+  width: 148rpx;
+	height: 58rpx;
+	background-color: #428ffc;
+  border-radius: 29rpx;
+  text-align: center;
+  line-height: 58rpx;
+  color: #fff;
+  font-size: 28rpx;
+}
+.cancel{
+  width: 100%;
+  background-color: #428ffc;
+	border-radius: 39rpx;
+  border: solid 1rpx #428ffc;
+  height: 78rpx;
+  text-align: center;
+  line-height: 78rpx;
+  font-size: 32rpx;
+  color: #ffffff;
+  margin-bottom: 32rpx;
+}

@@ -1,0 +1,57 @@
+<view class="own">
+  <view class="title" style="top: {{isIPhoneXSeries?'7.5%':'66rpx'}};">
+    <rich-text></rich-text><text>我的</text>
+    <rich-text nodes="{{nbsp}}"></rich-text>
+  </view>
+  <view class="top">
+    <view class="headerBg">
+      <image src="/assets/images/home/own.png" alt="" />
+      <view class="text">
+        <view>HI,欢迎来到兰溪</view>
+        <view><text>兰溪特色</text><text>尽在e兰茗果</text> </view>
+      </view>
+    </view>
+    <view class="context">
+      <view class="profile">
+        <image src="{{userInfo.yhtx}}" alt="" />
+      </view>
+      <view class="text">
+        <block wx:if="{{!userInfo||userInfo.sf==='微信未授权游客'}}"> 
+          <view bindtap="authorize">立即授权</view>
+        </block>
+        <block wx:else>
+          <view>{{userInfo.sf==='游客'?userInfo.nc:userInfo.username}}</view>
+          <view>{{userInfo.lx}} </view>
+          <view class="jindt">
+            <view class="progress-box">
+              <progress percent="{{userInfo.hlz}}" activeColor="#00b578" active stroke-width="17rpx" border-radius="8rpx" />
+            </view>
+            <text>活力值</text>
+            <!-- <view class="tip" style="left:{{420*baifenbi/100}}rpx">698</view> -->
+            <view class="bfb" style="left: {{420*userInfo.hlz/200}}rpx;">{{userInfo.hlz}}%</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class="middle">
+    <view class="titleApp">我的应用</view>
+    <view class="myApp">
+      <block wx:for="{{myAppList}}" wx:key="idx">
+        <view class="myAppItem" bindtap="goNext" data-item="{{item}}">
+          <view class="icon">
+            <image src="{{item.icon}}"></image>
+            <view class="kuang" wx:if="{{item.message}}">
+              <view class="messageNumber"><text>{{item.message}}</text></view>
+            </view>
+          </view>
+          <view class="name">{{item.name}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="bottom">
+    <van-cell wx:for="{{bottomList}}" wx:key="idx" is-link title="{{item.name}}" icon="{{item.icon}}" bindtap="goNext" value-class="{{item.value==='未认证'?'bluet':''}}" value="{{item.value}}" data-item="{{item}}" />
+  </view>
+</view>
+<authentication show="{{showAuthentication}}" url="{{authUrl}}" content="为了更好的体验以及权限请你完善更多的信息"></authentication>

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-toast": "@vant/weapp/toast/index"
+  },
+  "backgroundTextStyle":"light",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTitleText": "微保姆",
+  "navigationBarTextStyle":"black"
+}

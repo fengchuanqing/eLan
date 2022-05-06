@@ -1,0 +1,24 @@
+<view class="tjns">
+    <view class="container">
+        <view class="title">基本信息</view>
+        <van-cell title="农场名称" wx:if="{{jsShow}}" is-link bind:click="openShow2" value="{{farmName}}" value-class="right_color" />
+        <van-cell title="日期" bind:click="openShow" is-link value="{{createTime}}" value-class="right_color" />
+        <view class="title"><text style="color:red;">*</text>农事操作</view>
+        <view class="nscz_box">
+            <view wx:for="{{list}}" wx:key="bindex" wx:for-index="bindex" bindtap="changeActive" data-item="{{bindex}}" class="{{item.checked?'active':''}}">{{item.name}}</view>
+        </view>
+    </view>
+    <view class="queren" wx:if="{{jsShow}}" bindtap="gogogo">确认</view>
+
+    <van-overlay show="{{ show }}">
+        <view class="picker_box">
+            <van-datetime-picker bind:cancel="cancel" bind:confirm="confirm" class="pickerSty" type="datetime" show-toolbar value="{{ currentDate }}" min-date="{{ minDate }}" max-date="{{ maxDate }}" bind:input="onInput" />
+        </view>
+    </van-overlay>
+    <van-overlay show="{{ show1 }}">
+        <view class="picker_box">
+            <van-picker columns="{{ columns }}" show-toolbar bind:cancel="cancel" bind:confirm="confirm2" />
+        </view>
+    </van-overlay>
+
+</view>

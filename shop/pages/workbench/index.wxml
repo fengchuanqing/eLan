@@ -1,0 +1,47 @@
+<view class="page">
+  <view class="main">
+    <view class="navList">
+      <view class="navItem">
+        <navigator url="/shop/pages/evaluate/evaluate">
+          <image src="/shop/static/img/stock.png"></image>
+          <view>查看评价</view>
+        </navigator>
+      </view>
+      <view class="navItem">
+        <navigator url="/shop/pages/business/business">
+          <image src="/shop/static/img/order.png"></image>
+          <view>订单管理</view>
+        </navigator>
+      </view>
+    </view>
+    <view class="navList">
+      <view class="navItem">
+        <navigator url="/shop/pages/lookGoods/lookGoods">
+          <image src="/shop/static/img/member.png"></image>
+          <view>沉浸式看货</view>
+        </navigator>
+      </view>
+      <view class="navItem">
+        <navigator url="/shop/pages/offlineOrder/offlineOrder">
+          <image src="/shop/static/img/offLine.png"></image>
+          <view>线下订单管理</view>
+        </navigator>
+      </view>
+    </view>
+    <view class="navList">
+      <view class="navItem">
+        <navigator url="/shop/pages/activity/activity">
+          <image src="/shop/static/img/activity.png"></image>
+          <view>活动管理</view>
+        </navigator>
+      </view>
+      <view class="navItem">
+        <navigator url="/shop/pages/shopManage/shopManage">
+          <image src="/shop/static/img/shop.png"></image>
+          <view>商品管理</view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <tabBar tabOfficerActive='{{false}}' tabWorkbenchActive="{{true}}"></tabBar>
+</view>

@@ -1,0 +1,101 @@
+/* message/pages/shopProve/shopProve.wxss */
+/* message/pages/spShop/spShop.wxss */
+.header {
+    height: 181rpx;
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    margin: 32rpx 0 19rpx 0;
+    box-shadow: 0rpx 2rpx 24rpx 0rpx rgba(47, 111, 247, 0.16);
+}
+.content{
+    box-shadow: 0rpx 2rpx 24rpx 0rpx rgba(47, 111, 247, 0.16);
+
+}
+.header>view {
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+.header view text {
+    font-size: 28rpx;
+    width: 100%;
+    text-align: center;
+    color: #428ffc;
+}
+
+.header view view {
+    margin-bottom: 20rpx;
+    width: 55rpx;
+    height: 55rpx;
+    border: 1rpx dotted #428ffc;
+    border-radius: 50%;
+    color: #428ffc;
+    text-align: center;
+}
+
+.activeF {
+    color: #428ffc;
+}
+
+.header view .active {
+    background-color: #428ffc;
+    border: 1px solid #428ffc;
+    color: #fff;
+}
+
+van-uploader {
+    display: flex;
+    justify-content: center;
+    padding: 41rpx 0 39rpx ;
+}
+
+.picUpload {
+    width: 379rpx;
+    height: 215rpx;
+    background-color: rgba(175, 181, 185, 0.1);
+    border-radius: 8rpx;
+    border: 1rpx dotted #b3b5b9;
+    text-align: center;
+    line-height: 215rpx;
+    font-size:50rpx ;
+}
+.picBg{
+    background: #fff;
+}
+.picBg image{
+    width: 379rpx;
+    height: 215rpx;
+}
+.footer{
+height: 195rpx;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.footer view{
+    width: 686rpx;
+	height: 108rpx;
+	background-color: #428ffc;
+    border-radius: 54rpx;
+    font-size: 36rpx;
+    text-align: center;
+    line-height: 108rpx;
+    color: #fff;
+    font-weight: 800;
+}
+.getCode {
+  font-size: 24rpx;
+  color: #ffffff;
+  width: 179rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  background-color: #428ffc;
+  border-radius: 4rpx;
+  padding: 0;
+  font-weight: 500;
+}

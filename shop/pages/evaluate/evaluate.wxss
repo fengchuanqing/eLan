@@ -1,0 +1,80 @@
+.page {
+  min-height: 100vh;
+  background-color: #f5f6f7;
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+
+.evaluate_item {
+  padding: 30rpx;
+  padding-bottom: 27rpx;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-bottom: 32rpx;
+}
+
+.evaluate_time {
+  margin-bottom: 15rpx;
+  font-size: 24rpx;
+  color: #686b73;
+}
+
+.evaluate_main {
+  margin-top: 16rpx;
+  padding-bottom: 22rpx;
+  /* border-bottom: 1rpx solid #e8e9ec; */
+  display: flex;
+}
+
+.evaluate_main>image {
+  width: 199rpx;
+  height: 198rpx;
+  background-color: #428ffc;
+  border-radius: 10rpx;
+}
+
+.evaluate_info {
+  margin-left: 38rpx;
+}
+
+.evaluate_name {
+  font-size: 30rpx;
+  color: #000000;
+}
+
+.rate {
+  display: flex;
+  align-items: center;
+  margin: 15rpx 0;
+  font-size: 24rpx;
+  color: #686b73;
+}
+
+.rate text {
+  display: block;
+}
+
+.rate image {
+  width: 44rpx;
+  height: 42rpx;
+  margin-right: 8rpx;
+}
+
+.evaluate_con {
+  word-wrap: break-word;
+  margin: 17rpx 0 0 38rpx;
+  font-size: 24rpx;
+  color: #686b73;
+  line-height: 36rpx;
+}
+
+.noLists {
+  text-align: center;
+  color: #999999;
+  padding: 50rpx 0;
+  background-color: #fff;
+}
+.pj_content {
+  max-height: 300rpx;
+  overflow-y: auto;
+}

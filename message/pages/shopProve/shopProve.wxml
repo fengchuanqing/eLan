@@ -1,0 +1,61 @@
+<!--message/pages/shopProve/shopProve.wxml-->
+<view>
+    <view class="header">
+        <view>
+            <view>1</view>
+            <text>填写店铺信息</text>
+        </view>
+        <view>
+            <view class="active">2</view>
+            <text class="activeF">上传资质证明</text>
+        </view>
+    </view>
+    <view class="content">
+        <van-cell-group>
+            <block wx:if="{{dplx!=='规模大户'}}">
+                <van-cell title-width="250rpx" title="营业执照备案" required="{{true}}" value="" />
+                <view class="picBg">
+                    <van-uploader file-list="{{ yyzz }}" max-count="1" data-keyname="yyzz" bind:after-read="afterRead" deletable="{{ false }}">
+                        <view class="picUpload">
+                            +
+                        </view>
+                    </van-uploader>
+                </view>
+            </block>
+            <van-cell title-width="250rpx" title="身份证实名认证" required="{{true}}" value="" />
+            <view class="picBg">
+                <van-uploader file-list="{{ sfsmrz1 }}" max-count="1" bind:after-read="afterRead" data-keyname="sfsmrz1" deletable="{{ false }}">
+                    <image src="../assets/sfzZm.png"></image>
+                </van-uploader>
+            </view>
+            <view class="picBg">
+                <van-uploader file-list="{{ sfsmrz2 }}" max-count="1" bind:after-read="afterRead" data-keyname="sfsmrz2" deletable="{{ false }}">
+                    <image src="../assets/sfzBm.png"></image>
+                </van-uploader>
+            </view>
+            <view class="picBg">
+                <van-uploader file-list="{{ sfsmrz3 }}" max-count="1" bind:after-read="afterRead" data-keyname="sfsmrz3" deletable="{{ false }}">
+                    <image src="../assets/sfzSc.png"></image>
+
+                </van-uploader>
+            </view>
+            <van-cell title-width="250rpx" title="经营许可" value="选填" />
+            <view class="picBg">
+                <van-uploader file-list="{{ jyxk }}" max-count="1" bind:after-read="afterRead" data-keyname="jyxk" deletable="{{ false }}">
+                    <view class="picUpload">
+                        +
+                    </view>
+                </van-uploader>
+            </view>
+        </van-cell-group>
+        <van-field title-width="150rpx" readonly required="{{true}}" model:value="{{ phone }}" label="手机号码" placeholder="请输入手机号码" />
+        <van-field title-width="150rpx" required model:value="{{ authCode }}" type="number" placeholder="请输入验证码" label="验证码" clearable use-button-slot>
+            <button slot="button" class="getCode" bindtap="getAuthCode" disabled="{{disabled}}">{{codename}}</button>
+        </van-field>
+    </view>
+    <view class="footer">
+        <view bindtap="submit">
+            提交
+        </view>
+    </view>
+</view>

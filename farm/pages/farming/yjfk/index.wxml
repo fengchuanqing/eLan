@@ -1,0 +1,18 @@
+<view>
+    <view class="container">
+        <view class="title"><text style="color:red;">*</text>选择您要反馈的问题类型</view>
+        <view class="nscz_box">
+            <view class="active">功能建议</view>
+            <view>页面问题</view>
+            <view>操作问题</view>
+            <view>功能问题</view>
+            <view>购买问题</view>
+            <view>其他</view>
+        </view>
+        <view class="title"><text style="color:red;">*</text>反馈描述</view>
+        <van-cell-group>
+            <van-field value="{{ message }}" type="textarea" placeholder="请输入您要反馈的意见" autosize border="{{ false }}" />
+        </van-cell-group>
+    </view>
+    <view class="queren">提交</view>
+</view>

@@ -1,0 +1,63 @@
+<view class="search">
+  <van-search value="{{ value }}" shape="round" placeholder="请输入搜索关键词" input-align="center" right-icon="search" left-icon="" bind:search="onSearch" />
+</view>
+<swiper indicator-dots="{{false}}" autoplay="{{false}}" class="swiper" wx:if="{{jxsjList.length}}">
+  <block wx:for="{{jxsjList}}" wx:key="*this">
+    <swiper-item>
+      <view class="jxItem">
+        <image src="{{img+item.dpfm}}" class="jxItem_bj" mode="widthFix"></image>
+        <image src="/specialZone/assets/icon_tip1.png" class="jxItem_tip"></image>
+        <view class="jxItem_info">
+          <view class="jxItem_name">{{item.full_name}}</view>
+          <view class="jxItem_zy">主营：{{item.commodity}}</view>
+          <view class="jxItem_jg">
+            <view class="jxItem_jg_l">
+              <text>{{item.qsj}}</text>元
+            </view>
+            <view class="jxItem_jg_r">
+              <text>起</text>
+              <view class="jxItem_jg_r_j">></view>
+            </view>
+          </view>
+        </view>
+        <navigator url="/specialZone/pages/storeDetail/storeDetail?id={{item.id}}" class="go">去店铺></navigator>
+      </view>
+    </swiper-item>
+  </block>
+</swiper>
+<view class="goodsList" wx:if="{{goodsList.length}}">
+  <view class="tit">
+    <text>相关商品</text>
+    <view class="nav">
+      <view class="{{curNav==1?'curNav':''}}" bindtap="changeNav" data-idx="{{1}}">热销</view>
+      <view class="{{curNav==2?'curNav':''}}" bindtap="changeNav" data-idx="{{2}}">价格</view>
+    </view>
+  </view>
+  <view class="goods" wx:for="{{goodsList}}" wx:key="index">
+    <view class="goodsTop">
+      <image src="{{img+item.img}}"></image>
+      <view class="goodsInfo">
+        <view class="goodsName">
+          <view>
+            <text>{{item.name}}</text>
+            <image src="/specialZone/assets/hot.png"></image>
+          </view>
+          <navigator hover-class="none" class="goDetail" url="/specialZone/pages/shopDetail/shopDetail?id={{item.spid}}">查看详情>></navigator>
+        </view>
+        <view class="tags">{{item.trait}}</view>
+        <view class="xl">销量：{{item.dealed}}</view>
+        <view class="gg">
+          <view class="jg">
+            <text>￥{{item.goodsSizeList[0].prince}} /</text>{{item.goodsSizeList[0].size_name}}
+          </view>
+          <navigator class="goOrder" url="/specialZone/pages/placeOrder/placeOrder?id={{item.spid}}&store_id={{item.dpid}}&goodsSizeId={{item.goodsSizeList[0].id}}&num=1">去下单<image src="/specialZone/assets/cart_white.png"></image>
+          </navigator>
+        </view>
+      </view>
+    </view>
+    <view class="goodsBtm">
+      <text>{{item.full_name}}</text>
+      <navigator url="/specialZone/pages/storeDetail/storeDetail?id={{item.dpid}}">去店铺></navigator>
+    </view>
+  </view>
+</view>

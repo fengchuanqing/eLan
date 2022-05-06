@@ -1,0 +1,22 @@
+<!--pages/micro/bctk/bctk.wxml-->
+<view>
+    <view class="header">
+        <van-dropdown-menu active-color="#1989fa">
+            <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" bind:change="selected" />
+            <van-search value="{{ value }}" placeholder="请输入搜索关键词" bind:search="serach" />
+        </van-dropdown-menu>
+    </view>
+    <view class="muban" wx:for="{{list}}" wx:key="index" bindtap="navTo" data-id="{{item.id}}" wx:if="{{list.length}}">
+        <image src="{{img+item.tp}}"></image>
+        <view class="text">
+            <view><text>{{item.mc}}</text>
+            </view>
+            <view><text>{{item.lxmc}}</text> </view>
+            <view class="con">
+                {{item.whzz}}
+                <!-- <rich-text nodes="<div style='width: 170px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;display:block'></div>"></rich-text> -->
+            </view>
+        </view>
+    </view>
+    <image wx:if="{{list.length===0}}" src="/micro/assets/empty.png" class="none"></image>
+</view>

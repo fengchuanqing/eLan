@@ -1,0 +1,293 @@
+/************************************************************
+** 请将全局样式拷贝到项目的全局 CSS 文件或者当前页面的顶部 **
+** 否则页面将无法正常显示                                  **
+************************************************************/
+
+page {
+  width: 100vw;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', 'Microsoft Yahei', sans-serif;
+}
+
+view,
+image,
+text {
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+.justify-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.justify-evenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.justify-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.justify-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.items-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.items-center {
+  display: flex;
+  align-items: center;
+}
+
+.items-end {
+  display: flex;
+  align-items: flex-end;
+}
+
+van-field {
+  --cell-background-color: transparent;
+}
+
+van-field .van-field__body {
+  width: 100%;
+}
+
+van-checkbox .van-checkbox__label,
+van-radio .van-radio__label {
+  padding-left: 0;
+  flex: 1 1 auto;
+}
+
+van-checkbox .van-checkbox--horizontal,
+van-radio .van-radio--horizontal {
+  margin-right: 0;
+}
+
+van-search {
+  --search-padding: 0;
+}
+
+.left-group {
+  line-height: 34rpx;
+  white-space: nowrap;
+  height: 34rpx;
+}
+
+.group_3 {
+  padding: 10rpx 0;
+  border-top: solid 6rpx rgb(232, 233, 236);
+}
+
+.icon {
+  margin: 4rpx 0;
+  width: 15rpx;
+  height: 26rpx;
+}
+
+.text_5 {
+  color: rgb(104, 107, 115);
+  font-size: 36rpx;
+  line-height: 34rpx;
+}
+
+.text_11 {
+  color: rgb(54, 58, 68);
+  font-size: 36rpx;
+  line-height: 34rpx;
+  white-space: nowrap;
+}
+
+.page {
+  background-color: rgb(246, 247, 248);
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.group {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.divider {
+  margin: 20rpx;
+  height: 35vh;
+  background-color: rgb(255, 255, 255);
+  position: relative;
+}
+
+
+.section_2 {
+  padding: 37rpx 11rpx 39rpx 32rpx;
+  color: rgb(255, 255, 255);
+  font-size: 36rpx;
+  line-height: 34rpx;
+  white-space: nowrap;
+  background-color: rgb(66, 143, 252);
+  box-shadow: 0px 0px 24rpx rgba(47, 111, 247, 0.1);
+  position: relative;
+}
+
+.image_2 {
+  width: 100vw;
+  height: 59vw;
+}
+
+.section_3 {
+  padding: 32rpx 0;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 24rpx rgba(47, 111, 247, 0.1);
+}
+
+.fieldWidth {
+  width: 100%;
+}
+
+
+
+.section_4 {
+  margin-top: 20rpx;
+  padding: 41rpx 11rpx 0 30rpx;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 24rpx rgba(47, 111, 247, 0.1);
+}
+
+.group_2 {
+  color: rgb(54, 58, 68);
+  font-size: 36rpx;
+  line-height: 34rpx;
+  white-space: nowrap;
+}
+
+.text_8 {
+  margin-left: 4rpx;
+  color: rgb(179, 181, 185);
+  font-size: 36rpx;
+  line-height: 34rpx;
+  white-space: nowrap;
+}
+
+.view_1 {
+  margin-top: 30rpx;
+}
+
+.group_4 {
+  padding: 39rpx 2rpx 27rpx;
+  border-top: solid 6rpx rgb(232, 233, 236);
+}
+
+.group_5 {
+  padding: 39rpx 0 27rpx 2rpx;
+  border-top: solid 6rpx rgb(232, 233, 236);
+}
+
+.group_6 {
+  padding: 35rpx 2rpx 40rpx;
+  border-top: solid 6rpx rgb(232, 233, 236);
+}
+
+.image_3 {
+  margin-top: 7rpx;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.text_12 {
+  margin-left: 82rpx;
+}
+
+.text_15 {
+  color: rgb(54, 58, 68);
+  font-size: 36rpx;
+  line-height: 34rpx;
+  white-space: nowrap;
+}
+
+.text_18 {
+  color: rgb(54, 58, 68);
+  font-size: 36rpx;
+  line-height: 34rpx;
+  white-space: nowrap;
+}
+
+.view_7 {
+  margin-right: 18rpx;
+}
+
+.group_7 {
+  margin-right: 18rpx;
+  color: rgb(54, 58, 68);
+  font-size: 36rpx;
+  line-height: 34rpx;
+  white-space: nowrap;
+}
+
+.pickerZz {
+  position: relative;
+  z-index: 99999;
+}
+
+.pickerPosi {
+  position: absolute;
+  height: 45vh;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+.section_2_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.button_bottom {
+  display: flex;
+  justify-content: space-around;
+  margin: 25rpx 0;
+}
+
+.button_bottom>text {
+  width: 40%;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  border: 1px solid rgb(67, 137, 212);
+  border-radius: 18px;
+  color: rgb(67, 137, 212);
+}
+.button_bottom>text:nth-child(2) {
+  background-color: rgb(67, 137, 212);
+  color: #fff;
+}

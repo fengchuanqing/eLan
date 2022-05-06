@@ -1,0 +1,8 @@
+<block wx:for="{{sfList}}" wx:key="index" wx:if="{{sfList.length}}">
+  <van-cell-group custom-class="box">
+    <van-cell title="身份：" value="{{item.sf}}" value-class="val" />
+    <van-cell title="联系电话：" value="{{item.lxfs}}" />
+    <van-cell title="姓名：" value="{{item.lxr}}" />
+  </van-cell-group>
+</block>
+<image wx:if="{{!sfList.length}}" src="/message/pages/assets/message/empty.png" class="none"></image>

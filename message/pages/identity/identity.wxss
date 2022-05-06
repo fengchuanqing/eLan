@@ -1,0 +1,15 @@
+.none{
+  width: 305rpx;
+  height: 416rpx;
+  margin: 58rpx auto;
+  display: block;
+}
+.val{
+  color: #428ffc !important;
+  font-weight: bold;
+}
+.box{
+  margin-top: 32rpx;
+  box-shadow: 6rpx 0rpx 10rpx 0rpx 
+		rgba(0, 0, 0, 0.07);
+}

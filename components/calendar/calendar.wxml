@@ -1,0 +1,20 @@
+<view class="model-calendar">
+  <view class="model-calendar-top">
+    <image src="/assets/icons/icons_leftarrow.png" class="model-calendar-leftarrow" bindtap="lastMonth"></image>
+    <view class="model-calendar-ym">{{year}}年{{month}}月</view>
+    <image src="/assets/icons/icons_rightarrow.png" class="model-calendar-leftarrow" bindtap="nextMonth"></image>
+  </view>
+  <!-- 日历主体 -->
+ 
+  <view class='date-box'>
+    <block wx:for='{{dateArr}}' wx:key='index'>
+      <view wx:if="{{!item.isToday}}" class="date-day kong"></view>
+      <view wx:else class="date-day {{item.isColor?'date-bj':''}} {{item.leftRadius?'leftRadius':''}} {{item.rightRadius?'rightRadius':''}}">
+        <view class='date-head font28'>
+          <view>{{item.dateNum}}</view>
+        </view>
+        <view class="date-yq" wx:if="{{item.choose}}"></view>
+      </view>
+    </block>
+  </view>
+</view>

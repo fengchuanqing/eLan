@@ -1,0 +1,52 @@
+<!--message/pages/spShop/spShop.wxml-->
+<view>
+    <view class="header">
+        <view>
+            <view class="active">1</view>
+            <text class="activeF">填写店铺信息</text>
+        </view>
+        <view>
+            <view>2</view>
+            <text>上传资质证明</text>
+        </view>
+    </view>
+    <view class="content">
+        <van-cell-group>
+            <van-field title-width="250rpx" required="{{true}}" model:value="{{ dpmc }}" label="店铺/企业名称" placeholder="请输入店铺/企业名称" input-align="right" bind:blur="blur" data-dataKey="{{0}}" />
+            <van-cell title-width="250rpx" title="店铺类别" required="{{true}}" is-link model:value="{{dplx}}" bind:click="showPopupLx" />
+            <van-cell title-width="250rpx" title="所在城市" required="{{true}}" is-link model:value="{{szcs}}" bind:click="showPopup" />
+            <van-field title-width="250rpx" required="{{true}}" model:value="{{ xxdz }}" label="详细地址" placeholder="请填写详细地址" input-align="right" />
+            <van-field title-width="250rpx" model:value="{{ dpdh }}" label="店铺/企业电话" type="number" placeholder="格式05126886232" input-align="right" bind:blur="blur" data-dataKey="{{4}}" />
+            <van-field title-width="250rpx" required="{{true}}" model:value="{{ sjhm }}" label="手机号码" type="number" placeholder="请填写正确格式的手机号码" input-align="right" bind:blur="blur" data-dataKey="{{5}}" />
+            <block wx:if="{{dplx!=='规模大户'}}">
+                <van-cell title-width="250rpx" title="门头照" required value="请上传1张" />
+                <view class="picBg">
+                    <van-uploader file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" deletable="{{ false }}">
+                        <view class="picUpload">
+                            +
+                        </view>
+                    </van-uploader>
+                </view>
+                <van-cell title-width="250rpx" title="内景照" required value="请上传2-5张内景照" />
+                <view class="picBg">
+                    <van-uploader file-list="{{ listdNjz }}" max-count="5" bind:after-read="afterReadNjz" deletable="{{ false }}">
+                        <view class="picUpload">
+                            +
+                        </view>
+                    </van-uploader>
+                </view>
+            </block>
+        </van-cell-group>
+        <van-popup show="{{ show }}" round position="bottom" custom-style="height: 70%">
+            <van-area show-toolbar title="标题" area-list="{{ areaList }}" toolbar-position="top" bind:cancel="onCancel" bind:confirm="onConfirm" data-lx="{{'dz'}}" />
+        </van-popup>
+        <van-popup show="{{ showLx }}" round position="bottom" custom-style="height: 70%">
+            <van-picker columns="{{ dplxList }}" bind:change="onChange" show-toolbar title="{{titleSjlx}}" toolbar-position="top" bind:cancel="onCancel" bind:confirm="onConfirm" data-lx="{{'sj'}}" />
+        </van-popup>
+    </view>
+    <view class="footer">
+        <view bindtap="navTo">
+            下一步
+        </view>
+    </view>
+</view>

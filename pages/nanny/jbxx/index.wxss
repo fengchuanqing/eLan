@@ -1,0 +1,41 @@
+/* pages/nanny/jbxx/index.wxss */
+.container {
+    background-color: #fff;
+    height: 100vh;
+}
+
+.title {
+    padding-left: 1rem;
+    line-height: 88rpx;
+    font-weight: 600;
+    font-size: 36rpx;
+}
+
+.item {
+    padding: 0rpx 10rpx;
+    position: relative;
+}
+
+.item::before {
+    content: '*';
+    color: red;
+    position: absolute;
+    left: 20rpx;
+    z-index: 12;
+    top: 30%;
+}
+
+.pinji {
+    /* position: absolute; */
+    position: fixed;
+    bottom: 60rpx;
+    left: 30rpx;
+    width: 686rpx;
+    height: 80rpx;
+    font-size:36rpx;
+    text-align: center;
+    color: #fff;
+    background-color: #428EFC;
+    border-radius: 60rpx;
+    line-height: 80rpx;
+}
