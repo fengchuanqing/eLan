@@ -2,7 +2,8 @@
 import {
   dpqylx,
   uploadFile,
-  img
+  img,
+  kdzlsqxq
 } from '../../../apis/message.js'
 import {
   areaList
@@ -32,8 +33,24 @@ Page({
     szcs: '浙江省-金华市-兰溪市',
     xxdz: '',
     dpdh: '',
-    sjhm: '',
+    sjhm: wx.getStorageSync('userInfo').lxdh || '',
     img,
+    fmSrc: ''
+  },
+  goCut() {
+    wx.navigateTo({
+      url: '/micro/pages/cropper/cropper?cuttype=1&isZ=2&fm=1',
+    })
+  },
+  delImg(event) {
+    const idx = event.detail.index
+    const {
+      listdNjz
+    } = this.data
+    listdNjz.splice(idx, 1)
+    this.setData({
+      listdNjz
+    })
   },
   afterRead(event) {
     const {
@@ -63,6 +80,7 @@ Page({
     const {
       file
     } = event.detail;
+    console.log(event.detail)
     let that = this;
     wx.showLoading({
       title: '加载中...',
@@ -70,21 +88,24 @@ Page({
     setTimeout(() => {
       wx.hideLoading()
     }, 10000);
-    wx.uploadFile({
-      url: uploadFile,
-      filePath: file.url,
-      name: 'file',
-      formData: {},
-      success: (res) => {
-        console.log(JSON.parse(res.data).fileName);
-        that.setData({
-          listdNjz: [...that.data.listdNjz, {
-            url: that.data.img + JSON.parse(res.data).fileName
-          }]
-        });
-        wx.hideLoading()
-      }
-    })
+    for (let i in file) {
+      wx.uploadFile({
+        url: uploadFile,
+        filePath: file[i].url,
+        name: 'file',
+        formData: {},
+        success: (res) => {
+          console.log(JSON.parse(res.data).fileName);
+          that.setData({
+            listdNjz: [...that.data.listdNjz, {
+              url: that.data.img + JSON.parse(res.data).fileName
+            }]
+          });
+          wx.hideLoading()
+        }
+      })
+    }
+
   },
   blur(e) {
     console.log(e);
@@ -150,15 +171,20 @@ Page({
       dpdh,
       sjhm,
       fileList,
-      listdNjz
+      listdNjz,
+      fmSrc,
+      img
     } = this.data
+    fileList = [{
+      url: fmSrc
+    }]
     if (dpmc == '' || dplx == '' || szcs == '' || xxdz == '' || sjhm == '') {
       wx.showToast({
         title: '请填写完整信息',
         icon: 'error'
       })
     } else {
-      if (dplx!=='规模大户'&&fileList.length <= 0) {
+      if (dplx !== '规模大户' && fileList.length <= 0) {
         wx.showToast({
           title: '请添加门头照',
           icon: 'error'
@@ -166,7 +192,7 @@ Page({
         })
         return
       }
-      if (dplx!=='规模大户'&&listdNjz.length < 2) {
+      if (dplx !== '规模大户' && listdNjz.length < 2) {
         wx.showToast({
           title: '至少两张内景照',
           icon: 'error'
@@ -216,8 +242,48 @@ Page({
         })
       }
     })
+    this.kdzlsqxq()
   },
-
+  kdzlsqxq() {
+    kdzlsqxq({
+      openid: wx.getStorageSync('thirdSession').openid
+    }).then(res => {
+      if (res.code == 200) {
+        let tpList = res.data.tpList
+        let fmSrc = '',
+          listdNjz = []
+        tpList.map(item => {
+          if (item.lx == "门头照") {
+            fmSrc = item.tplj
+          }
+          if (item.lx == "内景照") {
+            item.tplj && item.tplj.split(',').map(ite => listdNjz.push({
+              url: ite
+            }))
+          }
+        })
+        let {
+          qymc: dpmc,
+          lx: dplx,
+          dz: szcs,
+          xxdz,
+          dh: dpdh,
+          sjhm
+        } = res.data
+        console.log(listdNjz)
+        this.setData({
+          fmSrc,
+          listdNjz,
+          dpmc,
+          dplx,
+          szcs,
+          xxdz,
+          dpdh,
+          sjhm
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

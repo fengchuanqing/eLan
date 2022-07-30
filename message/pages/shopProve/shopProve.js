@@ -4,7 +4,8 @@ import {
   getCodeByMobile,
   uploadFile,
   img,
-  checkCodeByMobileAndSubmit
+  checkCodeByMobileAndSubmit,
+  kdzlsqxq
 } from '../../../apis/message.js'
 import {
   phoneVerify
@@ -22,7 +23,7 @@ Page({
     sfsmrz3: [],
     jyxk: [],
     authCode: '',
-    phone: '',
+    phone: wx.getStorageSync('userInfo').lxdh || '',
     codename: '获取验证码',
     disabled: false
   },
@@ -68,7 +69,7 @@ Page({
         title: '身份信息不完整',
         icon: 'error'
       })
-    } else if (dplx!=='规模大户'&&yyzz.length !== 1) {
+    } else if (dplx !== '规模大户' && yyzz.length !== 1) {
       wx.showToast({
         title: '营业执照不完整',
         icon: 'error'
@@ -108,6 +109,14 @@ Page({
       })
     }
   },
+  delImg(event) {
+    const idx = event.detail.index
+    const keyname = event.currentTarget.dataset.keyname
+    const yyzz = keyname
+    this.setData({
+      [yyzz]: []
+    })
+  },
   submit() {
     let {
       jyxk,
@@ -139,14 +148,14 @@ Page({
         dz: szcs,
         jyxkz: jyxkSte,
         lx: dplx,
-        mtz: dplx!=='规模大户'?fileList[0].url:0,
-        njz: dplx!=='规模大户'?listdNjz.reduce((acc, cur) => acc.concat(cur.url), []).join():0,
+        mtz: dplx !== '规模大户' ? fileList[0].url : 0,
+        njz: dplx !== '规模大户' ? listdNjz.reduce((acc, cur) => acc.concat(cur.url), []).join() : 0,
         qymc: dpmc,
         scsfz: sfsmrz3[0].url,
         sfzgh: sfsmrz2[0].url,
         sfzzm: sfsmrz1[0].url,
         xxdz: xxdz,
-        yyzzba: dplx!=='规模大户'?yyzz[0].url:0,
+        yyzzba: dplx !== '规模大户' ? yyzz[0].url : 0,
         mobile: sjhm,
         openid: wx.getStorageSync('thirdSession').openid
       }
@@ -197,10 +206,57 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
+    this.kdzlsqxq()
   },
 
+  kdzlsqxq() {
+    kdzlsqxq({
+      openid: wx.getStorageSync('thirdSession').openid
+    }).then(res => {
+      if (res.code == 200) {
+        let tpList = res.data.tpList
+        let yyzz = [],
+          sfsmrz1 = [],
+          sfsmrz2 = [],
+          sfsmrz3 = [],
+          jyxk = []
+        tpList.map(item => {
+          if (item.lx == "营业执照备案") {
+            yyzz = [{
+              url: item.tplj
+            }]
+          }
+          if (item.lx == "身份证正面") {
+            sfsmrz1 = [{
+              url: item.tplj
+            }]
+          }
+          if (item.lx == "身份证国徽") {
+            sfsmrz2 = [{
+              url: item.tplj
+            }]
+          }
+          if (item.lx == "手持身份证") {
+            sfsmrz3 = [{
+              url: item.tplj
+            }]
+          }
+          if (item.lx == "经营许可证") {
+            jyxk = item.tplj && item.tplj != '0' ? [{
+              url: item.tplj
+            }] : []
+          }
+        })
+        this.setData({
+          yyzz,
+          sfsmrz1,
+          sfsmrz2,
+          sfsmrz3,
+          jyxk
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

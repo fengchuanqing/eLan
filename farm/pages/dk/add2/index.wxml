@@ -1,53 +1,53 @@
 <view class="flex-col page">
-    <view class="flex-col group">
-        <view class="divider">
-        </view>
-        <view class="flex-col section_2">
-            <map class="section_2_bg" bindtap="bindmaptap" polygons="{{polygon}}" longitude="{{dw.lon}}" latitude="{{dw.lat}}" scale="6.5" markers="{{markers}}" />
-
-            <!-- <image src="/farm/assets/16394521595696088526.png" class="section_2_bg" /> -->
-            <view class="flex-col section_3">
-                <view bindtap="clear">
-                    <image src="/farm/assets/16394526793398971974.png" class="icon" />
-                    <text decode="decode">清除</text>
-                </view>
-                <view bindtap="back">
-                    <image src="/farm/assets/16394526794531640144.png" class="image_2" />
-
-                    <text decode="decode" class="text_2">撤销</text>
-                </view>
-            </view>
-            <!-- <image src="/farm/assets/16394526792332865880.png" class="image_3" /> -->
-            <view class="flex-row group_3">
-                <view class="flex-col items-center text-wrapper" bindtap="gogogo2">
-                    <text decode="decode">退出圈地</text>
-                </view>
-                <view class="flex-col items-center button" bindtap="gogogo">
-                    <text decode="decode">保存</text>
-                </view>
-            </view>
-        </view>
-        <view class="flex-col section_4">
-            <view class="justify-between group_4">
-                <!-- <text decode="decode" class="text_5">面积</text>
-                <text decode="decode" class="text_6">{{area}}亩</text> -->
-                <van-field disabled class="fieldWidth" value="{{ area + '亩'}}" label="面积" placeholder="" input-align="right" />
-            </view>
-            <view class="justify-between group_4">
-                <van-field disabled class="fieldWidth" value="{{ longitude }}" label="经度" placeholder="" input-align="right" />
-                <!-- <text decode="decode" class="text_7">经度</text>
-                <text decode="decode" class="text_8">{{longitude}}</text> -->
-            </view>
-            <view class="justify-between group_4">
-                <!-- <text decode="decode" class="text_9">纬度</text>
-                <text decode="decode" class="text_10">{{latitude}}</text> -->
-                <van-field disabled class="fieldWidth" value="{{ latitude }}" label="纬度" placeholder="" input-align="right" />
-            </view>
-            <view class="justify-between group_7">
-                <!-- <text decode="decode" class="text_11">位置</text>
-                <text decode="decode" class="text_12">浙江省兰溪市马涧镇下社村</text> -->
-                <van-field required class="fieldWidth" bind:input="GetAddress" label="位置" placeholder="请输入地址" input-align="right" />
-            </view>
-        </view>
+  <view class="flex-col group">
+    <view class="divider">
     </view>
+    <view class="flex-col section_2">
+      <map class="section_2_bg" bindtap="bindmaptap" polygons="{{polygon}}" longitude="{{dw.lon}}" latitude="{{dw.lat}}" scale="6.5" markers="{{markers}}" />
+
+      <!-- <image src="/farm/assets/16394521595696088526.png" class="section_2_bg" /> -->
+      <view class="flex-col section_3">
+        <view bindtap="clear">
+          <image src="/farm/assets/16394526793398971974.png" class="icon" />
+          <text decode="decode">清除</text>
+        </view>
+        <view bindtap="back">
+          <image src="/farm/assets/16394526794531640144.png" class="image_2" />
+
+          <text decode="decode" class="text_2">撤销</text>
+        </view>
+      </view>
+      <!-- <image src="/farm/assets/16394526792332865880.png" class="image_3" /> -->
+      <view class="flex-row group_3">
+        <view class="flex-col items-center text-wrapper" bindtap="gogogo2">
+          <text decode="decode">退出圈地</text>
+        </view>
+        <view class="flex-col items-center button" bindtap="gogogo">
+          <text decode="decode">保存</text>
+        </view>
+      </view>
+    </view>
+    <view class="flex-col section_4">
+      <view class="justify-between group_4">
+        <!-- <text decode="decode" class="text_5">面积</text>
+                <text decode="decode" class="text_6">{{area}}亩</text> -->
+        <van-field disabled class="fieldWidth" value="{{ area + '亩'}}" label="面积" placeholder="" input-align="right" />
+      </view>
+      <view class="justify-between group_4">
+        <van-field disabled class="fieldWidth" value="{{ longitude }}" label="经度" placeholder="" input-align="right" />
+        <!-- <text decode="decode" class="text_7">经度</text>
+                <text decode="decode" class="text_8">{{longitude}}</text> -->
+      </view>
+      <view class="justify-between group_4">
+        <!-- <text decode="decode" class="text_9">纬度</text>
+                <text decode="decode" class="text_10">{{latitude}}</text> -->
+        <van-field disabled class="fieldWidth" value="{{ latitude }}" label="纬度" placeholder="" input-align="right" />
+      </view>
+      <view class="justify-between group_7">
+        <!-- <text decode="decode" class="text_11">位置</text>
+                <text decode="decode" class="text_12">浙江省兰溪市马涧镇下社村</text> -->
+        <van-field required class="fieldWidth" bind:input="GetAddress" label="位置" placeholder="请输入地址" input-align="right" />
+      </view>
+    </view>
+  </view>
 </view>

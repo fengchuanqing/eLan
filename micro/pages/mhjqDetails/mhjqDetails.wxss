@@ -1,84 +1,82 @@
 /* pages/micro/mhjqDetails/mhjqDetails.wxss */
 .details {
-    padding: 32rpx;
-    color: #686b73;
-    font-size: 28rpx;
+  padding: 32rpx;
+  color: #686b73;
+  font-size: 28rpx;
 }
 
 .name,
 .english,
-.time 
-{
-    display: flex;
-    justify-content: center;
+.time {
+  display: flex;
+  justify-content: center;
 }
 
 .name {
-    color: #428ffc;
-    font-size: 36rpx;
-    font-weight: 800;
-    margin-bottom: 12rpx;
+  color: #428ffc;
+  font-size: 36rpx;
+  font-weight: 800;
+  margin-bottom: 12rpx;
 }
 
 .english {
-    color: #428ffc;
-    font-size: 24rpx;
-    margin-bottom: 33rpx;
+  color: #428ffc;
+  font-size: 24rpx;
+  margin-bottom: 33rpx;
 }
 
 .time text {
-    width: 565rpx;
-    height: 58rpx;
-    background-color: #428ffc;
-    border-radius: 29rpx;
-    font-size: 28rpx;
-    color: #fff;
-    text-align: center;
-    line-height: 58rpx;
-    margin-bottom: 31rpx;
+  width: 565rpx;
+  height: 58rpx;
+  background-color: #428ffc;
+  border-radius: 29rpx;
+  font-size: 28rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 58rpx;
+  margin-bottom: 31rpx;
 }
-.from{
-    display: flex;
-    justify-content: space-between;
-    padding: 0 92rpx;
+.from {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 92rpx;
 }
-.from view{
-    /* width: 565rpx;
+.from view {
+  /* width: 565rpx;
     display: flex;
     justify-content: space-between; */
-    font-size: 28rpx;
-    color: #363a44;
-    margin-bottom: 31rpx;
+  font-size: 28rpx;
+  color: #363a44;
+  margin-bottom: 31rpx;
 }
-.from view text{
-    color: #e63633;
+.from view text {
+  color: #e63633;
 }
-image{
-    width: 684rpx;
-	height: 454rpx;
-	background-color: #ffffff;
-	box-shadow: -8rpx 5rpx 22rpx 0rpx 
-		rgba(0, 0, 0, 0.16);
+image {
+  width: 684rpx;
+  height: 454rpx;
+  background-color: #ffffff;
+  box-shadow: -8rpx 5rpx 22rpx 0rpx rgba(0, 0, 0, 0.16);
 }
-.text{
-    width: 431rpx;
-    line-height: 43rpx;
+.text {
+  width: 431rpx;
+  line-height: 43rpx;
 }
-.h3{
-    margin: 30rpx 0;
-    font-size: 32rpx;
-    color: #363a44;
-    font-weight: 700;
+.h3 {
+  margin: 30rpx 0;
+  font-size: 32rpx;
+  color: #363a44;
+  font-weight: 700;
 }
 .h3 text {
-    color: #428ffc;
-    margin-left: 26rpx;
+  color: #428ffc;
+  margin-left: 26rpx;
 }
-.study view{
-    display: flex;
-    justify-content: space-between;
-    font-size: 28rpx;
+.study view {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
 }
-.study view text:nth-child(2){
-color: #5cbdd7;
+.study view text:nth-child(2) {
+  color: #5cbdd7;
 }

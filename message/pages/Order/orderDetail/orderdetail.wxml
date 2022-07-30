@@ -6,12 +6,12 @@
       {{province}} {{city}} {{county}}
     </view>
     <view class="a_second">
-      {{addressDeatil.address}}
+      {{orderDetail.address_detail}}
     </view>
     <view class="a_third">
-      {{addressDeatil.name}} {{addressDeatil.mobile}}
+      {{orderDetail.address_name}} {{orderDetail.address_mobile}}
     </view>
-    <image class="a_line" src="/shop/static/icons/me/a-line.png"></image>
+    <image class="a_line" src="/message/img/a-line.png"></image>
   </view>
   <view class="item">
     <view wx:for="{{orderDetail.goodSizeList}}" wx:key="index" wx:for-item="goods" class="goods">
@@ -22,7 +22,7 @@
         <view>{{orderDetail.activity_name?orderDetail.activity_name:goods.name}}</view>
         <view>{{orderDetail.introduction?orderDetail.introduction:goods.trait}}</view>
         <view class="gg" wx:if="{{!orderDetail.activity_name}}">
-          <text>{{goods.sizeName}}</text>
+          <text>{{goods.sizeName}}斤/件</text>
           <text>x{{goods.num}}</text>
         </view>
       </view>
@@ -67,6 +67,11 @@
       <view wx:if="{{orderDetail.distribution!=='活动'}}">
         <text>配送方式</text>
         <text>{{orderDetail.distribution}}</text>
+      </view>
+      <view wx:if="{{orderDetail.distribution=='自提'}}">
+        <text>自提点</text>
+        <text>{{orderDetail.selfPoint.mc}}</text>
+        <van-icon name="arrow" bindtap="goThere" />
       </view>
       <view wx:if="{{(orderDetail.order_status==='4'||orderDetail.order_status==='5')&&orderDetail.distribution==='快递配送'}}">
         <text>物流单号</text>

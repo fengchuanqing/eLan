@@ -36,7 +36,7 @@
                 <view class="xl">销量：{{item.dealed}}</view>
                 <view class="gg">
                     <view class="jg">
-                        <text>￥{{item.goodsSizeList[0].prince}} /</text>{{item.goodsSizeList[0].size_name}}
+                        <text>￥{{item.goodsSizeList[0].prince}} /</text>{{item.goodsSizeList[0].size_name}}斤/件
                     </view>
                     <navigator class="goOrder" url="/specialZone/pages/placeOrder/placeOrder?id={{item.spid}}&store_id={{item.dpid}}&goodsSizeId={{item.goodsSizeList[0].id}}&num=1">去下单<image src="/specialZone/assets/cart_white.png"></image>
                     </navigator>

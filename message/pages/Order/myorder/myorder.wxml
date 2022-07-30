@@ -24,7 +24,7 @@
             <p>{{item.activity_name?item.activity_name:goods.name}}</p>
             <p>{{item.introduction?item.introduction:goods.trait}}</p>
             <view class="gg" wx:if="{{!item.activity_name}}">
-              <text>{{goods.sizeName}}</text>
+              <text>{{goods.sizeName}}斤/件</text>
               <text>x{{goods.num}}</text>
             </view>
           </view>

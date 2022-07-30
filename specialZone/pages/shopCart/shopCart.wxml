@@ -12,7 +12,7 @@
               <image src="{{img+goods.logo}}"></image>
               <view class="goodsItem_info">
                 <view class="goodsItem_name">{{goods.goodsName}}</view>
-                <view class="goodsItem_gg">{{goods.sizeName}}</view>
+                <view class="goodsItem_gg">{{goods.sizeName}}斤/件</view>
                 <view class="goodsItem_b" catchtap='noop'>
                   <text>￥{{goods.unitPrice}}</text>
                   <van-stepper value="{{ goods.num }}" class="stepper" bind:change="onNumChange" data-item="{{idx}}" data-index="{{index}}" />

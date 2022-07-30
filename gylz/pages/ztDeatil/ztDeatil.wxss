@@ -1,0 +1,39 @@
+.zdcy_box{
+  margin-top: 20rpx;
+  background-color: #ffffff;
+  padding: 30rpx;
+}
+.zdcy_tit{
+  font-size: 30rpx;
+}
+.zdcy_name{
+  font-size: 28rpx;
+  line-height: 80rpx;
+  border-bottom: 1rpx solid #ebedf0;
+}
+.zdcy_child{
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #ebedf0;
+}
+.zdcy_child_item{
+  flex: 1;
+}
+.zdcy_child_item_lab{
+  font-size: 30rpx;
+}
+.zdcy_child_item_val{
+  font-size: 28rpx;
+  line-height: 60rpx;
+}
+.edit{
+  margin: 100rpx 30rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 32rpx;
+  color: #ffffff;
+  background-color: #428ffc;
+  text-align: center;
+  letter-spacing: 10rpx;
+}

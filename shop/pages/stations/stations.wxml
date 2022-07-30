@@ -1,0 +1,34 @@
+<view class="selectSearch">
+  <van-dropdown-menu active-color="#1989fa" custom-class="menu">
+    <van-dropdown-item value="{{selectValue}}" options="{{option}}" bind:change="selectShop" />
+  </van-dropdown-menu>
+  <van-search value="{{ serchValue }}" shape="round" placeholder="请输入自提点、联系人等关键字" bind:search="searchShop" />
+</view>
+<view class="list">
+  <view class="item" wx:for="{{staffList}}" wx:key="index">
+    <view class="itemTop">
+      <view class="imgBox">
+        <image src="{{img+item.tp}}"></image>
+        <view class="{{item.zt==0?'zwJy':'zwStatus'}}">{{item.zt==0?'禁用':'启用'}}</view>
+      </view>
+      <view class="itemInfo">
+        <view class="xm">
+          <view class="zwName">{{item.mc}}</view>
+        </view>
+        <view class="xm">
+          <text>{{item.dq+item.xxdz}}</text>
+          <van-icon name="arrow" bind:click="goThere" data-item="{{item}}" />
+        </view>
+        <view class="xm">{{item.lxr}} | {{item.dh}}</view>
+      </view>
+    </view>
+    <view class="itemBtm">
+      <view class="btn" bindtap="deleteStaff" data-item="{{item}}" data-idx="{{index}}">删除</view>
+      <view class="btn" bindtap="editStaff" data-item="{{item}}">编辑</view>
+      <view class="btn" bindtap="onOffStaff" data-item="{{item}}" data-idx="{{index}}">{{item.zt==0?'启用':'禁用'}}</view>
+    </view>
+  </view>
+</view>
+<view class="add" style="height:{{isIPhoneXSeries?150:128}}rpx">
+  <view class="addBtn" bindtap="addStaff">添加自提点</view>
+</view>

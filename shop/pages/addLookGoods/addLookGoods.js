@@ -73,34 +73,6 @@ Page({
           })
         }
       })
-      // wx.request({
-      //   url: updateLookGoods,
-      //   method: 'put',
-      //   data: {
-      //     name: this.data.name,
-      //     message: this.data.message,
-      //     type: this.data.typeIndex,
-      //     url: this.data.typeIndex === 0 ? this.data.videoUrl : this.data.shopCoverImg,
-      //     id: this.data.order_id
-      //   },
-      //   success: (res) => {
-      //     if (res.data.code == 200) {
-      //       wx.showToast({
-      //         title: res.data.msg,
-      //       })
-      //       setTimeout(() => {
-      //         wx.navigateBack({
-      //           delta: 1
-      //         })
-      //       }, 1500)
-      //     } else {
-      //       wx.showToast({
-      //         icon: 'error',
-      //         title: res.data.msg,
-      //       })
-      //     }
-      //   }
-      // })
     } else {
       // 新增
       xzcjkh({
@@ -122,34 +94,6 @@ Page({
           title: res.msg,
         })
       })
-      // wx.request({
-      //   url: updateLookGoods,
-      //   method: 'post',
-      //   data: {
-      //     name: this.data.name,
-      //     message: this.data.message,
-      //     type: this.data.typeIndex,
-      //     url: this.data.typeIndex === 0 ? this.data.videoUrl : this.data.shopCoverImg,
-      //     storeId: wx.getStorageSync('userInfo').id || 1
-      //   },
-      //   success: (res) => {
-      //     if (res.data.code == 200) {
-      //       wx.showToast({
-      //         title: res.data.msg,
-      //       })
-      //       setTimeout(()=>{
-      //         wx.navigateBack({
-      //           delta: 1
-      //         })
-      //       },1500)
-      //     } else {
-      //       wx.showToast({
-      //         icon: 'error',
-      //         title: res.data.msg,
-      //       })
-      //     }
-      //   }
-      // })
     }
 
   },
@@ -161,16 +105,17 @@ Page({
         this.setData({
           name: res.data.name,
           message: res.data.message,
-          typeIndex: res.data.type,
+          typeIndex: Number(res.data.type),
           type: this.data.typeColumns[Number(res.data.type)]
         })
         if (res.data.type === '0') {
+          console.log(111)
           this.setData({
-            videoUrl: res.url
+            videoUrl: res.data.url
           })
         } else {
           this.setData({
-            shopCoverImg: res.url
+            shopCoverImg: res.data.url
           })
         }
       } else {
@@ -180,34 +125,6 @@ Page({
         })
       }
     })
-    // wx.request({
-    //   url: updateLookGoods + this.data.order_id,
-    //   method: 'get',
-    //   success: (res) => {
-    //     if (res.data.code == 200) {
-    //       this.setData({
-    //         name: res.data.data.name,
-    //         message: res.data.data.message,
-    //         typeIndex: res.data.data.type,
-    //         type: this.data.typeColumns[Number(res.data.data.type)]
-    //       })
-    //       if (res.data.data.type === '0') {
-    //         this.setData({
-    //           videoUrl: res.data.data.url
-    //         })
-    //       } else {
-    //         this.setData({
-    //           shopCoverImg: res.data.data.url
-    //         })
-    //       }
-    //     } else {
-    //       wx.showToast({
-    //         icon: 'error',
-    //         title: res.data.msg,
-    //       })
-    //     }
-    //   }
-    // })
   },
   OpenImgUpload() {
     let that = this;

@@ -3,11 +3,6 @@
   <van-tab title="账号密码"></van-tab>
 </van-tabs>
 <view wx:if="{{active===0}}">
-  <!-- <van-cell  title="人物头像" is-link size="large" bindtap="OpenUpload">
-    <view>
-      <image src="{{domain+headPortrait}}" style="width:45rpx;height:50rpx;border-radius: 50%;"></image>
-    </view>
-  </van-cell> -->
   <van-cell title="人物头像" size="large" disabled>
     <view>
       <image src="{{backData.yhtx}}" style="width:45rpx;height:50rpx;border-radius: 50%;"></image>
@@ -15,15 +10,10 @@
   </van-cell>
   <van-field label="姓名" size="large" model:value="{{ backData.xm }}" placeholder="" disabled />
   <van-field label="主体名称" size="large" model:value="{{ backData.name }}" disabled />
-  <!-- <van-field label="类别" size="large" model:value="{{ category }}" placeholder="请输入类别" /> -->
-  <!-- <van-cell title="类别" size="large" value="{{category}}" arrow-direction="{{categoryShow?'down':''}}" bindtap="onCategoryShow" disabled /> -->
   <van-field label="类别" size="large" model:value="{{ backData.QYLXMC }}" disabled />
   <van-popup show="{{ categoryShow }}" bind:close="categoryClose" position="bottom">
     <van-picker columns="{{ categoryColumns }}" show-toolbar bind:cancel="categoryClose" bind:confirm="categoryChange" />
   </van-popup>
-  <!-- <van-field model:value="{{ fullName }}" required center clearable label="店铺全称" placeholder="请输入店铺全称" use-button-slot>
-    <view class="update" slot="button">修改</view>
-  </van-field> -->
   <van-field label="店铺全称" size="large" required model:value="{{ fullName }}" placeholder="请输入请输入店铺全称" />
 
   <van-field label="主营商品" required size="large" model:value="{{ commodity }}" placeholder="请输入主营商品" />
@@ -32,16 +22,19 @@
   <van-popup show="{{ addressShow }}" bind:close="cancelArea" position="bottom">
     <van-area area-list="{{ areaList }}" bind:confirm='confirmArea' bind:cancel='cancelArea' />
   </van-popup>
-  <!-- <van-field model:value="{{ mobile }}" center clearable label="手机号" placeholder="请输入手机号" use-button-slot>
-    <view class="update" slot="button">修改</view>
-  </van-field> -->
   <van-field label="手机号" size="large" clearable required model:value="{{ mobile }}" placeholder="请输入手机号" />
 
-  <van-cell title="收款码" required is-link size="large" bindtap="OpenUpload" data-index="1">
-    <view>
-      <image src="{{img + skmSrc}}" style="width:45rpx;height:50rpx;border-radius: 50%;"></image>
+  <van-cell title="收款码" required is-link size="large"></van-cell>
+  <view class="uploadBox">
+    <view class="imgList" wx:for="{{skmSrc}}" data-index="{{index}}" wx:key='index'>
+      <text class="close" catchtap="delImg" data-idx="{{index}}">×</text>
+      <image src="{{img+item}}"></image>
     </view>
-  </van-cell>
+    <view class="uploadBtn" wx:if="{{skmSrc.length<5}}" bindtap="chooseImg">
+      <image src="/shop/static/icons/icon/canmera.png"></image>
+      <text>添加收款码</text>
+    </view>
+  </view>
 
   <van-cell title="微信号" required is-link size="large" bindtap="OpenUpload" data-index="2">
     <view>
@@ -49,19 +42,7 @@
     </view>
   </van-cell>
 
-  <van-field model:value="{{ qsj }}" required center size="large" type="digit" clearable label="起售价格" placeholder="请输入起售价格" use-button-slot>
-    <!-- <view class="update" slot="button">修改</view> -->
-  </van-field>
-
-  <!-- <van-cell title-width="250rpx" title="店铺封面" required="{{true}}" value="请选择封面" /> -->
-  <!-- <van-cell title-width="250rpx" title="店铺封面" required="{{true}}" value="" />
-    <view class="picBg">
-      <van-uploader file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" deletable="{{ false }}">
-        <view class="picUpload">
-          +
-        </view>
-      </van-uploader>
-    </view> -->
+  <van-field model:value="{{ qsj }}" required center size="large" type="digit" clearable label="起售价格" placeholder="请输入起售价格" use-button-slot></van-field>
   <van-cell title="店铺封面" required is-link size="large" bindtap="goCut" data-index="3"></van-cell>
   <view wx:if="{{fmSrc}}" class="fmSrc">
     <image src="{{img + fmSrc}}"></image>

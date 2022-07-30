@@ -1,11 +1,11 @@
 <view class="search">
   <van-search value="{{ value }}" shape="round" placeholder="请输入搜索关键词" input-align="center" right-icon="search" left-icon="" bind:search="onSearch" />
 </view>
-<swiper indicator-dots="{{false}}" autoplay="{{false}}" class="swiper" wx:if="{{jxsjList.length}}">
+<swiper class="swiper" wx:if="{{jxsjList.length}}" >
   <block wx:for="{{jxsjList}}" wx:key="*this">
     <swiper-item>
       <view class="jxItem">
-        <image src="{{img+item.dpfm}}" class="jxItem_bj" mode="widthFix"></image>
+        <image src="{{img+item.dpfm}}" class="jxItem_bj"></image>
         <image src="/specialZone/assets/icon_tip1.png" class="jxItem_tip"></image>
         <view class="jxItem_info">
           <view class="jxItem_name">{{item.full_name}}</view>
@@ -48,7 +48,7 @@
         <view class="xl">销量：{{item.dealed}}</view>
         <view class="gg">
           <view class="jg">
-            <text>￥{{item.goodsSizeList[0].prince}} /</text>{{item.goodsSizeList[0].size_name}}
+            <text>￥{{item.goodsSizeList[0].prince}} /</text>{{item.goodsSizeList[0].size_name}}斤/件
           </view>
           <navigator class="goOrder" url="/specialZone/pages/placeOrder/placeOrder?id={{item.spid}}&store_id={{item.dpid}}&goodsSizeId={{item.goodsSizeList[0].id}}&num=1">去下单<image src="/specialZone/assets/cart_white.png"></image>
           </navigator>

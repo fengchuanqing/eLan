@@ -22,7 +22,19 @@ Page({
     show3:false,
     show4:false,
     form:{},
-    hideContain:false
+    hideContain:false,
+    imgShow:false,
+  },
+  showImg(e){
+    this.setData({
+      imgShow:true,
+      curImg:e.currentTarget.dataset.img
+    })
+  },
+  hideImg(){
+    this.setData({
+      imgShow:false,
+    })
   },
   check(e){
     console.log(e.detail.value);
@@ -136,7 +148,7 @@ Page({
         this.setData({
           mobile:res?.data.mobile||'暂无',
           wechat:res?.data.wechat||'暂无',
-          skm:res?.data.skm||'暂无'
+          skm:res?.data.skm.split(',')||'暂无'
         })
       }
     })
@@ -239,7 +251,8 @@ Page({
         distribution:'活动',
         serialNum:this.getProjectNum() + Math.random().toString().substr(2,6),
         orderStatus:1,
-        openid:wx.getStorageSync('thirdSession').openid
+        openid:wx.getStorageSync('thirdSession').openid,
+        templateIdList:['5HD-XrMbh_0ynv0c1lgS0KBRvX51Or9LeEgcl5R6GH8']
       }
     // }
     console.log(form);

@@ -1,7 +1,4 @@
-// pages/MerchantCenter/addOfflineOrder/addOrder.js
-import {
-    addOfflineOrder
-  } from '../../../utils/api.js'
+
   import {
     addOffOnline
   } from '../../../apis/message.js'

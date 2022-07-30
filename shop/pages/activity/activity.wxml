@@ -9,7 +9,7 @@
   </view>
   <view class="activityList">
     <view class="item" wx:for="{{activityList}}" wx:key="index">
-      <navigator url="/shop/pages/activityDetail/activityDetail?id={{item.id}}">
+      <navigator url="/shop/pages/activityDetail/activityDetail?id={{item.id}}" hover-class="none">
         <view class="status">
           <text>{{active===1?'已下架':'已上架'}}</text>
           <text>{{item.time}}</text>

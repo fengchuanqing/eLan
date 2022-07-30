@@ -9,8 +9,8 @@
         </view>
       </view>
     </view>
-    <van-cell title="商品规格" size="large" value="{{ruleList[0].sizeName}}" border="{{false}}" />
-    <van-cell value="{{ ruleList[0].prince }}"  title="商品价格" border="{{ false }}" size="large" >
+    <van-cell title="商品规格(斤/件)" size="large" value="{{ruleList[0].sizeName}}" border="{{false}}" />
+    <van-cell value="{{ ruleList[0].prince }}" title="商品价格" border="{{ false }}" size="large">
       <view class="ruleItem" slot="right-icon">元</view>
     </van-cell>
     <van-cell title="商品分类" size="large" value="{{form.type}}" border="{{false}}" />
@@ -18,6 +18,12 @@
     <van-cell title="支持配送类型" size="large" value="{{form.distributionType==='1'?'物流发货':form.distributionType==='2'?'自提':'全部'}}" border="{{false}}" />
     <!-- <van-cell title="店铺地址" size="large" value="{{form.address}}" border="{{false}}" /> -->
 
+    <block wx:if="{{form.distributionType!=='1'}}">
+      <van-cell title="自提点" size="large" border="{{false}}" />
+      <view class="stationList">
+        <view wx:for="{{stationList}}" wx:key="*this" class="stations">{{item.mc}}</view>
+      </view>
+    </block>
     <!-- 新品 -->
 
     <view class="weui-cells weui-cells_after-title">
@@ -52,9 +58,10 @@
     <van-cell title="具体解释权归店家所有" size="large" border="{{false}}">
       <van-checkbox disabled value="{{form.checkbox3}}" shape="square" />
     </van-cell>
-    <van-cell title="不承担费用" size="large" border="{{false}}">
+    <van-cell title="不承担运费" size="large" border="{{false}}">
       <van-checkbox disabled value="{{form.checkbox4}}" shape="square" />
     </van-cell>
+    <van-cell title="下单须知补充说明" size="large" border="{{false}}" value="{{ form.bcsm }}"></van-cell>
     <view class="title">商家联系方式</view>
     <van-field readonly label="客服电话" size="large" value="{{ form.phone }}" border="{{ false }}" />
 
@@ -64,7 +71,11 @@
         <image src="{{img + skmSrc}}" style="width:45rpx;height:50rpx;border-radius: 50%;"></image>
       </view>
     </van-cell>
-
+    <view class="uploadBox">
+      <view class="imgList" wx:for="{{skmSrc}}" data-index="{{index}}" wx:key='index'>
+        <image src="{{img+item}}"></image>
+      </view>
+    </view>
     <van-cell title="微信号" required is-link size="large" bindtap="OpenUpload" data-index="2">
       <view bindtap="imgPop" data-item="{{skmSrc}}">
         <image src="{{img + wxhSrc}}" style="width:45rpx;height:50rpx;border-radius: 50%;"></image>

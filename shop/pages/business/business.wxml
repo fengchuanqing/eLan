@@ -14,14 +14,6 @@
       <van-tab title="已发货" name="4"></van-tab>
       <van-tab title="已完成" name="5"></van-tab>
     </block>
-    <!-- <block wx:elif="{{active1=='活动'}}">
-      <van-tab title="全部"></van-tab>
-      <van-tab title="待验证" name="1"></van-tab>
-      <van-tab title="驳回" name="2"></van-tab>
-      <van-tab title="已验证" name="3"></van-tab>
-      <van-tab title="待提货" name="4"></van-tab>
-      <van-tab title="已完成" name="5"></van-tab>
-    </block> -->
     <block wx:else>
       <van-tab title="全部"></van-tab>
       <van-tab title="待验证" name="1"></van-tab>
@@ -64,7 +56,7 @@
             <p>下单时间：{{item.create_time}}</p>
             <!-- <p wx:if="{{active1 !== '活动'}}">线下付款：{{item.order_money}}元</p> -->
             <view class="gg" wx:if="{{active1 !== '活动'}}">
-              <text>{{goods.sizeName}}</text>
+              <text>{{goods.sizeName}}斤/件</text>
               <text>x{{goods.num}}</text>
             </view>
           </view>
@@ -88,7 +80,7 @@
   <!-- 删除确认弹窗 -->
   <van-dialog id="van-dialog" />
   <!-- 筛选 -->
-  <van-popup show="{{show_sx}}" position="bottom" custom-style="height: 55%;" bind:close="onClose">
+  <van-popup show="{{show_sx}}" position="bottom" custom-style="height: 44%;" bind:close="onClose">
     <view class="sx_tk_box">
       <view class="s_t_b_x" bindtap="SxQueren">
         <image src="/shop/static/icons/icon/x.png"></image>
@@ -134,13 +126,14 @@
   <van-overlay show="{{ show_wl}}" bind:click="onClickHide">
     <view class="wrapper">
       <view class="show_wl" catch:tap="noop">
-        <view class="s_w_title">快递类型</view>
-        <view class="sw_margin">
-          <input type="text" placeholder="请输入快递名称" bindinput="bindInput" value="{{expressName}}" />
-        </view>
         <view class="s_w_title">物流单号</view>
         <view class="sw_margin">
           <input type="text" placeholder="请输入编号" bindinput="bindInputNo" value="{{expressNo}}" />
+          <van-icon name="scan" catchtap="goScan" />
+        </view>
+        <view class="s_w_title">快递类型</view>
+        <view class="sw_margin">
+          <input type="text" placeholder="请输入快递名称" bindinput="bindInput" value="{{expressName}}" />
         </view>
         <view class="s_w_bottom">
           <input type="button" value="取消" disabled="true" bindtap="onClickHide" />

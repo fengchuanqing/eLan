@@ -1,6 +1,4 @@
-<map id="map" name="马涧风情园" longitude="119.6" latitude="29.29" markers="{{markers}}" bindmarkertap="markertap" bindcallouttap="callouttap" scale="14">
-
-</map>
+<map id="map" name="马涧风情园" longitude="119.597347" latitude="29.29523" markers="{{markers}}" bindmarkertap="markertap" bindcallouttap="callouttap" scale="14.92"></map>
 <view class="dateBox">
   <view class="date_item">
     <view class="date_l">
@@ -66,8 +64,8 @@
         <view class="czxItem_r">
           <view class="czxItem_phone">电话：{{item.lxdh}}</view>
           <view class="czxItem_dh">
-              <image src="/micro/assets/icon_phone.png" bindtap="openPhone" data-item="{{item}}"></image>
-              <image src="/micro/assets/icon_address.png" bindtap="goThere" data-item="{{item}}"></image>
+            <image src="/micro/assets/icon_phone.png" bindtap="openPhone" data-item="{{item}}"></image>
+            <image src="/micro/assets/icon_address.png" bindtap="goThere" data-item="{{item}}"></image>
           </view>
         </view>
       </view>
@@ -93,7 +91,7 @@
       <view class="jd_con">
         <view class="jd_jj">简介</view>
         <view class="jd_con_c">
-          {{curMarkers.js}}
+          {{curMarkers.js?curMarkers.js:'暂无简介'}}
         </view>
       </view>
     </view>
@@ -108,7 +106,7 @@
           </view>
           {{curMarkers.sort}}号采摘线
         </view>
-        <image src="/micro/assets/icon_address.png"  bindtap="goThere" data-item="{{curMarkers}}"></image>
+        <image src="/micro/assets/icon_address.png" bindtap="goThere" data-item="{{curMarkers}}"></image>
       </view>
       <view class="czxList">
         <view class="czxItem" wx:for="{{curCzyList}}" wx:key="idx">
@@ -154,7 +152,7 @@
       <view class="jd_con">
         <view class="jd_jj">简介</view>
         <view class="jd_con_c">
-          {{curMarkers.js}}
+          {{curMarkers.js?curMarkers.js:'暂无简介'}}
         </view>
       </view>
     </view>

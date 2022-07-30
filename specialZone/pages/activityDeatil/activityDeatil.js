@@ -46,7 +46,7 @@ Page({
   },
   GoPhone() {
     wx.makePhoneCall({
-      phoneNumber: this.data.form.telephone
+      phoneNumber: this.data.mobile
     })
   },
   GoCopy() {
@@ -105,6 +105,7 @@ Page({
           // const city = areaList.city_list[regionCode[1]]
           // const county = areaList.county_list[regionCode[2]]
           // formData.address = province + city + county
+          formData.pf=Number(formData.pf)
           this.setData({
             form: formData,
             imgList: formData.img_url && formData.img_url.split(',')

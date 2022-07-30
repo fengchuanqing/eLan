@@ -14,7 +14,7 @@ const formatNumber = n => {
   return n[1] ? n : `0${n}`
 }
 const phoneVerify=str=>{
-  const myreg= /^[1][3,4,5,7,8,9][0-9]{9}$/;
+  const myreg= /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
   if(!myreg.test(str)){
     wx.showToast({
       icon:'error',
@@ -82,10 +82,23 @@ let convertHtmlToText= (inputText) =>{
     s = s.toFixed(2);
     return s;
   }
+
+let throttle = function(fn, wait) {
+  var last = 0;
+  return function () {
+    var args = arguments;
+    var now = Date.now();
+    if (now - last > wait) {
+      fn.apply(this, args);
+      last = now;
+    }
+  };
+}
 module.exports = {
   formatTime,
   phoneVerify,
   telephoneReg,
   convertHtmlToText,
-  distance
+  distance,
+  throttle
 }

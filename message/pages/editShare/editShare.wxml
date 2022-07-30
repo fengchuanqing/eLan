@@ -1,0 +1,43 @@
+<view class="steps">
+  <view class="first {{cur_step===1?'curStep':cur_step===2?'curStep2':''}}">
+    <view class="first_t" hidden="{{cur_step===1}}">
+      <image src="/message/img/y.png"></image>
+    </view>
+    <view class="first_t" hidden="{{cur_step===2}}">1</view>
+    <view class="name">发布人信息</view>
+  </view>
+  <view class="line"></view>
+  <view class="first {{cur_step===2?'curStep':''}}">
+    <view class="first_t">2</view>
+    <view class="name">冷库信息</view>
+  </view>
+</view>
+<view class="container">
+  <block wx:if="{{cur_step===1}}">
+    <van-cell-group>
+      <van-field label="姓名" model:value="{{ xm }}" placeholder="请输入用户名" input-align="right" required />
+      <van-field label="联系电话" model:value="{{ lxdh }}" placeholder="请输入联系电话" input-align="right" required type="number" maxlength="11" />
+    </van-cell-group>
+  </block>
+  <block wx:if="{{cur_step==2}}">
+    <van-cell-group>
+      <van-field label="冷库名称" model:value="{{ lkmc }}" placeholder="请输入冷库名称编号" input-align="right" required />
+      <van-field label="可共享容量(m³)" model:value="{{ kgxrl }}" placeholder="请输入冷库可共享容积" input-align="right" required />
+      <van-field required value="{{ lkwz }}" label="冷库位置" placeholder="请选择冷库位置" readonly use-right-icon-slot bindtap="getLoaction" input-align="right">
+        <van-icon name="location-o" color="#428ffc" slot="right-icon" />
+      </van-field>
+      <van-field label="详细地址" model:value="{{ xxdz }}" placeholder="请输入详细地址" input-align="right" required />
+      <van-field label="收费标准" model:value="{{ sfbz }}" placeholder="请输入收费标准" input-align="right" />
+    </van-cell-group>
+    <view class="remark">
+      <view class="label">冷库介绍</view>
+      <textarea bindinput="bindTextAreaBlur" auto-height placeholder="请简要介绍您的冷库！" value="{{lkjs}}" />
+    </view>
+  </block>
+</view>
+
+<view class="submit" bindtap="next" hidden="{{cur_step===2}}">下一步</view>
+<view class="btnBox" hidden="{{cur_step===1}}">
+  <view class="pre" bindtap="pre">上一步</view>
+  <view class="save" bindtap="save">保存</view>
+</view>

@@ -46,20 +46,34 @@
         <view class="close_box">
           <image class="close" bindtap="onCancel" src="/specialZone/assets/x.png"></image>
         </view>
-        <view class="codeBox">
+        <swiper class="codeBox"	indicator-dots>
+          <block wx:for="{{skm}}" wx:key="*this">
+            <swiper-item class="codeItemBox">
+              <view class="codeItem">
+                <image src="{{domain+item}}" show-menu-by-longpress="{{true}}" catchtap="showImg" data-img="{{item}}"></image>
+                <text>扫码付款</text>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="fkmts" wx:if="{{skm.length>2}}">向左滑动显示更多付款码</view>
+        <view class="lxBtm">
           <view class="codeItem">
-            <image src="{{domain+skm}}"	show-menu-by-longpress="{{true}}"></image>
-            <text>扫码付款</text>
-          </view>
-          <view class="codeItem">
-            <image src="{{domain+wechat}}"	show-menu-by-longpress="{{true}}"></image>
+            <image src="{{domain+wechat}}" show-menu-by-longpress="{{true}}" catchtap="showImg" data-img="{{wechat}}"></image>
             <text>添加微信</text>
           </view>
-        </view>
-        <view class="grey_text">商家热线</view>
-        <view class="sjrx">
-          <text>{{mobile}}</text>
-          <input bindtap="GoPhone" class="center" type="button" value="拨打电话" />
+          <view style="display: flex;padding-top: 44rpx;">
+            <image style="width: 30rpx;height: 30rpx;" src="/specialZone/assets/szs.png"></image>
+            <view class="sjrx">
+              <view class="tip">
+                长按可识别
+                <view>需微信二维码保存图片</view>
+              </view>
+              <view class="grey_text">商家热线</view>
+              <text>{{mobile}}</text>
+              <view bindtap="GoPhone" class="center">拨打电话</view>
+            </view>
+          </view>
         </view>
       </view>
     </view>
@@ -75,11 +89,17 @@
         </view>
         <view class="up_view">
           <van-uploader file-list="{{ fileList }}" deletable="{{ true }}" max-count="1" catch:after-read="afterRead"
-            bind:delete="delFile">
+            bind:delete="delFile" upload-text="点击上传">
           </van-uploader>
         </view>
         <view class="qrsc" bindtap="onClickHide">确认上传</view>
       </view>
+    </view>
+  </van-overlay>
+  <!-- 图片 -->
+  <van-overlay show="{{ imgShow }}" bind:click="hideImg">
+    <view class="wrapper">
+      <image class="curImg" src="{{domain+curImg}}" mode="aspectFit" show-menu-by-longpress="{{true}}"></image>
     </view>
   </van-overlay>
 

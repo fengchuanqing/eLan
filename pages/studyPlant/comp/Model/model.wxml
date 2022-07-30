@@ -1,5 +1,5 @@
 <view class="model">
-  <view class="model-gjjs">
+  <view class="model-gjjs" wx:if="{{jsList.length}}">
     <!-- <view class="model-gjjs-tit">关键技术</view> -->
     <view class="model-gjjs-con-box">
       <view class="content">

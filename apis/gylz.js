@@ -101,5 +101,56 @@ export const xqqr = (data) => {
       data
   })
 }
+export const getAllType = (data) => {
+  return requset({
+      url: '/api/elmg/zt/getAllType',
+      data
+  })
+}
+export const getAllTown = (data) => {
+  return requset({
+      url: '/api/elmg/zt/getAllTown',
+      data
+  })
+}
+export const getAllCountry = (data) => {
+  return requset({
+      url: '/api/elmg/zt/getAllCountry',
+      data
+  })
+}
+export const getZdcylx = (data) => {
+  return requset({
+      url: '/api/elmg/zt/getZdcylx',
+      data
+  })
+}
+export const getVarieties = (data) => {
+  return requset({
+      url: '/api/elmg/zt/getVarieties',
+      data
+  })
+}
+export const saveZtlx = (data) => {
+  return requset({
+      url: '/xcx/ztlx',
+      data,
+      method:'post'
+  })
+}
+export const ckzt = (data) => {
+  return requset({
+    url: '/xcx/ckzt',
+    method: 'get',
+    data
+  })
+}
+export const xgzt = (data) => {
+  return requset({
+    url: '/xcx/xgzt',
+    method: 'post',
+    data
+  })
+}
 
 export const domain = 'https://szsn.lx.gov.cn/bs'

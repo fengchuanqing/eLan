@@ -5,6 +5,7 @@ import {
   saveXcxDiscernUser,
   getXcxUserInfo,
   getCodeByMobile,
+  getInfoByOpenId
 } from '../../../apis/index'
 import {
   phoneVerify
@@ -16,7 +17,7 @@ Page({
    */
   data: {
     domain,
-    mobile: '',
+    mobile: wx.getStorageSync('userInfo').lxdh||'',
     yzCode:'',
     codename: '获取验证码',
     disabled: false,
@@ -30,6 +31,28 @@ Page({
     if (this.data.cuttype) {
       console.log(this.data.idCardA)
     }
+    if(options.rz){
+      this.setData({
+        isrz:true
+      })
+      getInfoByOpenId({
+        openid:wx.getStorageSync('thirdSession').openid
+      }).then(res=>{
+        if(res.code==200){
+          let {sfzzmtpdz:idCardA,sfzfmtpdz:idCardB,xm:username,lxdh:mobile,sfzhm:idCard} =res.data
+          this.setData({
+            idCardA,
+            idCardB,
+            username,
+            idCard,
+            mobile,
+          })
+        }
+      })
+    }
+    this.setData({
+      mobile: wx.getStorageSync('userInfo').lxdh||'',
+    })
   },
   goCut(e){
     // console.log(e);

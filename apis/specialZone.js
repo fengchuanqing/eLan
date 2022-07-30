@@ -188,6 +188,25 @@ export const Syssgb= (data) => {
     })
 }
 
+export const ztdlb = (data) => {
+  return requset({
+      url: '/xcx/tczq/ztdlb',
+      data
+  })
+}
+export const xdztdlb = (data) => {
+  return requset({
+      url: '/xcx/tczq/xdztdlb',
+      data
+  })
+}
+export const gwcxdztdlb = (data) => {
+  return requset({
+      url: '/xcx/tczq/gwcxdztdlb',
+      method:'post',
+      data
+  })
+}
 
 
 

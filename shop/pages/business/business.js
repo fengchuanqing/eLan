@@ -9,9 +9,6 @@
 // const bluetoothConfig = getBluetoothPageConfig();
 import {
   domain,
-  merchantOrderList,
-  merchantOrderDeatil,
-  merchantOrderUpdate
 } from "../../../utils/api.js"
 import {
   img,
@@ -105,6 +102,18 @@ Page({
         .buffer,
       lasterSuccess: () => {},
     });
+  },
+  goScan(){
+    wx.scanCode({
+      success:(res)=> {
+        console.log(res)
+        if(res.errMsg==='scanCode:ok'){
+          this.setData({
+            expressNo:res.result
+          })
+        }
+      }
+    })
   },
   onClose() {
     this.setData({

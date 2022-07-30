@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="tabs">
+    <view class="tab {{cur_tab===1?'curTab':''}}" bindtap="changeTab" data-idx="{{1}}">共享中</view>
+    <view class="tab {{cur_tab===0?'curTab':''}}" bindtap="changeTab" data-idx="{{0}}">已停止</view>
+  </view>
+  <van-search value="{{ searchVal }}" placeholder="请输入冷库名称搜索" shape="round" use-right-icon-slot bind:search="onSearch">
+    <view slot="right-icon" class="cancelSearch" bindtap="onCancel">取消</view>
+  </van-search>
+  <view class="list">
+    <view class="freezer" wx:for="{{freezerList}}" wx:key="*this">
+      <view class="name">{{item.lkmc}}</view>
+      <view class="rl">
+        <text>联系人</text>
+        <text>{{item.xm}}</text>
+      </view>
+      <view class="rl">
+        <text>联系电话</text>
+        <text>{{item.lxdh}}</text>
+      </view>
+      <view class="rl">
+        <text>可共享容量(m³)</text>
+        <text>{{item.kgxrl}}</text>
+      </view>
+      <view class="rl">
+        <text>收费标准</text>
+        <text>{{item.sfbz}}</text>
+      </view>
+      <view class="btnBox">
+        <view class="stopBtn" hidden="{{cur_tab===0}}" bindtap="stopService" data-item="{{item}}" data-idx="{{index}}" data-type="{{0}}">
+          <image src="/message/img/stop.png"></image>停止共享
+        </view>
+        <view class="openBtn" hidden="{{cur_tab===1}}" bindtap="stopService" data-item="{{item}}" data-idx="{{index}}" data-type="{{1}}">
+          <image src="/message/img/kaiqi.png"></image>开启共享
+        </view>
+        <navigator class="editBtn" url="/message/pages/editShare/editShare?id={{item.id}}" hover-class="none">
+          <image src="/message/img/edit.png"></image>编辑
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>
+<navigator class="add" hover-class="none" url="/message/pages/editShare/editShare">新增冷库</navigator>

@@ -1,84 +1,81 @@
 /* message/pages/subsidy/subsidy.wxss */
 .header {
-    height: 135rpx;
-    overflow: hidden;
-    /* display: flex; */
+  height: 135rpx;
+  overflow: hidden;
+  /* display: flex; */
 }
-.empty{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.empty {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.empty image{
-    width: 305rpx;
-    height: 416rpx;
+.empty image {
+  width: 305rpx;
+  height: 416rpx;
 }
-.van-dropdown-menu{
-    /* height: 165rpx;
+.van-dropdown-menu {
+  /* height: 165rpx;
     width: 174rpx; */
-    background: red;
-
+  background: red;
 }
-.van-dropdown-menu__item{
-    height: 135rpx;
-    line-height: 135rpx;
-    background: #f6f7f8;
-
+.van-dropdown-menu__item {
+  height: 135rpx;
+  line-height: 135rpx;
+  background: #f6f7f8;
 }
-.van-search{
-    height: 135rpx;
-    background: #f6f7f8 !important;
+.van-search {
+  height: 135rpx;
+  background: #f6f7f8 !important;
 }
-.van-search__content{
-    background: #fff !important;
+.van-search__content {
+  background: #fff !important;
 }
 .list {
-    box-shadow: 0rpx 0rpx 24rpx 0rpx rgba(47, 111, 247, 0.1);
-    background: #fff;
+  box-shadow: 0rpx 0rpx 24rpx 0rpx rgba(47, 111, 247, 0.1);
+  background: #fff;
 }
 
 .list .item {
-    margin: 0 28rpx;
-    border-bottom: solid 1rpx #e8e9ec;
-    /* height: 240rpx; */
+  margin: 0 28rpx;
+  border-bottom: solid 1rpx #e8e9ec;
+  /* height: 240rpx; */
 }
 
 .item .h3 {
-    font-size: 32rpx;
-    color: #428ffc;
-    line-height: 80rpx;
-    font-weight: 800;
+  font-size: 32rpx;
+  color: #428ffc;
+  line-height: 80rpx;
+  font-weight: 800;
 }
 
 .item .content {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-.item .content >view {
-    width: 50%;
-    color: #686b73;
-    font-size: 28rpx;
-    display: flex;
-    align-items: center;
-    height: 80rpx;
-
+.item .content > view {
+  width: 50%;
+  color: #686b73;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  height: 80rpx;
 }
 
 .item .content view .key {
-    display: inline-block;
-    height: 80rpx;
-    line-height: 80rpx;
-    min-width: 100rpx;
+  display: inline-block;
+  height: 80rpx;
+  line-height: 80rpx;
+  min-width: 100rpx;
 }
 
 .item .content view .value {
-    display: inline-block;
+  display: inline-block;
 
-    color: #428ffc;
-    height: 80rpx;
-    line-height: 80rpx;
+  color: #428ffc;
+  height: 80rpx;
+  line-height: 80rpx;
 }

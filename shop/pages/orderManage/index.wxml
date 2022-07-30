@@ -1,12 +1,13 @@
 <view class="page">
   <view class="top">
     <view class="user">
-      <image src="{{inFo.dpfm?img+inFo.dpfm:inFo.yhtx}}" class="photo"></image> 
+      <image src="{{inFo.dpfm?img+inFo.dpfm:inFo.yhtx}}" class="photo"></image>
       <view class="name">
         <view class="author">
           <text>{{inFo.full_name?inFo.full_name:inFo.name}} </text>
           <van-icon name="arrow" />
         </view>
+        <view class="tag">{{inFo.bq}}</view>
         <text>分享数：{{inFo.fxl}}</text>
         <text>点击量：{{inFo.djl}}</text>
       </view>
@@ -19,14 +20,7 @@
         <text class="{{isByOrder?'isActive':''}}">订单量</text>
         <image src="/shop/static/icons/icon/sort.png"></image>
       </view>
-      <!-- <view class="title_item">
-        <text>品牌</text>
-        <image src="/shop/static/icons/icon/sort.png"></image>
-      </view> -->
     </view>
-    <!-- <view class="title_right">
-      <image src="/shop/static/icons/icon/icon_01.png"></image>
-    </view> -->
   </view>
   <view class="shopList">
     <view class="shopItem" wx:for="{{orderList}}" wx:key="index">

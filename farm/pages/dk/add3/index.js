@@ -55,7 +55,6 @@ Page({
         })
     },
     GetJd() {
-        console.log('打开基地选项');
         this.setData({
             show: true
         })

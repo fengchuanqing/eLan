@@ -1,7 +1,5 @@
 import {
   domain,
-  lookGoodsList,
-  updateLookGoods
 } from '../../../utils/api.js'
 import {
   khlb,

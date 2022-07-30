@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isIPhoneXSeries:getApp().globalData.isIPhoneXSeries,
     domain:domain+'/bsApi',
     currentSwiper: 0,
     swiperList: [{

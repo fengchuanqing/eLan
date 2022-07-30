@@ -93,9 +93,40 @@ Page({
         }
       })
     })
+    let sameId =[]
+    if(arr.length>1){
+      let idArr = []
+      for(let i in arr){
+        if(arr[0].distribution_type!=arr[i].distribution_type){
+          wx.showToast({
+            icon:'none',
+            title: '所选商品的配送方式不一样，请选择配送方式相同的商品',
+          })
+          return
+        }
+        idArr.push(arr[i])
+      }
+      if(idArr[0].distribution_type=='1'){
+
+      }else{
+        sameId= idArr.reduce((a,b)=>{
+          return a.selfPoint.filter(c=>b.selfPoint.includes(c))
+        })
+        if(!sameId.length){
+          wx.showToast({
+            icon:'none',
+            title: '所选商品没有共同自提点，请重新选择商品',
+          })
+          return
+        }
+      }
+    }else{
+      sameId=arr[0].selfPoint
+    }
+    console.log(sameId)
     wx.setStorageSync('cartData', arr)
     wx.navigateTo({
-      url: '/specialZone/pages/cartOrder/cartOrder',
+      url: '/specialZone/pages/cartOrder/cartOrder?stationId='+(sameId.length?JSON.stringify(sameId):''),
     })
   },
   onAllIn(){

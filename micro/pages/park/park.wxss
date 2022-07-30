@@ -127,7 +127,7 @@
   font-size: 36rpx;
   color: #363a44;
   max-height: 100rpx;
-  line-height: 30rpx;
+  line-height: 42rpx;
 }
 .jd_tit text{
   font-size: 18rpx;

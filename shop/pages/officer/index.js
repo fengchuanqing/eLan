@@ -1,14 +1,12 @@
 import {
-  merchantGetAllCount,
-  merchantGetFhdd,
-  merchantGetDbsx,
   domain
 } from '../../../utils/api.js'
 import {
   count1,
   sjDetail,
   dbsx,
-  img
+  img,
+  getStoreOpenId
 } from '../../../apis/message.js'
 Page({
 
@@ -43,9 +41,43 @@ Page({
     sjDetail().then(res => {
       console.log(res);
       if (res.code == 200) {
+        if (!res.data) {
+          wx.showModal({
+            title: '提示',
+            content: '暂无权限',
+            showCancel: false,
+            success: (res) => {
+              if (res.confirm) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+          return
+        }
+        let userInfo = wx.getStorageSync('userInfo')
+        userInfo.storeId = res.data.storeId
+        wx.setStorageSync('userInfo', userInfo)
+        wx.setStorageSync('storeInfo', res.data)
+        if (res.data.bq !== '店长') {
+          getStoreOpenId({
+            openid: wx.getStorageSync('thirdSession').openid
+          }).then(res => {
+            if (res.code == 1) {
+              const thirdSession = wx.getStorageSync('thirdSession')
+              thirdSession.dzopenid = res.data[0].openid
+              wx.setStorageSync('thirdSession', thirdSession)
+            }
+          })
+        }
         this.setData({
           inFo: res.data
         })
+        this.getDbsx()
+        this.getData() //下面数据
       } else {
         wx.showToast({
           icon: 'error',
@@ -70,32 +102,6 @@ Page({
         })
       }
     })
-    // const currentTime = new Date().getTime()
-    // wx.request({
-    //   url: merchantGetDbsx,
-    //   method: 'post',
-    //   data: {
-    //     storeId: wx.getStorageSync('userInfo').id || 1
-    //   },
-    //   success: (res) => {
-    //     if (res.data.code === 200) {
-    //       res.data.rows.map(item => {
-    //         const time = new Date(item.time).getTime()
-    //         if (((currentTime - time) / 1000 / 3600 / 24) > 1) {
-    //           item.is_two = true
-    //         }
-    //       })
-    //       this.setData({
-    //         list: res.data.rows
-    //       })
-    //     } else {
-    //       thiswx.showToast({
-    //         icon: "error",
-    //         title: res.data.msg,
-    //       })
-    //     }
-    //   }
-    // })
   },
   getData() {
     count1({
@@ -155,17 +161,31 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getData() //下面数据
     this.getFhdd() //店铺信息
-    
+
     this.setData({
       userInfo: wx.getStorageSync('userInfo')
     })
-    this.getDbsx()
   },
   changeTab(tab) {
     if (tab.detail.index === 1) {
       this.getDbsx()
+      wx.getSetting({
+        withSubscriptions: true,
+        success(res) {
+          console.log(res)
+          if (res.subscriptionsSetting.mainSwitch) {
+            wx.requestSubscribeMessage({
+              tmplIds: ['5HD-XrMbh_0ynv0c1lgS0KBRvX51Or9LeEgcl5R6GH8'],
+              success(resl) {
+                console.log(resl)
+              }
+            })
+          }
+        }
+      })
+
+
     }
     this.setData({
       active: tab.detail.index
@@ -176,7 +196,6 @@ Page({
       date_active: val.target.dataset.date
     })
     this.getData()
-    // this.getFhdd()
   },
   goSetting() {
     wx.navigateTo({

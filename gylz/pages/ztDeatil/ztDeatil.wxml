@@ -1,0 +1,29 @@
+<van-cell-group>
+  <van-cell title="主体类型" value="{{ztlx}}" />
+  <van-cell title="主体名称" value="{{name}}" />
+  <van-cell title="联系人名称" value="{{contacts}}" />
+  <van-cell title="身份证号" value="{{idCard}}" />
+  <van-cell title="手机号码" value="{{telephone}}" />
+  <van-cell title="所属乡镇" value="{{ssxz}}" />
+  <van-cell title="所属村" value="{{ssc}}" />
+  <van-cell title="详细地址" value="{{address}}" />
+</van-cell-group>
+<view wx:for="{{cyList}}" wx:key="index">
+  <view class="zdcy_box">
+  <view class="zdcy_tit">主导产业类型</view>
+  <view class="zdcy_name">{{item.zdcylx}}</view>
+  <view  wx:for="{{item.zzList}}" wx:for-item="cy" wx:for-index="cyindex" wx:key="cyindex">
+    <view class="zdcy_child">
+    <view class="zdcy_child_item">
+      <view class="zdcy_child_item_lab">种植/养殖作物</view>
+      <view class="zdcy_child_item_val">{{cy.varietiesName}}</view>
+    </view>
+    <view class="zdcy_child_item">
+      <view class="zdcy_child_item_lab">种植/养殖面积(亩)</view>
+      <view class="zdcy_child_item_val">{{cy.mj}}</view>
+    </view>
+  </view>
+  </view>
+</view>
+</view>
+<navigator class="edit" hover-class="none" url="/gylz/pages/addZt/addZt?id={{ztid}}" wx:if="{{showEdit}}">编辑</navigator>

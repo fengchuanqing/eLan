@@ -1,0 +1,80 @@
+.freezer{
+  padding: 28rpx 30rpx;
+  border-bottom: 1rpx solid #e8e9ec;
+  overflow: hidden;
+  background-color: #ffffff;
+	box-shadow: 0rpx 2rpx 24rpx 0rpx 
+		rgba(47, 111, 247, 0.16);
+}
+.name{
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.rl{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  margin-top: 25rpx;
+}
+.rl text:first-child{
+  color: #686b73;
+}
+.address{
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #686b73;
+  margin-top: 25rpx;
+}
+.van-icon{
+  margin-right: 11rpx;
+}
+.address text{
+  color: #428ffc;
+  margin-left: 20rpx;
+  width: 200rpx;
+}
+.freezerOrder{
+  width: 336rpx;
+	height: 96rpx;
+	background-color: #428ffc;
+  border-radius: 48rpx;
+  text-align: center;
+  line-height: 96rpx;
+  color: #ffffff;
+  font-size: 36rpx;
+  margin: 30rpx auto 0;
+}
+.container{
+  background-color: #ffffff;
+	box-shadow: 0rpx 0rpx 24rpx 0rpx 
+    rgba(47, 111, 247, 0.1);
+    margin-top: 19rpx;
+}
+.tabs{
+  padding: 31rpx 30rpx;
+  border-bottom: 1rpx solid #e8e9ec;
+  display: flex;
+}
+.tab{
+  font-size: 36rpx;
+  color: #b3b5b9;
+  margin-right: 46rpx;
+}
+.curTab{
+  color: #363a44;
+  font-weight: bold;
+  position: relative;
+}
+.curTab::after{
+  content: '';
+  width: 46rpx;
+	height: 8rpx;
+	background-color: #428ffc;
+  border-radius: 4rpx;
+  position: absolute;
+  left: 50%;
+  bottom: -35rpx;
+  margin-left: -23rpx;
+}

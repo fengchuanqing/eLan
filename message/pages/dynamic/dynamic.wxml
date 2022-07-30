@@ -1,77 +1,77 @@
 <view wx:if="{{isEmptyList.length>0}}">
-    <van-tabs active="{{ active }}" class="selected" bind:change="onChange" color="rgb(66, 143, 252)" title-active-color="rgb(66, 143, 252)">
-        <van-tab title="{{item.name}}" wx:for="{{headerList}}" wx:key="index"></van-tab>
-    </van-tabs>
-    <view class="container">
-        <!-- 待审核 -->
-        <view class="item_box" wx:if="{{active==0}}" wx:for="{{list}}" wx:key="index">
-            <view class="i_header i_margin">
-                <image class="i_img" src="{{item.yhtx}}"></image><text class="i_name">{{item.mc}}</text><text class="zcbt">{{item.ztlx}}</text>
-            </view>
-            <view class="i_content i_color i_margin">
-                <view class="tit" wx:if="{{item.bt}}">{{item.bt}}</view>
-                {{item.nr}}
-                <view class="imgList">
-                    <block wx:for="{{item.dz}}" wx:for-item="img" wx:for-index="idx" wx:key="idx">
-                        <image class="item_img" src="{{img}}" wx:if="{{item.lb==='图片'}}"></image>
-                        <image class="item_img video" src="{{img.pic}}" wx:else bindtap="navToPlay" data-dz="{{img.video}}"></image>
-                    </block>
-                </view>
-            </view>
-            <view class="i_color i_margin">{{item.fbsj}}</view>
+  <van-tabs active="{{ active }}" class="selected" bind:change="onChange" color="rgb(66, 143, 252)" title-active-color="rgb(66, 143, 252)">
+    <van-tab title="{{item.name}}" wx:for="{{headerList}}" wx:key="index"></van-tab>
+  </van-tabs>
+  <view class="container">
+    <!-- 待审核 -->
+    <view class="item_box" wx:if="{{active==0}}" wx:for="{{list}}" wx:key="index">
+      <view class="i_header i_margin">
+        <image class="i_img" src="{{item.yhtx}}"></image><text class="i_name">{{item.mc}}</text><text class="zcbt">{{item.ztlx}}</text>
+      </view>
+      <view class="i_content i_color i_margin">
+        <view class="tit" wx:if="{{item.bt}}">{{item.bt}}</view>
+        {{item.nr}}
+        <view class="imgList">
+          <block wx:for="{{item.dz}}" wx:for-item="img" wx:for-index="idx" wx:key="idx">
+            <image class="item_img" src="{{img}}" wx:if="{{item.lb==='图片'}}"></image>
+            <image class="item_img video" src="{{img.pic}}" wx:else bindtap="navToPlay" data-dz="{{img.video}}"></image>
+          </block>
         </view>
-        <!-- 已驳回 -->
-        <view class="item_box" wx:if="{{active==2}}" wx:for="{{list}}" wx:key="index" bindtap="navTo" data-id="{{item.id}}">
-            <view class="failReson">原因：{{item.bhyy}}</view>
-            <view class="i_header i_margin">
-                <image class="i_img" src="{{item.yhtx}}"></image><text class="i_name">{{item.mc}}</text><text class="zcbt">{{item.ztlx}}</text>
-            </view>
-            <view class="i_content i_color i_margin">
-                <view class="tit" wx:if="{{item.bt}}">{{item.bt}}</view>
-                {{item.nr}}
-                <view class="imgList">
-                    <block wx:for="{{item.dz}}" wx:for-item="img" wx:for-index="idx" wx:key="idx">
-                        <image class="item_img" src="{{img}}" wx:if="{{item.lb==='图片'}}"></image>
-                        <image class="item_img video" src="{{img.pic}}" wx:else bindtap="navToPlay" data-dz="{{img.video}}"></image>
-                    </block>
-                </view>
-            </view>
-            <view class="i_color i_margin">{{item.fbsj}}</view>
+      </view>
+      <view class="i_color i_margin">{{item.fbsj}}</view>
+    </view>
+    <!-- 已驳回 -->
+    <view class="item_box" wx:if="{{active==2}}" wx:for="{{list}}" wx:key="index" bindtap="navTo" data-id="{{item.id}}">
+      <view class="failReson">原因：{{item.bhyy}}</view>
+      <view class="i_header i_margin">
+        <image class="i_img" src="{{item.yhtx}}"></image><text class="i_name">{{item.mc}}</text><text class="zcbt">{{item.ztlx}}</text>
+      </view>
+      <view class="i_content i_color i_margin">
+        <view class="tit" wx:if="{{item.bt}}">{{item.bt}}</view>
+        {{item.nr}}
+        <view class="imgList">
+          <block wx:for="{{item.dz}}" wx:for-item="img" wx:for-index="idx" wx:key="idx">
+            <image class="item_img" src="{{img}}" wx:if="{{item.lb==='图片'}}"></image>
+            <image class="item_img video" src="{{img.pic}}" wx:else bindtap="navToPlay" data-dz="{{img.video}}"></image>
+          </block>
         </view>
-        <!-- 已通过 -->
-        <view class="item_box" wx:if="{{active==1}}" wx:for="{{list}}" wx:key="index">
-            <view class="i_header i_margin">
-                <image class="i_img" src="{{item.yhtx}}"></image><text class="i_name">{{item.mc}}</text><text class="zcbt">{{item.ztlx}}</text>
-            </view>
-            <navigator url="/pages/countryside/detail/detail?id={{item.id}}">
-                <view class="i_content i_color i_margin">
-                    <view class="tit" wx:if="{{item.bt}}">{{item.bt}}</view>
-                    {{item.nr}}
-                    <view class="imgList">
-                        <block wx:for="{{item.dz}}" wx:for-item="img" wx:for-index="idx" wx:key="idx">
-                            <image class="item_img" src="{{img}}" wx:if="{{item.lb==='图片'}}"></image>
-                            <image class="item_img video" src="{{img.pic}}" wx:else bindtap="navToPlay" data-dz="{{img.video}}"></image>
-                        </block>
-                    </view>
-                </view>
-                <view class="i_color i_margin">{{item.fbsj}}</view>
-            </navigator>
-            <view class="btnBox">
-                <view class="btnBox_l" catchtap="bindzan" data-id="{{item.id}}" data-index="{{index}}">
-                    <image src="/assets/icons/icon_zan.png" wx:if="{{item.sfdz==0}}"></image>
-                    <image src="/assets/icons/icon_zan_act.png" wx:else></image>
-                    {{item.dzs}}
-                </view>
-                <view class="btnBox_r">
-                    <view class="btnBox_r_l" catchtap="showMsgPop" data-id="{{item.id}}" data-index="{{index}}">
-                        <image src="/assets/icons/icon_msg.png"></image>{{item.pls}}
-                    </view>
-                    <button class="shareBtn" open-type="share" data-id="{{item.id}}">
-                        <image class="share" src="/assets/icons/icon_share.png"></image>
-                    </button>
-                </view>
-            </view>
-            <!-- <view class="i_margin i_bottom i_margin">
+      </view>
+      <view class="i_color i_margin">{{item.fbsj}}</view>
+    </view>
+    <!-- 已通过 -->
+    <view class="item_box" wx:if="{{active==1}}" wx:for="{{list}}" wx:key="index">
+      <view class="i_header i_margin">
+        <image class="i_img" src="{{item.yhtx}}"></image><text class="i_name">{{item.mc}}</text><text class="zcbt">{{item.ztlx}}</text>
+      </view>
+      <navigator url="/pages/countryside/detail/detail?id={{item.id}}">
+        <view class="i_content i_color i_margin">
+          <view class="tit" wx:if="{{item.bt}}">{{item.bt}}</view>
+          {{item.nr}}
+          <view class="imgList">
+            <block wx:for="{{item.dz}}" wx:for-item="img" wx:for-index="idx" wx:key="idx">
+              <image class="item_img" src="{{img}}" wx:if="{{item.lb==='图片'}}"></image>
+              <image class="item_img video" src="{{img.pic}}" wx:else bindtap="navToPlay" data-dz="{{img.video}}"></image>
+            </block>
+          </view>
+        </view>
+        <view class="i_color i_margin">{{item.fbsj}}</view>
+      </navigator>
+      <view class="btnBox">
+        <view class="btnBox_l" catchtap="bindzan" data-id="{{item.id}}" data-index="{{index}}">
+          <image src="/assets/icons/icon_zan.png" wx:if="{{item.sfdz==0}}"></image>
+          <image src="/assets/icons/icon_zan_act.png" wx:else></image>
+          {{item.dzs}}
+        </view>
+        <view class="btnBox_r">
+          <view class="btnBox_r_l" catchtap="showMsgPop" data-id="{{item.id}}" data-index="{{index}}">
+            <image src="/assets/icons/icon_msg.png"></image>{{item.pls}}
+          </view>
+          <button class="shareBtn" open-type="share" data-id="{{item.id}}">
+            <image class="share" src="/assets/icons/icon_share.png"></image>
+          </button>
+        </view>
+      </view>
+      <!-- <view class="i_margin i_bottom i_margin">
         <view>
             <van-icon name="good-job-o" color="#428ffc" />
             <text class="i_num i_n_color">77</text>
@@ -82,22 +82,22 @@
             <van-icon name="share-o" />
         </view>
     </view> -->
-        </view>
     </view>
-    <!-- 删除 -->
-    <view class="delete" bindtap="GoDelete">
-        删除
-    </view>
+  </view>
+  <!-- 删除 -->
+  <view class="delete" bindtap="GoDelete">
+    删除
+  </view>
 </view>
 <view wx:else class="kkry">
-    <image src="../assets/message/empty.png" class="none"></image>
-    <view class="qfb" bindtap="navQfb">去发布</view>
+  <image src="../assets/message/empty.png" class="none"></image>
+  <view class="qfb" bindtap="navQfb">去发布</view>
 </view>
 <view class="popup" wx:if="{{show}}" class="pop" bindtap="close">
-    <view class="send">
-        <textarea auto-focus="auto" model:value="{{comment}}" confirm-type="send" auto-height maxlength="-1" placeholder="写回复" adjust-position="{{true}}"></textarea>
-        <button class="fabiao" bindtap="send">
-            发表
-        </button>
-    </view>
+  <view class="send">
+    <textarea auto-focus="auto" model:value="{{comment}}" confirm-type="send" auto-height maxlength="-1" placeholder="写回复" adjust-position="{{true}}"></textarea>
+    <button class="fabiao" bindtap="send">
+      发表
+    </button>
+  </view>
 </view>

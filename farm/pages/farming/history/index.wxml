@@ -1,26 +1,26 @@
 <view class="nsjl_bpx">
-    <!-- 主体 -->
-    <view class="nsjl" wx:if="{{List.length && jsShow}}" wx:for="{{List}}" wx:key="i">
-        <view class="title">{{item.jd}}</view>
+  <!-- 主体 -->
+  <view class="nsjl" wx:if="{{List.length && jsShow}}" wx:for="{{List}}" wx:key="i">
+    <view class="title">{{item.jd}}</view>
 
-        <view wx:for="{{item.month}}" wx:key="j" wx:for-item="ite" wx:for-index="j">
-            <view class="title2">
-                {{ite.yue}}
-            </view>
-            <view class="item" wx:for="{{ite.yueList}}" wx:key="q" wx:for-item="it" wx:for-index="q"><text>{{it.nsczlxmc}}</text><text>{{it.formatTime}}</text></view>
-        </view>
-        <!-- <view class="title2">9月份农事记录</view>
-        <view class="item"><text>施肥</text><text>2021-10-11 13:21:09</text></view> -->
+    <view wx:for="{{item.month}}" wx:key="j" wx:for-item="ite" wx:for-index="j">
+      <view class="title2">
+        {{ite.yue}}
+      </view>
+      <view class="item" wx:for="{{ite.yueList}}" wx:key="q" wx:for-item="it" wx:for-index="q"><text>{{it.nsczlxmc}}</text><text>{{it.formatTime}}</text></view>
     </view>
-    <!-- 农户 -->
-    <!-- <view class="nsjl" wx:if="{{List.length && !jsShow}}">
+    <!-- <view class="title2">9月份农事记录</view>
+        <view class="item"><text>施肥</text><text>2021-10-11 13:21:09</text></view> -->
+  </view>
+  <!-- 农户 -->
+  <!-- <view class="nsjl" wx:if="{{List.length && !jsShow}}">
         <view class="title2">10月份农事记录</view>
         <view class="item"><text>施肥</text><text>2021-10-11 13:21:09</text></view>
     </view> -->
-    <view wx:if="{{List.length == 0}}" class="kkry">
-        <image src="/farm/assets/kkry.png" />
-    </view>
-    <view class="tjns" bindtap="gogogo">
-        添加农事
-    </view>
+  <view wx:if="{{List.length == 0}}" class="kkry">
+    <image src="/farm/assets/kkry.png" />
+  </view>
+  <view class="tjns" bindtap="gogogo">
+    添加农事
+  </view>
 </view>

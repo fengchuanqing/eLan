@@ -54,7 +54,6 @@ Page({
     this.getJxsjlb(1, this.data.selectKey)
   },
   searchShop(e) {
-    console.log(e.detail);
     this.setData({
       storeList: [],
       searchValue: e.detail
@@ -75,13 +74,11 @@ Page({
         temp
       }).then((res) => {
         if (res) {
-          console.log(res);
           res.data.map((item) => {
             if (item.img) {
               item.img = item.img.split(',').reduce((acc, cur) => acc.concat(img + cur), [])
             }
           })
-          console.log(res.data);
           this.setData({
             storeList: [...this.data.storeList, ...res.data]
           })

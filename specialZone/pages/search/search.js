@@ -22,7 +22,11 @@ Page({
   onLoad: function (options) {
 
   },
-
+  changeSwiper(){
+    this.setData({
+      Sheight:343
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

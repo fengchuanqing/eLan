@@ -55,7 +55,6 @@ Page({
         // console.log(this.data.polygon[0].points);
         if (this.data.address) {
             if (this.data.polygon[0].points.length < 3) {
-                console.log('请至少选择3个点');
                 wx.showToast({
                     icon: 'none',
                     title: "请至少选择3个点",
@@ -180,7 +179,6 @@ Page({
     },
     // 获取点位 添加数组
     bindmaptap: function (e) {
-        console.log(e);
         var that = this;
         var point1 = [{
             longitude: e.detail.longitude,
@@ -198,12 +196,8 @@ Page({
                 item.latitude,
             ])
         })
-        console.log(path2);
         let area = computeSignedArea(path) * 0.0015
         let area2 = PlanarPolygonAreaMeters2(path2) * 0.0015
-        console.log(computeSignedArea(path));
-        console.log(area);
-        console.log(area2);
         this.setData({
             area: area.toFixed(2),
             longitude: e.detail.longitude,

@@ -120,11 +120,11 @@
                 电话：{{item.lxfs}}
               </van-col>
             </van-row>
-            <van-row class="rowfour" gutter="24">
+            <van-row class="rowfour">
               <van-col span="1">
                 <van-icon name="location-o" />
               </van-col>
-              <van-col span="20" style="font-size: 28rpx; color:#686b73;">{{item.dz}}</van-col>
+              <van-col span="16" offset='1' style="font-size: 28rpx; color:#686b73;">{{item.dz}}</van-col>
             </van-row>
           </view>
           <!-- 右边一点定位上去 -->

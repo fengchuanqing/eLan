@@ -46,7 +46,6 @@ Component({
       wx.canvasToTempFilePath({
         canvas: this.data.mycavas, // 使用2D 需要传递的参数
         success(res) {
-          console.log(res.tempFilePath)
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
             success(res) {

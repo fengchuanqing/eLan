@@ -59,7 +59,7 @@
       <navigator wx:for="{{rxcpList}}" wx:key="index" url="/specialZone/pages/shopDetail/shopDetail?id={{item.spid}}" hover-class="none" class="item">
         <image src="{{item.img[0]}}"></image>
         <view class="h4">{{item.name}}
-          <text>{{item.goodsSizeList[0].size_name}}</text>
+          <text>{{item.goodsSizeList[0].size_name}}斤/件</text>
         </view>
         <view class="text">
           <view class="flex-center">

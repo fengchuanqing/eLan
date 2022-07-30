@@ -1,6 +1,6 @@
 <view class="container">
   <view class="box">
-    <view class="item" wx:for="{{addressList}}" wx:key="index">
+    <view class="item" wx:for="{{addressList}}" wx:key="index" bindlongtap="copyThat" data-item="{{item}}">
       <view class="i_first">
         <van-tag type="danger" round wx:if="{{item.isdefault==='0'}}">默认</van-tag>
         {{item.province}} {{item.city}} {{item.county}}

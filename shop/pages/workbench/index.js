@@ -1,17 +1,27 @@
+import {
+  sjDetail,
+} from '../../../apis/message.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    bq: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    sjDetail().then(res => {
+      if (res.code == 200) {
+        console.log(res.data.bq)
+        this.setData({
+          bq: res.data.bq
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -23,8 +33,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏

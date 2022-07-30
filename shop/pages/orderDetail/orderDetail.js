@@ -1,8 +1,6 @@
 var titleList = getApp()
 import {
   domain,
-  merchantOrderDeatil,
-  merchantOrderUpdate
 } from "../../../utils/api.js"
 import {
   img,
@@ -36,6 +34,27 @@ Page({
 
     this.getData()
   },
+  copyThat(e){
+    const {orderDetail,province,city,county} = this.data;
+    wx.setClipboardData({
+      data: orderDetail.sjr +' '+orderDetail.sjrdh +' '+province+city+county+orderDetail.sjrdz,
+      success (res) {
+        
+      }
+    })
+  },
+  goScan(){
+    wx.scanCode({
+      success:(res)=> {
+        console.log(res)
+        if(res.errMsg==='scanCode:ok'){
+          this.setData({
+            expressNo:res.result
+          })
+        }
+      }
+    })
+  },
   getData() {
     orderDetail({
       id: this.data.orderNo
@@ -46,7 +65,7 @@ Page({
           item.img=item.img.split(',')
           num+=item.num*item.prince
         })
-        res.data.goodsSizeList&&(res.data.order_money=num)
+        // res.data.goodsSizeList&&(res.data.order_money=num)
         // 省市区
         if (res.data.address) {
           this.setData({
@@ -77,6 +96,17 @@ Page({
   showImg() {
     this.setData({
       show_img: true
+    })
+  },
+  goThere() {
+    const {orderDetail} = this.data
+    const latitude = Number(orderDetail.selfPoint.wd)
+    const longitude = Number(orderDetail.selfPoint.jd)
+    wx.openLocation({
+      latitude,
+      longitude,
+      name: orderDetail.selfPoint.dq+orderDetail.selfPoint.xxdz,
+      scale: 18
     })
   },
   hideImg() {

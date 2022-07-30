@@ -61,7 +61,7 @@ Page({
     ],
     cur_menu: 0,
     markers: [{
-      id: 'd',
+      id: 9999999,
       latitude: 29.29,
       longitude: 119.6,
       width: '39rpx',
@@ -79,6 +79,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.drawMap()
     if (options.type) {
       this.setData({
         cur_menu: Number(options.type),
@@ -118,7 +119,15 @@ Page({
       success: (res) => {
         this.setData({
           curLat: res.latitude,
-          curLon: res.longitude
+          curLon: res.longitude,
+          markers: [{
+            id: 9999999,
+            latitude: res.latitude,
+            longitude: res.longitude,
+            width: '39rpx',
+            height: '54rpx',
+            iconPath: '/micro/assets/marker_3.png',
+          }]
         })
       }
     })
@@ -126,7 +135,29 @@ Page({
     this.getKq()
     this.getJy()
   },
-
+  drawMap() {
+    this.mapCtx = wx.createMapContext('map')
+    this.mapCtx.addGroundOverlay({
+      id: 1000000,
+      src: 'https://szsn.lx.gov.cn/elmgServer/profile/upload/2022/06/23/b655451a-4ec4-4c64-8582-63c4caef76a8.png',
+      bounds: {
+        southwest: {
+          longitude: 119.588109,
+          latitude: 29.279476,
+        },
+        northeast: {
+          longitude: 119.616388,
+          latitude: 29.311939,
+        }
+      },
+      success: (res) => {
+        console.log(res, 'res')
+      },
+      fail: (err) => {
+        console.log(err, 'err')
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -140,7 +171,6 @@ Page({
   onShow: function () {
 
   },
-
   getNear() {
     const nearList = []
     records.map(item => {
@@ -171,7 +201,7 @@ Page({
       success: (res) => {
         if (res) {
           this.setData({
-            'today.jy': res.data.tips
+            'today.jy': res.data.tips||''
           })
         }
       }
@@ -235,6 +265,25 @@ Page({
       curMarkers,
       curCzyList
     })
+    this.mapCtx.includePoints({
+      padding: [10],
+      points: [{
+        latitude: curMarkers.latitude,
+        longitude: curMarkers.longitude,
+      }]
+    })
+    this.mapCtx.translateMarker({
+      markerId: curMarkers.id,
+      autoRotate: true,
+      duration: 1000,
+      destination: {
+        latitude: curMarkers.latitude,
+        longitude: curMarkers.longitude,
+      },
+      animationEnd() {
+        console.log('animation end')
+      }
+    })
   },
   markertap(e) {
     console.log('@@@ markertap', e)
@@ -248,7 +297,7 @@ Page({
         item.callout.bgColor = '#f7295e'
         curMarkers = item
       } else {
-        if (item.id != 'd') {
+        if (item.id != 9999999) {
           item.iconPath = item.iconPath2
           if (item.callout) item.callout.bgColor = '#428ffc'
         }
@@ -258,7 +307,26 @@ Page({
     this.setData({
       markers,
       jdShow: true,
-      curMarkers
+      curMarkers,
+    })
+    this.mapCtx.includePoints({
+      padding: [200],
+      points: [{
+        latitude: curMarkers.latitude,
+        longitude: curMarkers.longitude,
+      }]
+    })
+    this.mapCtx.translateMarker({
+      markerId: curMarkers.id,
+      autoRotate: true,
+      duration: 1000,
+      destination: {
+        latitude: curMarkers.latitude,
+        longitude: curMarkers.longitude,
+      },
+      animationEnd() {
+        console.log('animation end')
+      }
     })
   },
   onClose(e) {
@@ -281,7 +349,7 @@ Page({
       longitude: parseFloat(item.longitude),
       latitude: parseFloat(item.latitude),
       scale: 28,
-      name: item.xlmc?item.xlmc:(item.callout.content + (this.data.cur_menu === 2 ? '号采摘线' : '')),
+      name: item.xlmc ? item.xlmc : (item.callout.content + (this.data.cur_menu === 2 ? '号采摘线' : '')),
       address: item.js,
       success: res => {
         console.log(res)
@@ -314,9 +382,9 @@ Page({
     this.setData({
       cur_menu: idx,
       markers: [{
-        id: 'd',
-        latitude: 29.29,
-        longitude: 119.6,
+        id: 9999999,
+        latitude: this.data.curLat,
+        longitude: this.data.curLon,
         width: '39rpx',
         height: '54rpx',
         iconPath: '/micro/assets/marker_3.png',
@@ -349,8 +417,8 @@ Page({
                 id: item.id,
                 latitude: item.wd,
                 longitude: item.jd,
-                width: '38rpx',
-                height: '42rpx',
+                width: '50rpx',
+                height: '55rpx',
                 iconPath: 'https://szsn.lx.gov.cn/' + item.tb,
                 iconPath2: 'https://szsn.lx.gov.cn/' + item.tb,
                 js: item.js,
@@ -364,7 +432,7 @@ Page({
                   fontSize: '23rpx',
                   display: 'ALWAYS',
                   anchorY: 27,
-                  padding: 6
+                  padding: 5
                 },
               }
             })
@@ -374,8 +442,8 @@ Page({
                 id: item.id,
                 latitude: item.wd,
                 longitude: item.jd,
-                width: '38rpx',
-                height: '42rpx',
+                width: '50rpx',
+                height: '55rpx',
                 iconPath: 'https://szsn.lx.gov.cn/' + item.tb,
                 iconPath2: 'https://szsn.lx.gov.cn/' + item.tb,
                 iconPath3: 'https://szsn.lx.gov.cn/' + item.tb2,
@@ -389,15 +457,40 @@ Page({
                   color: '#fff',
                   fontSize: '15rpx',
                   display: 'ALWAYS',
-                  anchorY: 40,
+                  anchorY: 50,
                   padding: 5
                 },
               }
             })
           }
           this.setData({
-            markers: [...markers, ...this.data.markers]
+            markers: [...markers, ...this.data.markers],
           })
+          if (markers.length) {
+            let includePointsData = []
+            for (let i = 0; i < markers.length; i++) {
+              includePointsData.push({
+                latitude: markers[i].latitude,
+                longitude: markers[i].longitude
+              })
+            }
+            this.mapCtx.includePoints({
+              padding: [10],
+              points: includePointsData
+            })
+            this.mapCtx.translateMarker({
+              markerId: markers[0].id,
+              autoRotate: true,
+              duration: 1000,
+              destination: {
+                latitude: markers[0].latitude,
+                longitude: markers[0].longitude,
+              },
+              animationEnd() {
+                console.log('animation end')
+              }
+            })
+          }
           this.getNear()
           this.getFar()
         }

@@ -1,19 +1,18 @@
 // pages/MerchantCenter/setting/setting.js
 import {
-  merchantUserInfo,
-  merchantGetSubjectType,
-  merchantUpdateUserInfo,
   domain,
-  upload
 } from '../../../utils/api.js'
 import {
   dpqylx,
   uploadFile,
-  sjDetail,
+  sjshopDetail,
   updateDetail,
   img
 } from '../../../apis/message.js'
 const areaList = require('../../../utils/area-data.js')
+import {
+  phoneVerify
+} from '../../../utils/util.js'
 Page({
 
   /**
@@ -32,7 +31,7 @@ Page({
     fullName: '',
     commodity: '',
     address: '',
-    mobile: '',
+    mobile: wx.getStorageSync('userInfo').lxdh||'',
     categoryShow: false,
     categoryColumns: [1, 2],
     addressShow: false,
@@ -45,7 +44,7 @@ Page({
     currentEndTime: '20:00',
     subjectType: [],
     backData: {},
-    skmSrc: '',
+    skmSrc: [],
     wxhSrc: '',
     fmSrc: '',
   },
@@ -53,11 +52,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getSubjectType()
-    // this.getData()
 
     // 获取用户信息
-    sjDetail().then(res => {
+    sjshopDetail().then(res => {
       // console.log(res);
       this.setData({
         backData: res.data,
@@ -68,7 +65,7 @@ Page({
         fmSrc: res.data.dpfm,
         fullName: res.data.full_name,
         qsj: res.data.qsj,
-        skmSrc: res.data.skm,
+        skmSrc: res.data.skm?.split(',')??[],
         wxhSrc: res.data.wechat,
         mobile: res.data.mobile,
         isAll: res.data.is_all ? true : false,
@@ -85,7 +82,6 @@ Page({
     })
   },
   submit() {
-    let obj = {}
     // if (this.data.active === 0) {
     // if (!this.data.headPortrait) {
     //   wx.showToast({
@@ -101,6 +97,28 @@ Page({
       })
       return
     }
+    if (this.data.skmSrc.length==0) {
+      wx.showToast({
+        icon:'none',
+        title: '请上传收款码',
+      })
+      return
+    }
+    if (!this.data.fmSrc) {
+      wx.showToast({
+        icon:'none',
+        title: '请上传店铺封面',
+      })
+      return
+    }
+    if (!this.data.mobile) {
+      wx.showToast({
+        icon:'none',
+        title: '请输入手机号',
+      })
+      return
+    }
+    if(!phoneVerify(this.data.mobile)) return
     var dot = this.data.qsj.indexOf('.')
     if (dot > -1) {
       if (this.data.qsj.length > (dot + 3)) {
@@ -111,21 +129,13 @@ Page({
         return
       }
     }
-    // obj = {
-    //   headPortrait: this.data.headPortrait,
-    //   name: this.data.name,
-    //   subjectName: this.data.subjectName,
-    //   fullName: this.data.fullName,
-    //   commodity: this.data.commodity,
-    //   address: this.data.address,
-    //   mobile: this.data.mobile,
-    //   isAll: this.data.isAll ? 1 : 0,
-    //   type: this.data.subjectType.find(item => item.QYLXMC === this.data.category)?.XH,
-    //   businessDate: this.data.businessDate,
-    //   businessHours: this.data.isAll ? null : this.data.currentStartTime + ',' + this.data.currentEndTime
-
-    // }
-    // if( this.data.businessDate &&  this.data.address)
+    if (!this.data.wxhSrc) {
+      wx.showToast({
+        icon:'none',
+        title: '请上传微信号',
+      })
+      return
+    }
     let params = {
       account: this.data.account,
       password: this.data.password,
@@ -139,11 +149,10 @@ Page({
       qsj: this.data.qsj, //起售价格
       isAll: this.data.isAll ? 1 : 0, //是否24小时营业 0是 1否
       mobile: this.data.mobile, //手机号
-      skm: this.data.skmSrc, //收款码
+      skm: this.data.skmSrc.join(), //收款码
       wechat: this.data.wxhSrc, //微信号
     }
     updateDetail(params).then(res => {
-      console.log(res);
       if (res.code == 200) {
         wx.navigateBack({
           delta: 1,
@@ -155,56 +164,6 @@ Page({
         icon: 'none',
         title: res.msg,
       })
-    })
-    // } else {
-    //   obj = {
-    //     account: this.data.account,
-    //     password: this.data.password,
-    //   }
-    // }
-
-    // wx.request({
-    //   url: merchantUpdateUserInfo,
-    //   method: 'PUT',
-    //   data: {
-    //     ...obj,
-    //     id: this.data.shop_id
-    //   },
-    //   success: (res) => {
-    //     if (res.data.code === 200) {
-    //       wx.showToast({
-    //         title: res.data.msg,
-    //       })
-    //       wx.setStorageSync('userInfo', res.data.data[0])
-    //     } else {
-    //       wx.showToast({
-    //         icon: 'error',
-    //         title: res.data.msg,
-    //       })
-    //     }
-    //   }
-    // })
-  },
-  getSubjectType() {
-    wx.request({
-      url: merchantGetSubjectType,
-      method: 'get',
-      success: (res) => {
-        if (res.data.code === 200) {
-          let arr = []
-          res.data.data.map(item => {
-            arr.push(item.QYLXMC)
-          })
-          this.setData({
-            categoryColumns: arr,
-            subjectType: res.data.data
-          })
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-          })
-        }
-      }
     })
   },
   afterRead(event) {
@@ -228,39 +187,6 @@ Page({
           }]
         });
         wx.hideLoading()
-      }
-    })
-  },
-  getData() {
-    wx.request({
-      url: merchantUserInfo,
-      method: 'post',
-      data: {
-        account: wx.getStorageSync('userInfo').account || 'zhangxueyou'
-      },
-      success: (res) => {
-        if (res.data.code === 200) {
-          const formData = res.data.data
-          this.setData({
-            shop_id: formData.id,
-            name: formData.name,
-            headPortrait: formData.headPortrait,
-            subjectName: formData.subjectName,
-            fullName: formData.fullName,
-            commodity: formData.commodity,
-            address: formData.address,
-            mobile: formData.mobile,
-            businessDate: formData.businessDate,
-            isAll: formData.isAll === '1' ? true : false,
-            account: formData.account,
-            password: formData.password,
-            category: formData.type && this.data.subjectType.find(item => item.XH === formData.type)?.QYLXMC
-          })
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-          })
-        }
       }
     })
   },
@@ -363,6 +289,50 @@ Page({
       dayShow: false,
       businessDate: `${this.formatDate(start)} - ${this.formatDate(end)}`,
     });
+  },
+  delImg(e) {
+    const num = e.currentTarget.dataset.idx;
+    const {
+      skmSrc
+    } = this.data
+    skmSrc.splice(num, 1)
+    this.setData({
+      skmSrc
+    })
+  },
+  chooseImg() {
+    let pics = this.data.skmSrc;
+    console.log(pics)
+    wx.showLoading({
+      title: '加载中...',
+    })
+    wx.chooseImage({
+      count: 5 - pics.length,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success:(res)=> {
+        const tempFilePaths = res.tempFilePaths
+        for (let i in tempFilePaths) {
+          wx.uploadFile({
+            url: uploadFile,
+            filePath: tempFilePaths[i],
+            name: 'file',
+            formData: {},
+            success: (resl) => {
+              const data = JSON.parse(resl.data)
+              pics.push(data.fileName);
+              this.setData({
+                skmSrc: pics
+              })
+            }
+          })
+        }
+        wx.hideLoading()
+      },
+      fail() {
+        wx.hideLoading()
+      }
+    })
   },
   OpenUpload(e) {
     wx.chooseImage({

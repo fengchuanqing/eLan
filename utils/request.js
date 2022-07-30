@@ -10,7 +10,8 @@ export const requset = (options) => {
 		data,
 		method,
 		dataType,
-		hideLoading
+    hideLoading,
+    headType
 	} = options
 	//加载圈
 	if (!hideLoading) {
@@ -22,16 +23,19 @@ export const requset = (options) => {
 		wx.request({
 			url: baseUrl + url,
 			method: method || 'get',
-			data,
+      data,
+      header: {
+        'content-type': headType||'application/json'
+      },
 			dataType: dataType || "json",
 			success: (res) => {
 				if (!hideLoading) {
 					wx.hideLoading();
-				}
+        }
 				// code判断:200成功,不等于200错误
-				if (res.data.code != 200) {
+				if (res.data.code != 200&&res.data.code != 1) {
 					wx.showToast({
-						title: res.data.msg,
+						title: res.data.msg||res.data.message,
 						icon: 'none'
 					});
 					return;

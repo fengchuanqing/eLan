@@ -68,7 +68,6 @@ Page({
       orderList: [],
       isReachBottom: true
     })
-    // this.getData()
     OffOnlineList().then(res => {
       console.log(res);
       if (res.code == 200) {

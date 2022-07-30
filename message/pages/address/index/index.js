@@ -38,6 +38,15 @@ Page({
       }
     })
   },
+  copyThat(e){
+    const item = e.currentTarget.dataset.item;
+    wx.setClipboardData({
+      data: item.name+' '+item.mobile+' '+item.province+item.city+item.county+item.address,
+      success (res) {
+        
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -56,7 +65,7 @@ Page({
     }
     addressList(params).then(res=>{
       if(res){
-        let arr = res.data
+        let arr = res.data.length?res.data.filter(item=>item.is_del=='0'):[]
         arr.map(item=>{
           let regionCode=item.region_code?item.region_code.split(','):[];
           item.province=areaCode.areaList.province_list[regionCode[0]]

@@ -1,12 +1,9 @@
 import {
   domain,
-  merchantActivityList,
-  merchantActivityDeatil
 } from '../../../utils/api.js'
 import {
   img,
   activityList,
-  deleteActivity,
   updateActivity
 } from '../../../apis/message.js'
 
@@ -57,34 +54,6 @@ Page({
         })
       }
     })
-    // wx.request({
-    //   url: merchantActivityList,
-    //   method: 'GET',
-    //   data: {
-    //     pageNum: this.data.pageNum,
-    //     pageSize: this.data.pageSize,
-    //     storeId: wx.getStorageSync('userInfo').id || 1,
-    //     state: this.data.active,
-    //   },
-    //   success: (res) => {
-    //     if (res.data.code == 200) {
-    //       let arr = res.data.rows
-    //       if (this.data.pageNum * this.data.pageSize >= res.data.total) {
-    //         this.setData({
-    //           isReachBottom: false
-    //         })
-    //       }
-    //       this.setData({
-    //         activityList: [...this.data.activityList, ...arr]
-    //       })
-    //     } else {
-    //       wx.showToast({
-    //         icon: 'error',
-    //         title: res.data.msg,
-    //       })
-    //     }
-    //   }
-    // })
   },
   delActivity(e) {
     wx.showModal({
@@ -96,7 +65,7 @@ Page({
         if (res.confirm) {
           updateActivity({
             id: e.currentTarget.dataset.id,
-            isDelete:1
+            isDelete: 1
           }).then(res => {
             wx.showToast({
               title: res.msg,
@@ -110,28 +79,6 @@ Page({
               this.getData()
             }
           })
-          // wx.request({
-          //   url: merchantActivityDeatil + e.currentTarget.dataset.id,
-          //   method: 'DELETE',
-          //   success: (res) => {
-          //     if (res.data.code == 200) {
-          //       wx.showToast({
-          //         title: res.data.msg,
-          //       })
-          //       this.setData({
-          //         pageNum: 1,
-          //         activityList: [],
-          //         showMore: false
-          //       })
-          //       this.getData()
-          //     } else {
-          //       wx.showToast({
-          //         icon: 'error',
-          //         title: res.data.msg,
-          //       })
-          //     }
-          //   }
-          // })
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -163,32 +110,6 @@ Page({
             })
 
           })
-          // wx.request({
-          //   url: merchantActivityDeatil,
-          //   method: 'PUT',
-          //   data: {
-          //     id: e.currentTarget.dataset.id,
-          //     state: "0"
-          //   },
-          //   success: (res) => {
-          //     if (res.data.code == 200) {
-          //       wx.showToast({
-          //         title: res.data.msg,
-          //       })
-          //       this.setData({
-          //         pageNum: 1,
-          //         activityList: [],
-          //         showMore: false
-          //       })
-          //       this.getData()
-          //     } else {
-          //       wx.showToast({
-          //         icon: 'error',
-          //         title: res.data.msg,
-          //       })
-          //     }
-          //   }
-          // })
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -213,36 +134,11 @@ Page({
             this.setData({
               // pageSize: 10,
               pageNum: 1,
-              activityList: []
+              activityList: [],
+              showMore: false
             })
             this.getData()
           })
-          // wx.request({
-          //   url: merchantActivityDeatil,
-          //   method: 'PUT',
-          //   data: {
-          //     id: e.currentTarget.dataset.id,
-          //     state: "1"
-          //   },
-          //   success: (res) => {
-          //     if (res.data.code == 200) {
-          //       wx.showToast({
-          //         title: res.data.msg,
-          //       })
-          //       this.setData({
-          //         pageNum: 1,
-          //         activityList: [],
-          //         showMore: false
-          //       })
-          //       this.getData()
-          //     } else {
-          //       wx.showToast({
-          //         icon: 'error',
-          //         title: res.data.msg,
-          //       })
-          //     }
-          //   }
-          // })
         } else if (res.cancel) {
           console.log('用户点击取消')
         }

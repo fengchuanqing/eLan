@@ -6,6 +6,7 @@
       <view class="name">
         <view class="text">
           <text>{{inFo.full_name}}</text>
+          <view>{{inFo.bq}}</view>
           <image src="/shop/static/icons/icon/setting.png" bindtap="goSetting"></image>
           <!-- <image src="/shop/static/icons/icon/scan.png" bindtap="goSacn"></image> -->
         </view>
@@ -15,7 +16,8 @@
     <view class="nav">
       <van-tabs active="{{active}}" title-active-color="#4e71ac" bind:change="changeTab">
         <van-tab title="财务收益"></van-tab>
-        <van-tab title="待办事项"></van-tab>
+        <van-tab title="待办事项" info="{{list.length}}" wx:if="{{list.length}}"></van-tab>
+        <van-tab title="待办事项" wx:else></van-tab>
       </van-tabs>
     </view>
   </view>

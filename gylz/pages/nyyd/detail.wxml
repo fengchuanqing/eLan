@@ -58,7 +58,7 @@
         <van-cell title="签订时间" value="{{jyObj.lzsj}}" />
         <van-cell title="实际面积大小" value="{{jyObj.sjmj}}亩" />
         <van-cell title="实际流转年限" value="{{jyObj.sjnx}}年" />
-        <van-cell title="状态" value="已流转" value-class="orange"/>
+        <van-cell title="状态" value="已流转" value-class="orange" />
       </van-cell-group>
     </block>
   </view>
@@ -69,7 +69,7 @@
     为保障您的交易安全，请选择交易完成后上传凭证
   </view>
 </view>
-<view class="foot" wx:if="{{showFoot}}">
+<view class="foot" wx:if="{{showFoot}}" style="height: {{isIPhoneXSeries?178:146}}rpx;">
   <view class="foot_item">
     <image src="/gylz/img/icon_user.png"></image>
     <text>{{obj.lzr}}</text>

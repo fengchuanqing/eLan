@@ -10,7 +10,9 @@
 .isActive {
   color: #66ddff;
 }
-
+.tag{
+  font-size: 24rpx;
+}
 .top .user {
   height: 100%;
   display: flex;
@@ -34,7 +36,7 @@
 }
 
 .user .name .author {
-  margin-bottom: 20rpx;
+  /* margin-bottom: 20rpx; */
   display: flex;
   align-items: center;
 }

@@ -6,27 +6,35 @@
       <view id="{{kelong.id}}" class="imgList kelong" hidden='{{!showkelong}}' style='top:{{kelong.top}}px;left:{{kelong.left}}px'>
         <image src="{{kelong.nameIcon}}"></image>
       </view>
-      <view class="imgList" wx:for="{{imgList}}" data-index="{{index}}" wx:key='index' bind:touchstart='dragStart' catch:touchmove='dragMove' bind:touchend='dragEnd'>
-        <text class="close" catchtap="delImg" data-idx="{{index}}">×</text>
-        <image src="{{img+item}}"></image>
+      <view class="imgList" wx:if="{{fmSrc}}">
+        <text class="close" catchtap="delZtImg">×</text>
+        <image src="{{img+fmSrc}}"></image>
         <view class="zt" wx:if="{{index===0}}">
           <image src="/shop/static/icons/icon/img.png"></image>主图
         </view>
       </view>
-      <view class="uploadBtn" wx:if="{{imgList.length<6}}" bindtap="chooseImg">
+      <view class="imgList" wx:for="{{imgList}}" data-index="{{index}}" wx:key='index' bind:touchstart='dragStart' catch:touchmove='dragMove' bind:touchend='dragEnd'>
+        <text class="close" catchtap="delImg" data-idx="{{index}}">×</text>
+        <image src="{{img+item}}"></image>
+      </view>
+      <view class="uploadBtn" wx:if="{{!fmSrc}}" bindtap="goCut">
         <image src="/shop/static/icons/icon/canmera.png"></image>
-        <text>添加主图等</text>
+        <text>添加主图</text>
+      </view>
+      <view class="uploadBtn" wx:if="{{imgList.length<5}}" bindtap="chooseImg">
+        <image src="/shop/static/icons/icon/canmera.png"></image>
+        <text>其他图片</text>
       </view>
     </view>
     <view class="tip">可上传主图1张，其他图片1-5张，长按图片可拖拽调整顺序。<text>注：上传图片比例为1:1</text></view>
     <view class="rules">
       <view class="ruleItemBox" wx:for="{{ruleList}}" wx:key="*this">
-        <van-field required size="large" class="ruleItem" value="{{ ruleList[index].sizeName }}" center clearable label="商品规格" placeholder="请输入" border="{{ false }}" bindinput="addGg" data-id="{{index}}" input-align="right" />
+        <van-field required size="large" class="ruleItem" value="{{ ruleList[index].sizeName }}" type="digit" center clearable label="商品规格(斤/件)" placeholder="请输入" border="{{ false }}" bindinput="addGg" data-id="{{index}}" input-align="right" />
         <van-field required size="large" class="ruleItem" value="{{ ruleList[index].prince }}" type="digit" center clearable label="商品价格" placeholder="0.00" border="{{ false }}" input-align="right" bindinput="addJg" data-id="{{index}}" use-right-icon-slot bind:blur='jjTo'>
           <view slot="right-icon">元</view>
         </van-field>
       </view>
-    </view> 
+    </view>
     <van-cell required title="商品分类" size="large" is-link value="{{form.type}}" arrow-direction="{{flShow?'down':''}}" border="{{false}}" bindtap="onFlShow" />
     <van-popup show="{{ flShow }}" position="bottom">
       <van-picker show-toolbar title="标题" columns="{{ columns }}" bind:cancel="onFlClose" bind:confirm="onFlConfirm" />
@@ -59,6 +67,13 @@
         <text class="{{type_act==='3'?'type_act':''}}" bindtap="changeType" data-type="3">全部</text>
       </view>
     </view>
+    <block wx:if="{{type_act!=='1'}}">
+      <van-cell required title="请选择自提点" size="large" is-link border="{{false}}" bindtap="goStation" />
+      <view class="stationList" wx:if="{{stationList.length}}">
+        <view wx:for="{{stationList}}" wx:key="*this" class="stations">{{item.mc}}</view>
+      </view>
+    </block>
+
     <!-- 新品 -->
 
     <view class="weui-cells weui-cells_after-title">
@@ -100,7 +115,7 @@
     <van-cell title="具体解释权归店家所有" size="large" border="{{false}}">
       <van-checkbox bind:change="onChange3" value="{{form.checkbox3}}" shape="square" />
     </van-cell>
-    <van-cell title="不承担费用" size="large" border="{{false}}">
+    <van-cell title="不承担运费" size="large" border="{{false}}">
       <van-checkbox bind:change="onChange4" value="{{form.checkbox4}}" shape="square" />
     </van-cell>
     <van-field size="large" value="{{ form.bcsm }}" placeholder="下单须知补充说明" border="{{ false }}" bind:input="bcsmInput" />
@@ -108,12 +123,12 @@
     <view class="title title1">商家联系方式</view>
     <van-field required label="客服电话" size="large" value="{{ form.phone }}" placeholder="请输入客服电话" border="{{ false }}" bind:input="phoneInput" />
     <!-- <van-field required label="微信号" size="large" value="{{ form.wechat }}" placeholder="请输入微信号" border="{{ false }}" bind:input="wechatInput" /> -->
-    <van-cell title="收款码" required is-link size="large">
-      <view>
-        <image src=" {{img + skmSrc}}" style="width:45rpx;height:50rpx;border-radius: 50%;">
-        </image>
+    <van-cell title="收款码" required is-link size="large"></van-cell>
+    <view class="uploadBox">
+      <view class="imgList" wx:for="{{skmSrc}}" data-index="{{index}}" wx:key='index'>
+        <image src="{{img+item}}"></image>
       </view>
-    </van-cell>
+    </view>
 
     <van-cell title="微信号" required is-link size="large">
       <view>

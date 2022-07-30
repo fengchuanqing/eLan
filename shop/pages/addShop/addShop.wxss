@@ -10,7 +10,9 @@
   margin-top: 34rpx;
   padding: 0 32rpx;
 }
-
+.van-field__label{
+  width: 200rpx;
+}
 .imgList {
   width: 150rpx;
   height: 150rpx;
@@ -186,7 +188,7 @@ view.van-checkbox {
   display: flex;
   padding: 0 32rpx;
   justify-content: space-between;
-  margin-top: 50rpx;
+  margin: 50rpx 0;
 }
 
 .btn-area button {
@@ -276,8 +278,23 @@ input::-webkit-input-placeholder {
   display: flex;
   padding: 15rpx 36rpx;
   justify-content: space-between;
+  background-color: #ffffff;
 }
 .addBox image{
   width: 37rpx;
 	height: 37rpx;
+}
+.stationList{
+  padding: 0 35rpx;
+  margin-top: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+.stations{
+  padding: 13rpx 28rpx;
+  background-color: rgba(66,143,252,.1);
+  font-size: 28rpx;
+  color: #428efc;
+  margin-bottom: 16rpx;
+  margin-right: 16rpx;
 }

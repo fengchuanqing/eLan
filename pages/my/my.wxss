@@ -144,16 +144,16 @@
   justify-content: space-between;
 }
 
-.top .context .text view:nth-child(1) {
+.top .context .text>view:nth-child(1) {
   margin-top: 45rpx;
   font-size: 36rpx;
 }
 
-.top .context .text view:nth-child(2) {
+.top .context .text>view:nth-child(2) {
   font-size: 28rpx;
 }
 
-.top .context .text view:nth-child(2) text {
+.top .context .text>view:nth-child(2) text {
   width: 69rpx;
   height: 39rpx;
   text-align: center;
@@ -164,7 +164,19 @@
   font-size: 24rpx;
   color: #ff6a4a;
 }
-
+.bindPhone{
+  border: none;
+  width: fit-content;
+  color: #428ffc !important;
+  margin: 0;
+  padding: 0;
+}
+.bindPhone::after{
+  display: none;
+}
+.phoneBox{
+  font-size: 24rpx;
+}
 .own .middle {
   padding: 31rpx;
   box-shadow: 0rpx 2rpx 24rpx 0rpx rgba(47, 111, 247, 0.16);
@@ -214,18 +226,23 @@
 
 .myApp .myAppItem .messageNumber {
   font-size: 16rpx;
-  padding: 8rpx;
-  border-radius: 20rpx;
+  /* padding: 8rpx;
+  border-radius: 20rpx; */
 
-  background: #fff;
+  /* background: #fff; */
 }
 
 .myApp .myAppItem .messageNumber text {
   background: #ff5630;
-  padding: 6rpx;
-  border-radius: 15rpx;
+  /* padding: 6rpx; */
+  border-radius: 26rpx;
   color: #fff;
   white-space: nowrap;
+  width: 26rpx;
+  height: 26rpx;
+  text-align: center;
+  line-height: 26rpx;
+  display: block;
 }
 
 .myApp .myAppItem .name {

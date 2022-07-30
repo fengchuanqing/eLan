@@ -1,11 +1,11 @@
 <canvas id="shopCanvas" type="2d"></canvas>
 <view class="container">
-  <image class="header_img" src="{{domain+imgList[0]}}" mode="widthFix" ></image>
+  <image class="header_img" src="{{domain+imgList[0]}}" mode="widthFix"></image>
   <view class="list">
     <view class="item radius">
       <view class="title">{{form.name}}</view>
       <view class="trait">{{form.trait}}</view>
-      <view class="black">商品规格：{{form.goodsSizeList[0].sizeName}}</view>
+      <view class="black">商品规格：{{form.goodsSizeList[0].sizeName}}斤/件</view>
       <view class="black">商品价格：￥{{form.goodsSizeList[0].prince}}</view>
       <view class="black">销量：{{form.dealed}}</view>
       <view class="fenxinag" bindtap="OpenHb">
@@ -29,26 +29,26 @@
   </view>
   <view class="middle">
     图文详情</view>
-  <block wx:for="{{imgList}}" wx:key="index">
-    <image class="header_img" src="{{domain+item}}" mode="widthFix"></image>
-  </block>
   <text class="padd_all tw_text">
     {{form.introduction}}
   </text>
+  <block wx:for="{{imgList}}" wx:key="index">
+    <image class="header_img" src="{{domain+item}}" mode="widthFix"></image>
+  </block>
   <view class="bottom" style="padding-bottom: {{bottomLift}}px;">
     <view class="bottom_l">
       <view class="shouye" bindtap="Godetail" data-index="1" data-url="/specialZone/pages/index/index">
-      <image src="/specialZone/assets/shouye.png"></image>
-      <text>首页</text>
-    </view>
-    <view class="shouye" bindtap="OpenWeixin">
-      <image src="/specialZone/assets/shop.png"></image>
-      <text>商家</text>
-    </view>
-    <view class="shouye" bindtap="goCart">
-      <image src="/specialZone/assets/cart.png"></image>
-      <text>购物车</text>
-    </view>
+        <image src="/specialZone/assets/shouye.png"></image>
+        <text>首页</text>
+      </view>
+      <view class="shouye" bindtap="OpenWeixin">
+        <image src="/specialZone/assets/shop.png"></image>
+        <text>商家</text>
+      </view>
+      <view class="shouye" bindtap="goCart">
+        <image src="/specialZone/assets/cart.png"></image>
+        <text>购物车</text>
+      </view>
     </view>
     <view class="bottom_r">
       <view class="lxdz" bindtap="showPupop" data-type="cart">
@@ -104,7 +104,7 @@
       <view class="cart_gg">
         <text>规格</text>
         <view class="ggBox">
-          <view class="ggItem {{index===curGg?'curGg':''}}" wx:for="{{form.goodsSizeList}}" wx:key="index" catchtap="changeGg" data-id="{{index}}">{{item.sizeName}}</view>
+          <view class="ggItem {{index===curGg?'curGg':''}}" wx:for="{{form.goodsSizeList}}" wx:key="index" catchtap="changeGg" data-id="{{index}}">{{item.sizeName}}斤/件</view>
         </view>
       </view>
       <view class="cart_gg">
@@ -112,6 +112,14 @@
         <view catchtap='noop' class="stepper">
           <van-stepper value="{{ goodsNum }}" disable-input bind:change="onNumChange" />
         </view>
+      </view>
+      <view class="xdxz" wx:if="{{form.is_add_wechat||form.is_payment_voucher||form.is_explain||form.is_pay||form.supplement}}">
+        <view class="xdxzTit">下单须知</view>
+        <view class="xdxzItem" wx:if="{{form.is_add_wechat}}">◆下单前请添加微信</view>
+        <view class="xdxzItem" wx:if="{{form.is_payment_voucher}}">◆支付凭证勿忘</view>
+        <view class="xdxzItem" wx:if="{{form.is_explain}}">◆具体解释权归店家所有</view>
+        <view class="xdxzItem" wx:if="{{form.is_pay}}">◆不承担运费</view>
+        <view class="xdxzItem" wx:if="{{form.supplement}}">◆{{form.supplement}}</view>
       </view>
       <view wx:if="{{cartType==='order'}}" class="ljxd" catchtap="Godetail" data-url="/specialZone/pages/placeOrder/placeOrder?id={{_id}}&store_id={{form.store_id}}&goodsSizeId={{form.goodsSizeList[curGg].id}}&num={{goodsNum}}">
         <view>立即下单</view>

@@ -1,9 +1,6 @@
 // pages/MerchantCenter/addShop/addShop.js
 import {
   domain,
-  merchantGoodsDeatil,
-  merchantGoodsUp,
-  upload,
 } from "../../../utils/api.js"
 import Dialog from '@vant/weapp/dialog/dialog';
 
@@ -12,7 +9,7 @@ import {
   addGoods,
   uploadFile,
   img,
-  sjDetail,
+  sjshopDetail,
   GoodsDetail,
   updateGoods,
   getImgSize,
@@ -57,7 +54,7 @@ Page({
       checkbox3: 0,
       checkbox4: 0,
       bcsm: '',
-      phone: '',
+      phone:  wx.getStorageSync('storeInfo').mobile||'',
       wechat: '',
     },
     imgList: [],
@@ -96,54 +93,29 @@ Page({
       prince: ''
     }],
     sizeTrue: true,
-    columns:[]
+    columns:[],
+    stationList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      'form.phone':wx.getStorageSync('storeInfo').mobile||''
+    })
     if (options.id) {
       this.setData({
         order_id: options.id
       })
       this.getData()
-    } else {
-      // 获取商铺信息
-      sjDetail().then(res => {
-        console.log(res);
-        if (res.data.skm && res.data.wechat && res.data.xm) {
-          this.setData({
-            skmSrc: res.data.skm, //收款码
-            wxhSrc: res.data.wechat, //微信二维码
-            xm: res.data.xm, //客服姓名
-          })
-        } else {
-          // 非编辑 请求 店铺信息
-          Dialog.confirm({
-              message: '请您先完善店铺信息',
-            })
-            .then(() => {
-              // on confirm
-              wx.navigateBack()
-              wx.navigateTo({
-                url: '/shop/pages/setting/setting',
-              })
-              // this.setData({
-              //   sjShow: false
-              // })
-            })
-            .catch(() => {
-              // on cancel
-              // this.setData({
-              //   sjShow: false
-              // })
-              wx.navigateBack()
-            });
-        }
-      })
     }
     this.goodsType()
+  },
+  goCut(){
+    wx.navigateTo({
+      url: '/micro/pages/cropper/cropper?cuttype=1&isZ=2&fm=1',
+    })
   },
   goodsType(){
     goodsType().then(res=>{
@@ -155,6 +127,11 @@ Page({
           columns:arr
         })
       }
+    })
+  },
+  goStation(){
+    wx.navigateTo({
+      url: '/shop/pages/selectStations/selectStations',
     })
   },
   addRule() {
@@ -215,10 +192,13 @@ Page({
             item.check = true
           }
         })
+        let arr = formData.img.split(',')
+        let fmSrc = arr[0]
+        arr.shift()
         this.setData({
           'form.name': formData.name,
           'form.shopTag': formData.trait,
-          'form.distributionType': formData.distributionType,
+          type_act: formData.distribution_type,
           'form.address': formData.address,
           'form.explain': formData.introduction,
           'form.startDate': formData.valid_begin_time,
@@ -230,14 +210,16 @@ Page({
           'form.phone': formData.service_phone,
           'form.wechat': formData.wechat,
           'form.type': formData.type,
-          imgList: formData.img.split(','),
+          imgList: arr,
+          fmSrc,
           shopCoverImg: formData.detailPage,
           onState: formData.onState,
-          skmSrc: formData.skm,
+          skmSrc: formData.skm.split(','),
           wxhSrc: formData.wechat,
           Processing: formData.sfxp,
           items: this.data.items,
-          ruleList: formData.goodsSizeList
+          ruleList: formData.goodsSizeList,
+          stationList:formData.goodsPickList
         })
 
       } else {
@@ -247,39 +229,6 @@ Page({
         })
       }
     })
-    // wx.request({
-    //   url: merchantGoodsDeatil + this.data.order_id,
-    //   method: 'GET',
-    //   success: (res) => {
-    //     if (res.data.code === 200) {
-    //       const formData = res.data.data;
-    //       this.setData({
-    //         'form.name': formData.name,
-    //         'form.shopTag': formData.trait,
-    //         type_act: formData.distributionType,
-    //         'form.address': formData.address,
-    //         'form.explain': formData.introduction,
-    //         'form.startDate': formData.validBeginTime,
-    //         'form.endDate': formData.validEndTime,
-    //         'form.checkbox1': formData.isAddWechat,
-    //         'form.checkbox2': formData.isPaymentVoucher,
-    //         'form.checkbox3': formData.isExplain,
-    //         'form.checkbox4': formData.isPay,
-    //         'form.bcsm': formData.supplement,
-    //         'form.phone': formData.servicePhone,
-    //         'form.wechat': formData.wechat,
-    //         imgList: formData.img.split(','),
-    //         shopCoverImg: formData.detailPage,
-    //         onState: formData.onState
-    //       })
-    //     } else {
-    //       wx.showToast({
-    //         icon: 'error',
-    //         title: res.data.msg,
-    //       })
-    //     }
-    //   }
-    // })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -292,7 +241,32 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const stationList = wx.getStorageSync('staffList')||[]
+    stationList.length&&this.setData({stationList})
+    sjshopDetail().then(res => {
+      if (res.data.skm && res.data.wechat && res.data.xm) {
+        this.setData({
+          skmSrc: res.data.skm.split(','), //收款码
+          wxhSrc: res.data.wechat, //微信二维码
+          xm: res.data.xm, //客服姓名
+        })
+      } else {
+        // 非编辑 请求 店铺信息 
+        Dialog.confirm({
+            message: '请您先完善店铺信息',
+          })
+          .then(() => {
+            // on confirm
+            // wx.navigateBack()
+            wx.navigateTo({
+              url: '/shop/pages/setting/setting',
+            })
+          })
+          .catch(() => {
+            wx.navigateBack()
+          });
+      }
+    })
   },
   phoneInput(event) {
     this.setData({
@@ -373,6 +347,13 @@ Page({
   formSubmit() {
     console.log(this.data.ruleList)
     const formData = this.data.form
+    if(this.data.type_act!=='1'&&!this.data.stationList.length){
+      wx.showToast({
+        icon: 'none',
+        title: '请选择自提点',
+      })
+      return
+    }
     if (!formData.name) {
       wx.showToast({
         icon: 'error',
@@ -408,7 +389,7 @@ Page({
       })
       return
     }
-    if (this.data.imgList.length == 0) {
+    if (!this.data.fmSrc) {
       wx.showToast({
         icon: 'error',
         title: '请添加主图！',
@@ -416,9 +397,12 @@ Page({
       return
     }
     if (!phoneVerify(formData.phone)) return
+    this.data.imgList.unshift(this.data.fmSrc)
     console.log(this.data.imgList);
     const imgListStr = this.data.imgList.join(',')
-
+    const stationIdList=this.data.stationList.map(item=>{
+      return item.id
+    })
     // 编辑
     if (this.data.order_id) {
       this.data.ruleList.map(item => {
@@ -446,7 +430,8 @@ Page({
         isPaymentVoucher: formData.checkbox2,
         isExplain: formData.checkbox3,
         storeId: wx.getStorageSync('userInfo').id || 1,
-        goodsSizeList: this.data.ruleList
+        goodsSizeList: this.data.ruleList,
+        selfPointIdList:stationIdList
       }
       console.log('编辑');
       updateGoods(params).then(res => {
@@ -484,7 +469,8 @@ Page({
         isPaymentVoucher: formData.checkbox2,
         isExplain: formData.checkbox3,
         storeId: wx.getStorageSync('userInfo').id || 1,
-        goodsSizeList: this.data.ruleList
+        goodsSizeList: this.data.ruleList,
+        selfPointIdList:stationIdList
       }
       // 新增
       addGoods(params).then(res => {
@@ -500,93 +486,6 @@ Page({
         }
       })
     }
-
-    // if (this.data.order_id) {
-    //   wx.request({
-    //     url: merchantGoodsUp,
-    //     method: 'PUT',
-    //     data: {
-    //       name: formData.name,
-    //       img: imgListStr,
-    //       trait: formData.shopTag,
-    //       logo: this.data.imgList[0],
-    //       introduction: formData.explain,
-    //       validBeginTime: formData.startDate,
-    //       validEndTime: formData.endDate,
-    //       isAddWechat: formData.checkbox1,
-    //       isPay: formData.checkbox4,
-    //       supplement: formData.bcsm,
-    //       servicePhone: formData.phone,
-    //       wechat: formData.wechat,
-    //       distributionType: this.data.type_act,
-    //       detailPage: this.data.shopCoverImg,
-    //       isPaymentVoucher: formData.checkbox2,
-    //       isExplain: formData.checkbox3,
-    //       id: this.data.order_id,
-    //       onState: "1"
-    //     },
-    //     success: (res) => {
-    //       if (res.data.code === 200) {
-    //         wx.showToast({
-    //           icon: 'none',
-    //           title: '操作成功',
-    //         })
-    //         setTimeout(() => {
-    //           wx.navigateBack({
-    //             delta: 2
-    //           })
-    //         }, 1500)
-    //       } else {
-    //         wx.showToast({
-    //           icon: 'error',
-    //           title: res.data.msg,
-    //         })
-    //       }
-    //     }
-    //   })
-    // } else {
-    //   wx.request({
-    //     url: merchantGoodsUp,
-    //     method: 'POST',
-    //     data: {
-    //       name: formData.name,
-    //       img: imgListStr,
-    //       trait: formData.shopTag,
-    //       logo: this.data.imgList[0],
-    //       introduction: formData.explain,
-    //       validBeginTime: formData.startDate === '开始日期' ? '' : formData.startDate,
-    //       validEndTime: formData.endDate === '结束日期' ? '' : formData.endDate,
-    //       isAddWechat: formData.checkbox1,
-    //       isPay: formData.checkbox4,
-    //       supplement: formData.bcsm,
-    //       servicePhone: formData.phone,
-    //       wechat: formData.wechat,
-    //       distributionType: this.data.type_act,
-    //       detailPage: this.data.shopCoverImg,
-    //       isPaymentVoucher: formData.checkbox2,
-    //       isExplain: formData.checkbox3,
-    //       storeId: wx.getStorageSync('userInfo').id || 1
-    //     },
-    //     success: (res) => {
-    //       if (res.data.code === 200) {
-    //         wx.showToast({
-    //           icon: 'none',
-    //           title: '操作成功',
-    //         })
-    //         setTimeout(() => {
-    //           wx.navigateBack({
-    //             delta: 1
-    //           })
-    //         }, 1500)
-    //       } else {
-    //         wx.showToast({
-    //           icon: 'error',
-    //           title: res.data.msg,
-    //         })
-    //       }
-    //     }
-    //   })
-    // }
   },
   onChange4(event) {
     this.setData({
@@ -763,6 +662,11 @@ Page({
       }
     })
   },
+  delZtImg(){
+    this.setData({
+      fmSrc:''
+    })
+  },
   delImg(e) {
     const num = e.currentTarget.dataset.idx;
     const {
@@ -783,7 +687,7 @@ Page({
       title: '加载中...',
     })
     wx.chooseImage({
-      count: 6 - pics.length,
+      count: 5 - pics.length,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
@@ -932,7 +836,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wx.removeStorageSync('staffList')
   },
 
   /**

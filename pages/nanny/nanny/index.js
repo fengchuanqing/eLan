@@ -46,7 +46,7 @@ Page({
               // on confirm
               // 修改个人信息
               wx.navigateTo({
-                url: "../jbxx/index?item=" + JSON.stringify(res.data[0]),
+                url: "../jbxx/index?item=" + JSON.stringify(res.data[0])+'&fwd=' + JSON.stringify(e.currentTarget.dataset.item.dyList),
               })
             })
             .catch(() => {

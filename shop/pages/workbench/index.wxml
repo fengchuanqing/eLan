@@ -42,6 +42,20 @@
         </navigator>
       </view>
     </view>
+    <view class="navList">
+      <view class="navItem" wx:if="{{bq=='店长'}}">
+        <navigator url="/shop/pages/staff/staff">
+          <image src="/shop/static/img/yggl.png"></image>
+          <view>员工管理</view>
+        </navigator>
+      </view>
+      <view class="navItem">
+        <navigator url="/shop/pages/stations/stations">
+          <image src="/shop/static/img/ztd.png"></image>
+          <view>自提点管理</view>
+        </navigator>
+      </view>
+    </view>
   </view>
   <tabBar tabOfficerActive='{{false}}' tabWorkbenchActive="{{true}}"></tabBar>
 </view>

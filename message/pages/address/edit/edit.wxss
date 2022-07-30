@@ -9,6 +9,26 @@
   margin: 0 auto;
   padding: 20rpx 0;
 }
+.zntx{
+  background-color: #fff;
+  border-radius: var(--cell-group-inset-border-radius,8px);
+    margin: var(--cell-group-inset-padding,0 16px);
+    overflow: hidden;
+    margin-bottom: 20rpx;
+}
+.zntxTip{
+  font-size: 24rpx;
+  color: #666666;
+  padding: 20rpx;
+}
+.zntx textarea{
+  padding: 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+.zntx textarea::-webkit-input-placeholder{
+  color: #eeeeee;
+}
 .van-cell__value{
     overflow: hidden;
     text-overflow: ellipsis;

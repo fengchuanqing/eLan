@@ -124,17 +124,37 @@ Page({
       quality: 1,
       success: (res) => {
         console.log(res.tempFilePath)
+        // const deviceInfo = wx.getDeviceInfo()
+        // if (deviceInfo.system.indexOf('macOS') > -1 || deviceInfo.system.indexOf('Windows') > -1) {
+        //   var fileName = '/' + res.tempFilePath.substring(res.tempFilePath.lastIndexOf('/') + 1)
+        //   wx.downloadFile({
+        //     url: res.tempFilePath,
+        //     filePath: wx.env.USER_DATA_PATH + fileName,
+        //     success(res2) {
+        //       if (res2.statusCode === 200) {
+        //           wx.saveFileToDisk({
+        //             filePath: res2.filePath,
+        //             success: function (e) {
+        //               wx.showToast({
+        //                 title: '保存成功',
+        //                 duration: 2000
+        //               })
+        //             }
+        //           })
+        //       }
+        //     }
+        //   })
+        // }else{
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
           success: (res) => {
             wx.showToast({
               title: '保存成功',
             })
-            // if (e.currentTarget.dataset.type == 'myStorecavas') {
-            //   this.updateShare()
-            // }
           }
         })
+        // }
+
       }
     })
   },
@@ -168,8 +188,8 @@ Page({
     })
   },
   OpenHb(e) {
-    const item =e.currentTarget.dataset.item
-    item.img=item.img.split(',')[0]
+    const item = e.currentTarget.dataset.item
+    item.img = item.img.split(',')[0]
     // 商品分享
     this.setData({
       show5: true,
@@ -227,7 +247,7 @@ Page({
         mycavas: canvas
       })
       const ctx = canvas.getContext('2d');
-      this.drawRoundedRect(ctx, 0, 0, canvas.width*2, canvas.height*2, 5)
+      this.drawRoundedRect(ctx, 0, 0, canvas.width * 2, canvas.height * 2, 5)
       this.drawImg(ctx, canvas, _this.data.img + _this.data.currentShop.img, 0, 0, canvas.width, canvas.height / 2)
       ctx.font = "normal 22px '微软雅黑'"
       ctx.fillStyle = '#333'
@@ -238,7 +258,7 @@ Page({
       ctx.font = "normal 10px '微软雅黑'"
       ctx.fillStyle = '#666666'
       ctx.fillText('长按或扫一扫打开小程序', 20, canvas.height / 2 + 100)
-      _this.drawImg(ctx, canvas, _this.data.ewmImg, canvas.width - 97*2, canvas.height / 2 + 23, 85*2, 85*2)
+      _this.drawImg(ctx, canvas, _this.data.ewmImg, canvas.width - 97 * 2, canvas.height / 2 + 23, 85 * 2, 85 * 2)
     })
   },
   storeCanvas() {
@@ -255,8 +275,8 @@ Page({
         myStorecavas: canvas
       })
       const ctx = canvas.getContext('2d');
-      this.drawRoundedRect(ctx, 0, 0, canvas.width*2, canvas.height*2, 5)
-      this.drawImg(ctx, canvas, _this.data.inFo.dpfm?_this.data.img+_this.data.inFo.dpfm:_this.data.inFo.yhtx, 0, 0, canvas.width, canvas.height / 2) 
+      this.drawRoundedRect(ctx, 0, 0, canvas.width * 2, canvas.height * 2, 5)
+      this.drawImg(ctx, canvas, _this.data.inFo.dpfm ? _this.data.img + _this.data.inFo.dpfm : _this.data.inFo.yhtx, 0, 0, canvas.width, canvas.height / 2)
       ctx.font = "normal 22px '微软雅黑'"
       ctx.fillStyle = '#333'
       ctx.fillText(`【${_this.data.inFo.full_name}】`, 20, canvas.height / 2 + 40)
@@ -266,7 +286,7 @@ Page({
       ctx.font = "normal 10px '微软雅黑'"
       ctx.fillStyle = '#666666'
       ctx.fillText('长按或扫一扫打开小程序', 20, canvas.height / 2 + 100)
-      _this.drawImg(ctx, canvas, _this.data.ewmImg, canvas.width - 97*2, canvas.height / 2 + 23, 85*2, 85*2)
+      _this.drawImg(ctx, canvas, _this.data.ewmImg, canvas.width - 97 * 2, canvas.height / 2 + 23, 85 * 2, 85 * 2)
     })
   },
   /**
@@ -397,9 +417,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    return {
-      title: '兰农新零售',
-      path: '/page/user?id=123'
-    }
+    // return {
+    //   title: '兰农新零售',
+    //   path: '/page/user?id=123'
+    // }
   }
 })

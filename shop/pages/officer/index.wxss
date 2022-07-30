@@ -48,8 +48,9 @@
   margin-left: 24rpx;
 }
 
-.user .name .text {
-  margin-bottom: 30rpx;
+.user .name .text>view {
+  /* margin-bottom: 30rpx; */
+  font-size: 24rpx;
 }
 
 .nav {
@@ -175,7 +176,7 @@ view .van-tabs__line {
 .list .info {
   display: flex;
   color: #414040;
-  font-size: 20rpx;
+  font-size: 26rpx;
 }
 
 .list .info image {
@@ -186,14 +187,14 @@ view .van-tabs__line {
 }
 
 .list .info .name {
-  font-size: 28rpx;
+  font-size: 32rpx;
   margin-right: 50rpx;
   display: flex;
   flex-direction: column;
 }
 
 .list .info .name .orderNum {
-  font-size: 20rpx;
+  font-size: 24rpx;
 }
 
 .list .info .news {

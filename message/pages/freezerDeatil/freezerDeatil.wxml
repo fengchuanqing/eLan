@@ -1,0 +1,63 @@
+<view class="freezer">
+  <view class="name">{{freezer.lkmc}}</view>
+  <view class="rl">
+    <text>可共享容量(m³)</text>
+    <text>{{freezer.kgxrl}}</text>
+  </view>
+  <view class="rl">
+    <text>收费标准</text>
+    <text>{{freezer.sfbz}}</text>
+  </view>
+  <view class="address">
+    <van-icon name="location-o" color="#428ffc" />
+    {{freezer.dq}}
+    <text>{{freezer.distance}}公里</text>
+  </view>
+  <navigator class="freezerOrder" hover-class="none" url="/message/pages/freezerOrder/freezerOrder?id={{freezer.id}}&page=2" hover-stop-propagation="{{true}}">立即预约</navigator>
+</view>
+<view class="container">
+  <view class="tabs">
+    <view class="tab {{cur_tab===0?'curTab':''}}" bindtap="changeTab" data-idx="{{0}}">发布人信息</view>
+    <view class="tab {{cur_tab===1?'curTab':''}}" bindtap="changeTab" data-idx="{{1}}">冷库信息</view>
+  </view>
+  <view class="cellGroup" hidden="{{cur_tab===1}}">
+    <view class="cell">
+      <view class="label">联系人</view>
+      <view class="content">{{freezer.xm}}</view>
+    </view>
+    <view class="cell">
+      <view class="label">联系电话</view>
+      <view class="content">{{freezer.lxdh}}</view>
+    </view>
+    <!-- <view class="cell">
+      <view class="label">所属村镇</view>
+      <view class="content">{{freezer.xm}}</view>
+    </view> -->
+  </view>
+  <view class="cellGroup" hidden="{{cur_tab===0}}">
+    <view class="cell">
+      <view class="label">冷库名称</view>
+      <view class="content">{{freezer.lkmc}}</view>
+    </view>
+    <view class="cell">
+      <view class="label">可共享容量(m³)</view>
+      <view class="content">{{freezer.kgxrl}}</view>
+    </view>
+    <view class="cell">
+      <view class="label">冷库位置</view>
+      <view class="content">{{freezer.dq}}</view>
+    </view>
+    <view class="cell">
+      <view class="label">详细地址</view>
+      <view class="content">{{freezer.xxdz}}</view>
+    </view>
+    <view class="cell">
+      <view class="label">收费标准</view>
+      <view class="content">{{freezer.sfbz}}</view>
+    </view>
+    <view class="cellArea">
+      <view class="label">冷库介绍</view>
+      <view class="content">{{freezer.lkjs}}</view>
+    </view>
+  </view>
+</view>

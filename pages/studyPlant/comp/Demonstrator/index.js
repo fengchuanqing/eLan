@@ -8,7 +8,10 @@ import {
   zhfxData,
   dataCompare,
   MxxxTpLB,
-  getWsblb
+  getWsblb,
+  getXlbWeekData,
+  getXlbZhfxData,
+  getXlbDataCompare
 } from '../../../../apis/index'
 
 function getOption(xData, legends, unit, data_cur, data_his, data_him) {
@@ -103,9 +106,9 @@ Component({
     ],
     isMy: false,
     allSfh: null,
-    curGrowthItem:{},
-    wsbColumns:[],
-    wsbShow:false
+    curGrowthItem: {},
+    wsbColumns: [],
+    wsbShow: false
   },
   ready() {
     this.getWsblb()
@@ -117,25 +120,36 @@ Component({
     },
   },
   methods: {
-    onWsbCancel(){
+    onWsbCancel() {
       this.setData({
-        wsbShow:false
+        wsbShow: false
       })
     },
-    onWsbConfirm(e){
-      const {text,index} = e.detail.value;
-      let temp='farmerList[2].xm'
+    onWsbConfirm(e) {
+      const {
+        text,
+        index
+      } = e.detail.value;
+      let temp = 'farmerList[2].xm'
       this.setData({
-        [temp]:text, 
-        wsbShow:false
+        [temp]: text,
+        wsbShow: false
       })
-      this.getMyDataList()
-      this.getzhfxData()
+      if (this.data.demonstratorActive == '0' || this.data.demonstratorActive == '1') {
+        this.getXlbWeekData()
+        this.getXlbZhfxData()
+      } else {
+        this.getMyDataList()
+        this.getzhfxData()
+      }
     },
     getWsblb() {
       getWsblb(wx.getStorageSync('userInfo').sfzhm).then((res) => {
-        let arr = res.data.map(item=>{
-          return {text:item.mc,index:item.sbidh}
+        let arr = res.data.map(item => {
+          return {
+            text: item.mc,
+            index: item.sbidh
+          }
         })
         // let temp='farmerList[2].xm'
         this.setData({
@@ -158,14 +172,19 @@ Component({
       this.setData({
         demonstratorActive: e.detail.name
       })
-      this.getMyDataList()
-      this.getzhfxData()
+      if(e.detail.name=='0'||e.detail.name=='1'){
+        this.getXlbWeekData()
+        this.getXlbZhfxData()
+      }else{
+        this.getMyDataList()
+        this.getzhfxData()
+      }
     },
     getsfhDataList() {
       const params = {
         lx: this.data.demonstratorActive,
         mobile: this.data.curFarmerId,
-        sbidh:''
+        sbidh: ''
         // sj: this.data.curTime
       }
       sfhDataList(params).then(res => {
@@ -189,7 +208,7 @@ Component({
           //   let newArr = [];
           //   for (let i = 0; i <= arr_length; i += len) {
           //     if(arr_length === len&& len=== i){
-                
+
           //     }else{
           //       newArr.push(arr.slice(i, i + len));
           //     }
@@ -255,7 +274,7 @@ Component({
       const params = {
         lx: this.data.demonstratorActive,
         mobile: wx.getStorageSync('userInfo').lxdh,
-        sbidh:this.data.wsbColumns.length?this.data.wsbColumns.find(item=>item.text===this.data.farmerList[2].xm).index:''
+        sbidh: this.data.wsbColumns.length ? this.data.wsbColumns.find(item => item.text === this.data.farmerList[2].xm).index : ''
         // sj: this.data.curTime
       }
       sfhDataList(params).then(res => {
@@ -272,22 +291,145 @@ Component({
         this.getdataCompare()
       })
     },
+    getXlbWeekData() {
+      let data_my = []
+      const params = {
+        lx: this.data.demonstratorActive,
+        mobile: wx.getStorageSync('userInfo').lxdh,
+        sbidh: this.data.wsbColumns.length ? this.data.wsbColumns.find(item => item.text === this.data.farmerList[2].xm).index : '',
+        // sj: this.data.curTime
+        mc: this.data.farmerList.length ? this.data.farmerList.find(item => item.mobile === this.data.curFarmerId).mc : ''
+      }
+      getXlbWeekData(params).then(res => {
+        if (res) {
+          let {
+            wdList,
+            aiList,
+            sfhList
+          } = res.data;
+          wdList.map(item => {
+            data_my.push(item.sz)
+          })
+          this.setData({
+            data_my: data_my
+          })
+          let xData = [],
+            data_ai = [],
+            data_sfh = [],
+            lengends = ['数据平均值', this.data.curFarmer]
+          sfhList.map(item => {
+            xData.push(item.sj)
+            data_sfh.push(item.sz)
+          })
+          aiList.map(item => {
+            data_ai.push(item.sz)
+          })
+          const unit = (this.data.demonstratorActive === '0' || this.data.demonstratorActive === '2') ? '°C' : (this.data.demonstratorActive === '1' || this.data.demonstratorActive === '3') ? '%' : 'Lux'
+          if (this.data.isMy) {
+            lengends.push('我的农场')
+          }
+          if (this.data.isMy) {
+            var option = getOption(xData, lengends, unit, data_ai, data_sfh, data_my);
+          } else {
+            var option = getOption(xData, lengends, unit, data_ai, data_sfh);
+          }
+          chartLine.setOption(option);
+        }
+        this.getXlbDataCompare()
+      })
+    },
+    getsfhDataList() {
+      const params = {
+        lx: this.data.demonstratorActive,
+        mobile: this.data.curFarmerId,
+        sbidh: '',
+        mc: this.data.farmerList.length ? this.data.farmerList.find(item => item.xm === this.data.curFarmer).mc : ''
+      }
+      sfhDataList(params).then(res => {
+        if (res) {
+          const data = res.data;
+          let xData = [],
+            data_ai = [],
+            data_sfh = [],
+            data_my = [],
+            lengends = ['数据平均值', this.data.curFarmer]
+          data.data.map(item => {
+            xData.push(item.sj)
+            data_sfh.push(item.sz)
+          })
+          data.AIData.map(item => {
+            data_ai.push(item.sz)
+          })
+          const unit = (this.data.demonstratorActive === '0' || this.data.demonstratorActive === '2') ? '°C' : (this.data.demonstratorActive === '1' || this.data.demonstratorActive === '3') ? '%' : 'Lux'
+          if (this.data.isMy) {
+            data_my = this.data.data_my
+            lengends.push('我的农场')
+          }
+          if (this.data.isMy) {
+            var option = getOption(xData, lengends, unit, data_ai, data_sfh, data_my);
+          } else {
+            var option = getOption(xData, lengends, unit, data_ai, data_sfh);
+          }
+          chartLine.setOption(option);
+        }
+      })
+    },
+    getXlbZhfxData() {
+      const params = {
+        lx: this.data.demonstratorActive,
+        openid: wx.getStorageSync('thirdSession').openid,
+        sbidh: this.data.wsbColumns.length ? this.data.wsbColumns.find(item => item.text === this.data.farmerList[2].xm).index : '',
+        mc: this.data.farmerList.length ? this.data.farmerList.find(item => item.mobile === this.data.curFarmerId).mc : ''
+
+      }
+      getXlbZhfxData(params).then(res => {
+        if (res) {
+          this.setData({
+            curSfh: res.data.sfhList[0],
+            curMy: res.data.wdList ? res.data.wdList[0] : {},
+            zhfxAll: res.data
+          })
+        }
+      })
+    },
     getzhfxData() {
       const params = {
         lx: this.data.demonstratorActive,
         openid: wx.getStorageSync('thirdSession').openid,
         sj: this.data.curTime,
         sfhlxdh: this.data.curFarmerId,
-        sbidh:this.data.wsbColumns.length?this.data.wsbColumns.find(item=>item.text===this.data.farmerList[2].xm).index:''
+        sbidh: this.data.wsbColumns.length ? this.data.wsbColumns.find(item => item.text === this.data.farmerList[2].xm).index : ''
       }
       zhfxData(params).then(res => {
         if (res) {
           this.setData({
             curSfh: res.data.sfhList[0],
-            curMy: res.data.wdList?res.data.wdList[0]:{},
+            curMy: res.data.wdList ? res.data.wdList[0] : {},
             zhfxAll: res.data
           })
           console.log(this.data.curMy);
+        }
+      })
+    },
+    getXlbDataCompare() {
+      const params = {
+        lx: this.data.demonstratorActive,
+        openid: wx.getStorageSync('thirdSession').openid,
+        sbidh: this.data.wsbColumns.length ? this.data.wsbColumns.find(item => item.text === this.data.farmerList[2].xm).index : '',
+        mc: this.data.farmerList.length ? this.data.farmerList.find(item => item.mobile === this.data.curFarmerId).mc : ''
+      }
+      getXlbDataCompare(params).then(res => {
+        if (res && Object.keys(res.data).length > 0) {
+          let arr = this.data.zbList
+          arr[0].zb = res.data.res.firstRangeDaysBfb
+          arr[0].days = res.data.res.firstRangeDays
+          arr[1].zb = res.data.res.secRangeDaysBfb
+          arr[1].days = res.data.res.secRangeDays
+          arr[2].zb = res.data.res.thirdRangeDaysBfb
+          arr[2].days = res.data.res.thirdRangeDays
+          this.setData({
+            zbList: arr
+          })
         }
       })
     },
@@ -297,10 +439,10 @@ Component({
         openid: wx.getStorageSync('thirdSession').openid,
         sj: this.data.curTime,
         sfhlxdh: this.data.curFarmerId,
-        sbidh:this.data.wsbColumns.length?this.data.wsbColumns.find(item=>item.text===this.data.farmerList[2].xm).index:''
+        sbidh: this.data.wsbColumns.length ? this.data.wsbColumns.find(item => item.text === this.data.farmerList[2].xm).index : ''
       }
       dataCompare(params).then(res => {
-        if (res &&Object.keys(res.data).length>0) {
+        if (res && Object.keys(res.data).length > 0) {
           let arr = this.data.zbList
           arr[0].zb = res.data.res.firstRangeDaysBfb
           arr[0].days = res.data.res.firstRangeDays
@@ -320,7 +462,7 @@ Component({
           let sfh = res.data.sfhList
           if (wx.getStorageSync('userInfo').hasFarm) {
             sfh.push({
-              xm:this.data.wsbColumns.length?this.data.wsbColumns[0].text:'我的农场'
+              xm: this.data.wsbColumns.length ? this.data.wsbColumns[0].text : '我的农场'
             })
             this.setData({
               isMy: true
@@ -332,19 +474,26 @@ Component({
             curFarmer: sfh[0].xm,
             allSfh: res.data.sfhList
           })
-          this.getMyDataList()
-          setTimeout(()=>{
-            this.getzhfxData()
-          },0)
+          if (this.data.demonstratorActive == '0' || this.data.demonstratorActive == '1') {
+            this.getXlbWeekData()
+            setTimeout(() => {
+              this.getXlbZhfxData()
+            }, 0)
+          } else {
+            this.getMyDataList()
+            setTimeout(() => {
+              this.getzhfxData()
+            }, 0)
+          }
         }
       })
     },
     // 这里是一个自定义方法
     changeFarmer(e) {
       const item = e.currentTarget.dataset.item
-      if (!item.mobile){
+      if (!item.mobile) {
         this.setData({
-          wsbShow:true
+          wsbShow: true
         })
         return
       }
@@ -354,8 +503,8 @@ Component({
         curFarmer: item.xm
       })
       timer && clearInterval(timer)
-      this.getMyDataList()
-      this.getzhfxData()
+      this.getXlbWeekData()
+      this.getXlbZhfxData()
     },
     changeTime(e) {
       timer && clearInterval(timer)

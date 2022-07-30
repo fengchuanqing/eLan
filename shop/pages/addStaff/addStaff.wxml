@@ -1,0 +1,34 @@
+<van-cell-group>
+  <van-field label="头像" readonly border="{{ false }}" />
+  <view class="uploadBox">
+    <view class="upload" bindtap="upload" wx:if="{{!headPortrait}}">+</view>
+    <image class="headPortrait" bindtap="upload" src="{{img+headPortrait}}" wx:if="{{headPortrait}}"></image>
+  </view>
+  <van-field required value="{{ zw }}" label="职位" placeholder="选择职位" readonly use-right-icon-slot bindtap="showPopup">
+    <van-icon name="arrow" slot="right-icon" />
+  </van-field>
+  <van-field model:value="{{ name }}" required label="姓名" placeholder="输入员工姓名" />
+  <view class="sex">
+    <view class="sexLabel">性别</view>
+    <van-radio-group value="{{ radio }}" bind:change="onSexChange" direction="horizontal" class="sexVal">
+      <van-radio name="男">男</van-radio>
+      <van-radio name="女">女</van-radio>
+    </van-radio-group>
+  </view>
+  <van-field model:value="{{ mobile }}" type="number" required label="手机" maxlength="{{11}}" placeholder="输入手机号码" />
+  <view class="sex">
+    <view class="sexLabel">状态</view>
+    <view class="sexVal">
+      <text class="{{!checked?'onState':''}}">禁用</text>
+      <van-switch checked="{{ checked }}" size="18px" bind:change="onStateChange" custom-class="close"/>
+      <text class="{{checked?'onState':''}}">启用</text>
+    </view>
+  </view>
+</van-cell-group>
+
+
+<view class="add" bindtap="submit">{{_id?'确认编辑':'确认添加'}}</view>
+
+<van-popup show="{{ showZw }}" position="bottom">
+  <van-picker columns="{{ columns }}" show-toolbar bind:cancel="onCancel" bind:confirm="onConfirm" />
+</van-popup>

@@ -28,7 +28,7 @@
             <view class="qdlz" catchtap="goNext" data-id="{{item.id}}">确定流转</view>
             <view class="cxbj" catchtap="goEdit" data-id="{{item.id}}">重新编辑</view>
           </block>
-          <view class="del"  catchtap="delete" data-id="{{item.id}}">删除</view>
+          <view class="del" catchtap="delete" data-id="{{item.id}}">删除</view>
         </view>
       </view>
     </navigator>

@@ -1,21 +1,21 @@
 <view class="flex-col page">
-    <view class="flex-col group">
-        <map class="section_2_bg" bindtap="bindmaptap" polygons="{{polygon}}" longitude="{{dw.lon}}" latitude="{{dw.lat}}" scale="8.5" />
-        <view class="divider">
-        </view>
-        <view class="flex-col section_2">
-            <!-- <image src="/farm/assets/16394521595696088526.png" /> -->
-            <view class="justify-around section_3">
-                <view class="flex-row group_1">
-                    <image src="/farm/assets/16394521599364595198.png" class="icon" />
-                    <input bindinput="GetKeyWord" type="" placeholder="请输入关键词" />
-                    <!-- <text decode="decode" class="text_1">请输入关键词</text> -->
-                </view>
-                <text decode="decode" class="text_2" bindtap="GoSearch">搜索</text>
-            </view>
-            <view class="flex-col items-center button" bindtap="gogogo">
-                <text decode="decode">开始圈地</text>
-            </view>
-        </view>
+  <view class="flex-col group">
+    <map class="section_2_bg" bindtap="bindmaptap" polygons="{{polygon}}" longitude="{{dw.lon}}" latitude="{{dw.lat}}" scale="8.5" />
+    <view class="divider">
     </view>
+    <view class="flex-col section_2">
+      <!-- <image src="/farm/assets/16394521595696088526.png" /> -->
+      <view class="justify-around section_3">
+        <view class="flex-row group_1">
+          <image src="/farm/assets/16394521599364595198.png" class="icon" />
+          <input bindinput="GetKeyWord" type="" placeholder="请输入关键词" />
+          <!-- <text decode="decode" class="text_1">请输入关键词</text> -->
+        </view>
+        <text decode="decode" class="text_2" bindtap="GoSearch">搜索</text>
+      </view>
+      <view class="flex-col items-center button" bindtap="gogogo">
+        <text decode="decode">开始圈地</text>
+      </view>
+    </view>
+  </view>
 </view>

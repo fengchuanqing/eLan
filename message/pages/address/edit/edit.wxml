@@ -1,5 +1,9 @@
 <view class="container">
   <view class="box">
+    <view class="zntx">
+      <view class="zntxTip">请粘贴信息</view>
+      <textarea cols="30" rows="10" placeholder="请粘贴诸如浙江省杭州市拱墅区智慧信息产业园，张三，18388888888" value="{{ textInfo }}" bindinput="bindTextarea"></textarea>
+    </view>
     <van-cell-group>
       <van-field model:value="{{ username }}" label="收货人" placeholder="请输入" />
       <van-field model:value="{{ phone }}" label="手机号" placeholder="请输入手机号" />

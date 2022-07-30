@@ -73,7 +73,7 @@ Page({
         var QQMapWX = require('../../../utils/qqmap-wx-jssdk.js');
         // 实例化API核心类
         var qqmapsdk = new QQMapWX({
-            key: 'IFOBZ-32WKP-3WEDG-LL26B-JUVIH-RXFGX' // 必填
+            key: 'TQHBZ-KRQY4-O54UD-XZCGV-BZMEZ-WGBN7' // 必填
         });
         var _this = this;
         //调用关键词提示接口

@@ -2,37 +2,30 @@
 import {
   getXcxUserInfo,
   gxykxx,
+  wdxxwdsl,
+  getMobileByCode
 } from '../../apis/index'
+import {
+  dbsx,
+} from '../../apis/message.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isIPhoneXSeries:getApp().globalData.isIPhoneXSeries,
+    isIPhoneXSeries: getApp().globalData.isIPhoneXSeries,
     baifenbi: 80,
-    myAppList: [{
-        icon: '/assets/images/own/dindan.png',
-        name: '我的订单',
-        // message: '10',
-        url: '/message/pages/Order/myorder/myorder'
-      }, {
-        icon: '/assets/images/own/xiaoxi.png',
-        name: '我的消息',
-        // message: '10',
-        url: '/message/pages/message/message'
-      },
-      //  {
-      //   icon: '/assets/images/own/dianpu.png',
-      //   name: '我的店铺',
-      //   message: '',
-      //   url: '/shop/pages/officer/index'
-      // }, 
-    ],
+    myAppList: [],
     bottomList: [{
         icon: '/assets/images/own/icGrzx.png',
         name: '我的地址',
         url: '/message/pages/address/index/index'
+      },
+      {
+        icon: '/assets/icons/wdzt.png',
+        name: '我的主体',
+        url: '/gylz/pages/ztDeatil/ztDeatil'
       },
       {
         icon: '/assets/images/home/tydt.png',
@@ -57,20 +50,67 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
+  getxldt() {
+    let {
+      myAppList
+    } = this.data
+    const params = {
+      openid: wx.getStorageSync('thirdSession').openid || ''
+    }
+    wdxxwdsl(params).then(res => {
+      if (res) {
+        myAppList.map(item => {
+          if (item.name == '我的消息') {
+            item.message = res.data
+          }
+        })
+        this.setData({
+          myAppList
+        })
+      }
+    })
+  },
+  getDbsx() {
+    let {
+      myAppList
+    } = this.data
+    dbsx().then(res => {
+      if (res.code == 200) {
+        myAppList.map(item => {
+          if (item.name == '我的店铺') {
+            item.message = res.data.length
+          }
+        })
+        this.setData({
+          myAppList
+        })
+      } else {
+        wx.showToast({
+          icon: 'error',
+          title: res.msg,
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  },
+  onReady: function () {},
   goNext(e) {
     const item = e.currentTarget.dataset.item
     if (item.value === '未认证') {
       this.setData({
         showAuthentication: true,
         authUrl: '/pages/studyPlant/attestation/index'
+      })
+      return
+    }
+    if (item.value === '已认证') {
+      wx.navigateTo({
+        url: '/pages/studyPlant/attestation/index?rz=1',
       })
       return
     }
@@ -133,72 +173,34 @@ Page({
         }
       }
     })
-  }, 
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     this.getXcxUserInfo()
   },
-  init(){
-    if (this.data.userInfo && (this.data.userInfo.sf !== '游客' && this.data.userInfo.sf !== '微信未授权游客')) {
-      if (this.data.myAppList.find((item) => item.name === '我的农场')) return
-      this.setData({
-        myAppList: [...this.data.myAppList, {
-          icon: '/assets/images/own/nonchang.png',
-          name: '我的农场',
-          url: '/farm/pages/index/index',
-          message: '',
-          isZhu: true
-        }, {
-          icon: '/assets/images/own/butie.png',
-          name: '我的补贴',
-          message: '',
-          isZhu: true,
-          url: '/message/pages/subsidy/subsidy'
-        }],
-        // bottomList: [
-        //   {
-        //     icon: '/assets/images/own/icLnm.png',
-        //     name: '兰农码',
-        //   },  ...this.data.bottomList
-        // ]
-      })
-    }
-    if (this.data.userInfo&&this.data.userInfo.lxdh) {
-      if (this.data.myAppList.find((item) => item.name === '服务身份')) return
-      this.setData({
-        myAppList: [...this.data.myAppList, {
-          icon: '/assets/images/own/fuwu.png',
-          name: '服务身份',
-          isZhu: true,
-          // message: '未绑定',
-          url: '/message/pages/identity/identity'
-        }]
-      })
-    }
-    if (this.data.userInfo && (this.data.userInfo.sf !== '游客' && this.data.userInfo.sf !== '微信未授权游客')) {
-      this.setData({
-        'bottomList[3].value': '已认证'
-      })
-    }
-    // 我的店铺
-    if (wx.getStorageSync('userInfo').shopState && wx.getStorageSync('userInfo').shopState == "已通过") {
-      if (this.data.myAppList.find((item) => item.name === '我的店铺')) return
-      // 申请状态
-      this.setData({
-        myAppList: [...this.data.myAppList, {
-          icon: '/assets/images/own/dianpu.png',
-          name: '我的店铺',
-          message: '',
-          url: '/shop/pages/officer/index'
-        }],
-      })
-    }else{
-      this.setData({
-        myAppList:this.data.myAppList.filter(item=>item.name!=='我的店铺')
-      })
-    }
+  editPhone() {
+    wx.navigateTo({
+      url: '/pages/editPhone/editPhone',
+    })
+  },
+  getPhoneNumber(e) {
+    console.log(e.detail.code)
+    if (!e.detail.code) return
+    getMobileByCode({
+      openid: wx.getStorageSync('thirdSession').openid,
+      code: e.detail.code
+    }).then(res => {
+      if (res.code == 200) {
+        let userInfo = wx.getStorageSync('userInfo')
+        userInfo.lxdh = JSON.parse(JSON.stringify(res.msg))
+        wx.setStorageSync('userInfo', userInfo)
+        this.setData({
+          'userInfo.lxdh': res.msg.replace(/^((?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[189])))(\d{4})(\d{4})$/, '$1****$3')
+        })
+      }
+    })
   },
   getXcxUserInfo() {
     const param = {
@@ -207,11 +209,24 @@ Page({
     getXcxUserInfo(param).then(res => {
       if (res) {
         res.data.hlz = Number(res.data.hlz)
+        let userInfo = JSON.parse(JSON.stringify(res.data))
+        userInfo.lxdh = userInfo.lxdh.replace(/^((?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[189])))(\d{4})(\d{4})$/, '$1****$3')
         this.setData({
-          userInfo: res.data
+          userInfo
         })
+        this.setData({
+          myAppList: res.data.menuList
+        })
+        if (res.data.sf !== '游客' && res.data.sf !== '微信未授权游客') {
+          this.setData({
+            'bottomList[4].value': '已认证'
+          })
+        }
+        this.getxldt()
         wx.setStorageSync('userInfo', res.data)
-        this.init()
+        if (res.data.shopState == "已通过") {
+          this.getDbsx()
+        }
       }
     })
   },

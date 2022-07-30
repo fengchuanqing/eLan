@@ -28,7 +28,19 @@ Page({
     show3: false,
     show4: false,
     form: {},
-    hideContain: false
+    hideContain: false,
+    imgShow:false
+  },
+  showImg(e){
+    this.setData({
+      imgShow:true,
+      curImg:e.currentTarget.dataset.img
+    })
+  },
+  hideImg(){
+    this.setData({
+      imgShow:false,
+    })
   },
   check(e){
     console.log(e.detail.value);
@@ -183,7 +195,7 @@ Page({
         this.setData({
           mobile: res?.data.mobile || '暂无',
           wechat: res?.data.wechat || '暂无',
-          skm: res?.data.skm || '暂无'
+          skm: res?.data.skm.split(',') || '暂无'
         })
       }
     })
@@ -242,8 +254,8 @@ Page({
     }).then((res) => {
       if (res) {
         const formData = res.data
-        console.log(formData.img);
-        let curGg =formData.goodsSizeList.find(item=>item.id = this.data.goodsSizeId)
+        console.log(formData);
+        let curGg =formData.goodsSizeList.find(item=>item.id == this.data.goodsSizeId)
         console.log(curGg);
         this.setData({
           form: formData, 
@@ -251,10 +263,16 @@ Page({
           type:formData.distribution_type==1?'快递配送':formData.distribution_type==2?'自提':'自提',
           show1: formData.distribution_type==1?false:true,
           curGg,
-          payMoney:curGg.prince*this.data.goodsNum
+          payMoney:curGg.prince*this.data.goodsNum,
+          columns:formData.distribution_type==1?['快递配送']:formData.distribution_type==2?['自提']:['自提','快递配送']
         })
        
       }
+    })
+  },
+  goStations(){
+    wx.navigateTo({
+      url: '/specialZone/pages/selectStations/selectStations?goodsId='+this.data.form.goodsSizeList[0].goodsId,
     })
   },
   OpenCheck() {
@@ -336,9 +354,17 @@ Page({
       })
       return
     }
+    if (this.data.type=='自提' && !this.data.stations) {
+      wx.showToast({
+        icon: 'none',
+        title: '请选择自提点',
+      })
+      return
+    }
     let ggList = this.data.form.goodsSizeList.filter(item=>{
-      return item.id === this.data.goodsSizeId
+      return item.id == this.data.goodsSizeId
     })
+    console.log(this.data.form,ggList,'ggListggListggListggList')
     ggList[0].goodsSizeId=ggList[0].id
     ggList[0].storeId=this.data.form.store_id
     ggList[0].num=this.data.goodsNum
@@ -356,7 +382,9 @@ Page({
       orderStatus: 1,
       nums: this.data.goodsNum,
       addressId: this.data.addressDeatil?.id,
-      shopCarList:ggList
+      shopCarList:ggList,
+      templateIdList:['5HD-XrMbh_0ynv0c1lgS0KBRvX51Or9LeEgcl5R6GH8'],
+      pickId:this.data.type=='自提'?this.data.stations.id:''
     }
     addOrder({
         ...form
@@ -392,6 +420,8 @@ Page({
    */
   onShow: function () {
     this.getAddress()
+    const curStation = wx.getStorageSync('curStation')
+    curStation&&this.setData({stations:curStation})
   },
 
   /**
@@ -405,7 +435,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wx.removeStorageSync('curStation')
   },
 
   /**

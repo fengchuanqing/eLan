@@ -1,4 +1,4 @@
-<view class="tabbars"  style="bottom: {{isIPhoneXSeries?15:0}}px;">
+<view class="tabbars" style="bottom: {{isIPhoneXSeries?15:0}}px;">
   <image src="/shop/static/icons/icon/tabBj.png" class="tabbars_img"></image>
   <view class="tabs">
     <view class="tab_item">

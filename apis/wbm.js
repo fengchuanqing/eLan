@@ -46,7 +46,6 @@ export const fwdyhxxcx = (data) => {
 }
 // 微保姆_服务队_用户信息修改
 export const fwdyhxxxg = (data) => {
-    console.log(data);
     return requset({
         method: 'post',
         data,

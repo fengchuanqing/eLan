@@ -5,7 +5,7 @@ import {
 import {
   Hdzq,
   img
-} from '../../../apis/specialZone/'
+} from '../../../apis/specialZone.js'
 Page({
 
   /**

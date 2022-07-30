@@ -278,15 +278,6 @@ Page({
             shopShow: true
           })
         }
-        //   if (!wx.getStorageSync('userInfo').hasShop) {
-        //     that.setData({
-        //       shopShow: true
-        //     })
-        //   } else {
-        //     that.setData({
-        //       shopShow: false
-        //     })
-        //   }
       }
     })
   },

@@ -13,7 +13,7 @@
   <view wx:else>
     <view class="activityList">
       <view class="item" wx:for="{{shopList}}" wx:key="index">
-        <navigator url="/shop/pages/shopDetail/shopDetail?id={{item.id}}" open-type="navigate">
+        <navigator url="/shop/pages/shopDetail/shopDetail?id={{item.id}}" open-type="navigate" hover-class="none">
           <view class="status">
             <text>{{active===0?'已上架':'已下架'}}</text>
             <text>{{item.time}}</text>

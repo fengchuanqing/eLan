@@ -6,7 +6,7 @@
       {{orderDetail.order_status==='1'?'已下单(未验证)':orderDetail.order_status==='4'?'已发货':orderDetail.order_status==='5'?'已完成':orderDetail.order_status==='2'?'已驳回':''}}
     </view>
     <!-- 地址 -->
-    <view class="address">
+    <view class="address" bindlongtap="copyThat">
       <view class="a_first" wx:if="{{state==='快递配送'}}">
         {{province}} {{city}} {{county}}
       </view>
@@ -29,7 +29,7 @@
           <view>{{orderDetail.distribution==='活动'?orderDetail.spname:goods.name}}</view>
           <view>{{goods.trait}}</view>
           <view class="gg">
-            <text>{{goods.sizeName}}</text>
+            <text>{{goods.sizeName}}斤/件</text>
             <text>x{{goods.num}}</text>
           </view>
         </view>
@@ -74,6 +74,11 @@
       <view wx:if="{{state!=='活动'}}">
         <text>配送方式</text>
         <text>{{state}}</text>
+      </view>
+      <view wx:if="{{orderDetail.distribution=='自提'}}">
+        <text>自提点</text>
+        <text>{{orderDetail.selfPoint.mc}}</text>
+        <van-icon name="arrow" bindtap="goThere" />
       </view>
       <view wx:if="{{orderDetail.logistics_num}}">
         <text>物流单号</text>
@@ -123,13 +128,14 @@
   <van-overlay show="{{ show_wl}}" bind:click="onClickHide">
     <view class="wrapper">
       <view class="show_wl" catch:tap="noop">
-        <view class="s_w_title">快递类型</view>
-        <view class="sw_margin">
-          <input type="text" placeholder="请输入快递名称" bindinput="bindInput" value="{{expressName}}" />
-        </view>
         <view class="s_w_title">物流单号</view>
         <view class="sw_margin">
           <input type="text" placeholder="请输入编号" bindinput="bindInputNo" value="{{expressNo}}" />
+          <van-icon name="scan" catchtap="goScan" />
+        </view>
+        <view class="s_w_title">快递类型</view>
+        <view class="sw_margin">
+          <input type="text" placeholder="请输入快递名称" bindinput="bindInput" value="{{expressName}}" />
         </view>
         <view class="s_w_bottom">
           <input type="button" value="取消" disabled="true" bindtap="onClickHide" />

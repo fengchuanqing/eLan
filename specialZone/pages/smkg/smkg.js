@@ -22,7 +22,6 @@ Page({
   upload(){
     wx.scanCode({
       success (res) {
-        console.log(res)
         if(res.path){
           wx.navigateTo({
             url: '/'+res.path,
@@ -35,7 +34,6 @@ Page({
     wx.scanCode({
       onlyFromCamera: true,
       success(res) {
-        console.log(res)
         if(res.path){
           wx.navigateTo({
             url: '/'+res.path,

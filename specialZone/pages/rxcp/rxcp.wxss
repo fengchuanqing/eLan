@@ -30,18 +30,19 @@
       border-radius: 6rpx;
   }
   .section_4 .content .item .h4{
-    line-height: 70rpx;
+    /* line-height: 70rpx; */
     font-size: 32rpx;
     font-weight: 800;
     color: #686b73;
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; */
   }
   .section_4 .content .item .h4>text{
     font-weight: 500;
     font-size: 28rpx;
     color: #686b73;
+    display: inline-block;
   }
   .section_4 .content .item .text .prince{
     font-size: 32rpx;

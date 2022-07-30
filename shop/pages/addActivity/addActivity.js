@@ -1,8 +1,6 @@
 // pages/MerchantCenter/addShop/addShop.js
 import {
   domain,
-  upload,
-  merchantActivityDeatil
 } from '../../../utils/api.js'
 const areaList = require('../../../utils/area-data.js')
 import {
@@ -29,7 +27,7 @@ Page({
       startDate: '开始日期',
       endDate: '结束日期',
       gmxz: '',
-      phone: '',
+      phone: wx.getStorageSync('storeInfo').mobile||'',
       wechat: '',
       content: ''
     },
@@ -44,6 +42,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      'form.phone':wx.getStorageSync('storeInfo').mobile||''
+    })
     if (options.id) {
       this.setData({
         act_id: options.id
@@ -78,36 +79,6 @@ Page({
         })
       }
     })
-    // wx.request({
-    //   url: merchantActivityDeatil + this.data.act_id,
-    //   method: 'get',
-    //   success: (res) => {
-    //     if (res.data.code === 200) {
-    //       const formData = res.data.data
-    //       const regionCode = formData.address ? formData.address.split(',') : [];
-    //       const province = areaList.areaList.province_list[regionCode[0]]
-    //       const city = areaList.areaList.city_list[regionCode[1]]
-    //       const county = areaList.areaList.county_list[regionCode[2]]
-    //       this.setData({
-    //         'form.name': formData.activityName,
-    //         'form.explain': formData.introduction,
-    //         'form.address': formData.address,
-    //         'form.area': province + city + county,
-    //         shopCoverImg: formData.imgUrl,
-    //         imgList: formData.otherImg && formData.otherImg.split(','),
-    //         'form.startDate': formData.beginTime,
-    //         'form.endDate': formData.endTime,
-    //         'form.gmxz': formData.notice,
-    //         'form.phone': formData.telephone,
-    //         'form.wechat': formData.vx,
-    //       })
-    //     } else {
-    //       wx.showToast({
-    //         title: res.data.msg,
-    //       })
-    //     }
-    //   }
-    // })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -200,42 +171,6 @@ Page({
           })
         }
       })
-      // wx.request({
-      //   url: merchantActivityDeatil,
-      //   method: 'PUT',
-      //   data: {
-      //     activityName: formData.name,
-      //     otherImg: imgListStr,
-      //     imgUrl: this.data.shopCoverImg,
-      //     introduction: formData.explain,
-      //     beginTime: formData.startDate,
-      //     endTime: formData.endDate,
-      //     address: formData.area,
-      //     notice: formData.gmxz,
-      //     telephone: formData.phone,
-      //     vx: formData.wechat,
-      //     id: this.data.act_id,
-      //     state: "0"
-      //   },
-      //   success: (res) => {
-      //     if (res.data.code === 200) {
-      //       wx.showToast({
-      //         icon: 'none',
-      //         title: '操作成功',
-      //       })
-      //       setTimeout(() => {
-      //         wx.navigateBack({
-      //           delta: 1
-      //         })
-      //       }, 1500)
-      //     } else {
-      //       wx.showToast({
-      //         icon: 'error',
-      //         title: res.data.msg,
-      //       })
-      //     }
-      //   }
-      // })
     } else {
       // 新增
       let params = {
@@ -262,41 +197,6 @@ Page({
           title: res.msg,
         })
       })
-      // wx.request({
-      //   url: merchantActivityDeatil,
-      //   method: 'POST',
-      //   data: {
-      //     activityName: formData.name,
-      //     otherImg: imgListStr,
-      //     imgUrl: this.data.shopCoverImg,
-      //     introduction: formData.explain,
-      //     beginTime: formData.startDate === "开始日期" ? '' : formData.startDate,
-      //     endTime: formData.endDate === "结束日期" ? '' : formData.endDate,
-      //     address: formData.address,
-      //     notice: formData.gmxz,
-      //     telephone: formData.phone,
-      //     vx: formData.wechat,
-      //     storeId: wx.getStorageSync('userInfo').id || 1
-      //   },
-      //   success: (res) => {
-      //     if (res.data.code === 200) {
-      //       wx.showToast({
-      //         icon: 'none',
-      //         title: '操作成功',
-      //       })
-      //       setTimeout(() => {
-      //         wx.navigateBack({
-      //           delta: 1
-      //         })
-      //       }, 1500)
-      //     } else {
-      //       wx.showToast({
-      //         icon: 'error',
-      //         title: res.data.msg,
-      //       })
-      //     }
-      //   }
-      // })
     }
   },
   nameInput(event) {
@@ -334,45 +234,7 @@ Page({
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   },
   onConfirm(event) {
-    // if (this.data.isStart === 0) {
-    //   if (this.data.form.endDate != '结束日期') {
-    //     if (event.detail < new Date(this.data.form.endDate)) {
-    //       this.setData({
-    //         showDate: false,
-    //         'form.startDate': this.formatDate(event.detail),
-    //       });
-    //     } else {
-    //       wx.showToast({
-    //         icon: 'none',
-    //         title: '开始日期不可大于结束日期',
-    //       })
-    //     }
-    //   } else {
-    //     this.setData({
-    //       showDate: false,
-    //       'form.startDate': this.formatDate(event.detail),
-    //     });
-    //   }
-    // } else {
-    //   if (this.data.form.startDate != '开始日期') {
-    //     if (event.detail > new Date(this.data.form.startDate)) {
-    //       this.setData({
-    //         showDate: false,
-    //         'form.endDate': this.formatDate(event.detail),
-    //       });
-    //     } else {
-    //       wx.showToast({
-    //         icon: 'none',
-    //         title: '结束日期不可小于开始日期',
-    //       })
-    //     }
-    //   } else {
-    //     this.setData({
-    //       showDate: false,
-    //       'form.endDate': this.formatDate(event.detail),
-    //     });
-    //   }
-    // }
+    
     if (this.data.isStart === 0) {
       this.setData({
         showDate: false,

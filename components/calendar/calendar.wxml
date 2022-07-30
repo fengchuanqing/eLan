@@ -5,7 +5,7 @@
     <image src="/assets/icons/icons_rightarrow.png" class="model-calendar-leftarrow" bindtap="nextMonth"></image>
   </view>
   <!-- 日历主体 -->
- 
+
   <view class='date-box'>
     <block wx:for='{{dateArr}}' wx:key='index'>
       <view wx:if="{{!item.isToday}}" class="date-day kong"></view>

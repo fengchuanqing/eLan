@@ -1,0 +1,29 @@
+<view class="selectSearch">
+  <van-search value="{{ serchValue }}" shape="round" placeholder="请输入自提点、联系人等关键字" bind:search="searchShop" />
+</view>
+<view class="list">
+  <view class="item" wx:for="{{staffList}}" wx:key="index">
+    <view class="selectBox {{item.isChecked?'curSelectBox':''}}" bindtap="checkedCur" data-idx="{{index}}"></view>
+    <view class="itemTop">
+      <view class="imgBox">
+        <image src="{{img+item.tp}}"></image>
+      </view>
+      <view class="itemInfo">
+        <view class="xm">
+          <view class="zwName">{{item.mc}}</view>
+        </view>
+        <view class="xm">
+          <text>{{item.dq+item.xxdz}}</text>
+          <van-icon name="arrow" bind:click="goThere" data-item="{{item}}" />
+        </view>
+        <view class="xm">{{item.lxr}} | {{item.dh}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="add" wx:if="{{staffList.length}}" style="height:{{isIPhoneXSeries?150:128}}rpx">
+  <view class="addBtn" bindtap="confirm">确定</view>
+</view>
+<view class="none" wx:else>
+  暂无自提点，去<navigator url="/shop/pages/stations/stations">添加</navigator>
+</view>

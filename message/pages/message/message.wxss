@@ -33,7 +33,11 @@
 .container view>text:nth-child(2){
     font-size: 24rpx;
     margin-top: 5rpx;
+    padding-left: 20rpx;
 }
 .date{
     color: #b3b5b9;
+}
+.item{
+  display: flex;
 }

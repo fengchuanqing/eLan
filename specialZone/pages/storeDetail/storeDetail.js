@@ -29,8 +29,6 @@ Page({
         text: '杨梅',
         value: 0,
       },
-
-
     ]
   },
 
@@ -71,7 +69,6 @@ Page({
   },
   goodsType() {
     goodsType().then((res) => {
-      console.log(res);
       this.setData({
         option1:[{text:'全部',value:0},...res.data.map((item, i) => {
           return {
@@ -123,6 +120,7 @@ Page({
         name: this.data.searchVal
       }
     }
+    console.log(temp)
     if (this.data.shopList.length >= (this.data.pageNum - 1) * this.data.pageSize) {
       Dpxq({
         page: this.data.pageNum,
@@ -132,7 +130,6 @@ Page({
         ...obj,
         type: this.data.goodsType==='全部'?'':this.data.goodsType
       }).then((res) => {
-        console.log(res);
         if (res) {
           let arr = res.data[1]
           arr.map((item) => {
@@ -148,13 +145,14 @@ Page({
     }
   },
   changeTabs(event) {
+    console.log(event.detail.name)
     this.setData({
       active: event.detail.name,
       pageNum: 1,
       isReachBottom: true,
       activityList: [],
       shopList: [],
-      navTitle: event.detail.title
+      navTitle: event.detail.title=="全部"?'杨梅':event.detail.title
     })
     if (event.detail.name === 1) {
       this.getShopData('活动')
@@ -201,7 +199,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log(1111);
     this.setData({
       pageNum: this.data.pageNum + 1
     })
@@ -214,14 +211,12 @@ Page({
   onShareAppMessage: function () {
     let {
       storeId,
-      headPortrait,
       fullName,
-      evaluate
     } = this.data
-    Zzfxs(this.data.storeId)
+    Zzfxs(this.data.storeId) 
     return {
       title: fullName,
-      path: `/pages/shop/shop?storeId=${storeId}&storeName=${fullName}&headPortrait=${headPortrait}&evaluate=${evaluate}`
+      path: `/specialZone/pages/storeDetail/storeDetail?id=${storeId}`
     }
   }
 })

@@ -1,8 +1,6 @@
 // pages/MerchantCenter/shopDetail/shopDetail.js
 import {
   domain,
-  merchantGoodsDeatil,
-  merchantGoodsUp
 } from "../../../utils/api.js"
 import {
   img,
@@ -110,13 +108,15 @@ Page({
           'form.phone': formData.service_phone,
           'form.wechat': formData.wechat,
           'form.type': formData.type,
+          'form.bcsm': formData.supplement,
           imgList: formData.img.split(','),
           shopCoverImg: formData.detailPage,
           onState: formData.on_state,
-          skmSrc: formData.skm,
+          skmSrc: formData.skm.split(','),
           wxhSrc: formData.wechat,
           items: that.data.items,
-          ruleList:formData.goodsSizeList
+          ruleList:formData.goodsSizeList,
+          stationList:formData.goodsPickList
         })
       } else {
         wx.showToast({
@@ -125,38 +125,6 @@ Page({
         })
       }
     })
-    // wx.request({
-    //   url: merchantGoodsDeatil + this.data.order_id,
-    //   method: 'GET',
-    //   success: (res) => {
-    //     if (res.data.code === 200) {
-    //       const formData = res.data.data;
-    //       this.setData({
-    //         'form.name': formData.name,
-    //         'form.shopTag': formData.trait,
-    //         'form.distributionType': formData.distributionType,
-    //         'form.address': formData.address,
-    //         'form.explain': formData.introduction,
-    //         'form.startDate': formData.validBeginTime,
-    //         'form.endDate': formData.validEndTime,
-    //         'form.checkbox1': formData.isAddWechat,
-    //         'form.checkbox2': formData.isPaymentVoucher,
-    //         'form.checkbox3': formData.isExplain,
-    //         'form.checkbox4': formData.isPay,
-    //         'form.phone': formData.servicePhone,
-    //         'form.wechat': formData.wechat,
-    //         imgList: formData.img.split(','),
-    //         shopCoverImg: formData.detailPage,
-    //         onState: formData.onState
-    //       })
-    //     } else {
-    //       wx.showToast({
-    //         icon: 'error',
-    //         title: res.data.msg,
-    //       })
-    //     }
-    //   }
-    // })
   },
   grounding() {
     wx.showModal({

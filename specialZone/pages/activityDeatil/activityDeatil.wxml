@@ -4,7 +4,7 @@
   <view class="list">
     <view class="item radius">
       <view class="title">{{form.activity_name}}</view>
-      <view class="black">销量：{{form.xl}}</view>
+      <view class="black">销量：{{form.dealed}}</view>
       <view class="fenxinag" bindtap="OpenHb">
         <image src="/specialZone/assets/fx-icon.png"></image>
         <text>分享</text>
@@ -16,7 +16,7 @@
         <view class="business_name">{{form.full_name}}</view>
         <view class="business_rate">
           评分：
-          <van-rate value="{{form.pf}}" allow-half='{{true}}' void-icon="star" readonly />
+        <van-rate value="{{form.pf}}" allow-half void-icon="star" void-color="#eee" readonly />
         </view>
       </view>
     </view>

@@ -1,7 +1,12 @@
 // pages/Order/orderDetail/orderdetail.js
 // import {myOrderDeatils,myOrderDel,myOrderUpdate,domain} from '../../../utils/api.js'
 import Dialog from '@vant/weapp/dialog/dialog';
-import {img,Yhddlb,Sjgzm,addressList,updateOrder} from '../../../../apis/specialZone.js'
+import {
+  img,
+  Yhddlb,
+  Sjgzm,
+  updateOrder
+} from '../../../../apis/specialZone.js'
 const areaCode = require('../../../../utils/area-data.js')
 Page({
 
@@ -9,11 +14,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    bottomLift:getApp().globalData.bottomLift,
+    bottomLift: getApp().globalData.bottomLift,
     img,
-    orderDetail:{},
-    show3:false,
-    show_img:false
+    orderDetail: {},
+    show3: false,
+    show_img: false
   },
 
   /**
@@ -23,90 +28,80 @@ Page({
     console.log(options.id);
     this.getYhddlb(options.id)
   },
-  getAddress() {
-    addressList({
-      openid: wx.getStorageSync('thirdSession').openid,
-      pageNum: 1,
-      pageSize: 10,
-    }).then(
-      (res) => {
-        if (res) {
-          if (res.data.length > 0) {
-            let formData = ""
-            for (let i in res.data) {
-              if (res.data[i].id ===this.data.orderDetail.address_id) {
-                formData = res.data[i]
-              }
-            }
-            console.log(formData);
-            const regionCode = formData.region_code ? formData.region_code.split(',') : []
-            const province = areaCode.areaList.province_list[regionCode[0]]
-            const city = areaCode.areaList.city_list[regionCode[1]]
-            const county = areaCode.areaList.county_list[regionCode[2]]
-            console.log(province);
-            this.setData({
-              addressDeatil: formData,
-              province,
-              city,
-              county
-            })
-          }
-
-        }
-
-      }
-    )
+  goThere() {
+    const {
+      orderDetail
+    } = this.data
+    const latitude = Number(orderDetail.selfPoint.wd)
+    const longitude = Number(orderDetail.selfPoint.jd)
+    wx.openLocation({
+      latitude,
+      longitude,
+      name: orderDetail.selfPoint.dq + orderDetail.selfPoint.xxdz,
+      scale: 18
+    })
   },
-  getWx(){
+  getWx() {
     Sjgzm({
-      id:this.data.orderDetail.store_id
-    }).then((res)=>{
+      id: this.data.orderDetail.store_id
+    }).then((res) => {
       console.log(res);
-      if(res){
+      if (res) {
         this.setData({
-          mobile:res?.data.mobile||'暂无',
-          wechat:res?.data.wechat||'暂无'
+          mobile: res?.data.mobile || '暂无',
+          wechat: res?.data.wechat || '暂无'
         })
       }
     })
   },
-  getYhddlb(id=''){
+  getYhddlb(id = '') {
     console.log(id);
     Yhddlb({
-      page:1,size:7,openid:wx.getStorageSync('thirdSession').openid,orderStatus:'',id
-    }).then((res)=>{
+      page: 1,
+      size: 7,
+      openid: wx.getStorageSync('thirdSession').openid,
+      orderStatus: '',
+      id
+    }).then((res) => {
       console.log(res);
-      if(res){
-        let num=0
-        res.data[0].goodSizeList.map(item=>{
-          item.sptp=item.sptp?.split(',')
-          num+=item.num*item.prince
+      if (res) {
+        let num = 0
+        res.data[0].goodSizeList.map(item => {
+          item.sptp = item.sptp?.split(',')
+          num += item.num * item.prince
         })
-        if(!res.data[0].hdid)res.data[0].order_money=num
+        let formData = res.data[0]
+        const regionCode = formData.address_region_code ? formData.address_region_code.split(',') : []
+        const province = areaCode.areaList.province_list[regionCode[0]]
+        const city = areaCode.areaList.city_list[regionCode[1]]
+        const county = areaCode.areaList.county_list[regionCode[2]]
+        // if (!res.data[0].hdid) res.data[0].order_money = num
         this.setData({
-          orderDetail:res.data[0]
+          orderDetail: res.data[0],
+          province,
+          city,
+          county
         })
         this.getWx()
-        this.getAddress()
       }
     })
   },
-  confirmOrder(e){
+  confirmOrder(e) {
     console.log(e);
     Dialog.confirm({
-      title: '我的订单',
-      message: '确认收货？',
-    })
+        title: '我的订单',
+        message: '确认收货？',
+      })
       .then(() => {
         console.log(111);
         updateOrder({
             orderStatus: '5',
-            id:e.target.dataset.id,
-            activityId:e.target.dataset.item?.hdid||'',
-            goodsId:e.target.dataset.item?.spid||''
+            id: e.target.dataset.id,
+            activityId: e.target.dataset.item?.hdid || '',
+            goodsId: e.target.dataset.item?.spid || ''
           })
-        .then( (res) => {
-          console.log(res);
+          .then((res) => {
+            console.log(res);
             if (res.code == 200) {
               wx.showToast({
                 title: res.msg,
@@ -122,95 +117,96 @@ Page({
             }
           })
 
-        })
-     
+      })
+
       .catch(() => {
         // on cancel
       });
   },
-  showImg(){
+  showImg() {
     this.setData({
-      show_img:true
+      show_img: true
     })
   },
-  hideImg(){
+  hideImg() {
     this.setData({
-      show_img:false
+      show_img: false
     })
   },
   GoDetail(e) {
     console.log(e);
-    if(this.data.orderDetail.dpzt==0){
+    if (this.data.orderDetail.dpzt == 0) {
       wx.showToast({
         title: '该店铺已关闭',
-        icon:'error'
+        icon: 'error'
       })
-    }else if(this.data.orderDetail.spzt==0){
+    } else if (this.data.orderDetail.spzt == 0) {
       wx.showToast({
         title: '该商品已下架',
-        icon:'error'
+        icon: 'error'
       })
-    }else if(this.data.orderDetail.evaluation_state=='1'){
+    } else if (this.data.orderDetail.evaluation_state == '1') {
       wx.showToast({
         title: '该活动已下架',
-        icon:'error'
+        icon: 'error'
       })
-    }else{
-    if(e.currentTarget.dataset.type===1){
-      wx.navigateTo({
-        url: '/specialZone/pages/activityDeatil/activityDeatil?id='+e.currentTarget.dataset.id
-      })
-    }else{
-      wx.navigateTo({
-        url: '/specialZone/pages/shopDetail/shopDetail?id='+e.currentTarget.dataset.id
-      })
-    }}
+    } else {
+      if (e.currentTarget.dataset.type === 1) {
+        wx.navigateTo({
+          url: '/specialZone/pages/activityDeatil/activityDeatil?id=' + e.currentTarget.dataset.id
+        })
+      } else {
+        wx.navigateTo({
+          url: '/specialZone/pages/shopDetail/shopDetail?id=' + e.currentTarget.dataset.id
+        })
+      }
+    }
   },
   GoPhone() {
     wx.makePhoneCall({
       phoneNumber: this.data.mobile
     })
   },
-  GoCopy(){
+  GoCopy() {
     wx.setClipboardData({
       data: this.data.orderDetail.wechat,
-      success (res) {
+      success(res) {
         wx.getClipboardData({
-          success (res) {
+          success(res) {
             console.log(res.data) // data
           }
         })
       }
     })
   },
-  delOrder(val){
+  delOrder(val) {
     console.log(val)
     Dialog.confirm({
-      title: '我的订单',
-      message: '是否删除？',
-    })
-    .then(() => {
-      updateOrder({
-        userDel: '1',
-          id:val.target.dataset.id
-        })
-      .then( (res) => {
-        console.log(res);
-          if (res.code == 200) {
-            wx.showToast({
-              title: res.msg,
-            })
-            wx.navigateBack({
-              delta: 1
-            })
-            
-          } else {
-            wx.showToast({
-              icon: 'error',
-              title: res.msg,
-            })
-          }
-        })
+        title: '我的订单',
+        message: '是否删除？',
+      })
+      .then(() => {
+        updateOrder({
+            userDel: '1',
+            id: val.target.dataset.id
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.code == 200) {
+              wx.showToast({
+                title: res.msg,
+              })
+              wx.navigateBack({
+                delta: 1
+              })
+
+            } else {
+              wx.showToast({
+                icon: 'error',
+                title: res.msg,
+              })
+            }
+          })
 
       })
       .catch(() => {
@@ -222,14 +218,14 @@ Page({
     wx.showModal({
       title: '提示',
       content: '是否确认收货？',
-      success :(res)=> {
+      success: (res) => {
         if (res.confirm) {
           wx.request({
             url: myOrderUpdate,
-            method:'POST',
-            data:{
+            method: 'POST',
+            data: {
               orderStatus: '5',
-              id:e.target.dataset.id
+              id: e.target.dataset.id
             },
             success: (res) => {
               if (res.data.code == 200) {
@@ -251,27 +247,27 @@ Page({
       }
     })
   },
-  getData(id){
+  getData(id) {
     wx.request({
       url: myOrderDeatils,
-      method:'get',
-      data:{
-        id:id
+      method: 'get',
+      data: {
+        id: id
       },
-      success:(res)=>{
-        if(res.data.code==200){
+      success: (res) => {
+        if (res.data.code == 200) {
           const formData = res.data.data[0]
-          const regionCode=formData.regionCode?formData.regionCode.split(','):[]
+          const regionCode = formData.regionCode ? formData.regionCode.split(',') : []
           const province = areaCode.areaList.province_list[regionCode[0]]
           const city = areaCode.areaList.city_list[regionCode[1]]
           const county = areaCode.areaList.county_list[regionCode[2]]
           this.setData({
-            orderDetail:formData,
+            orderDetail: formData,
             province,
             city,
             county
           })
-        }else{
+        } else {
           wx.showToast({
             title: res.data.msg,
           })

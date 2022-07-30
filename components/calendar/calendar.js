@@ -56,7 +56,6 @@ Component({
         openid: wx.getStorageSync('thirdSession').openid
       }
       addYhdk(param).then((res) => {
-        console.log(res);
         this.getMxxxXxrq()
       })
     },

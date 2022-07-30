@@ -8,6 +8,7 @@
 
 .box {
   height: 100%;
+  margin-bottom: 200rpx;
 }
 
 .zanwu {

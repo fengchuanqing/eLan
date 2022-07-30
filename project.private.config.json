@@ -5,20 +5,7 @@
       "list": [
         {
           "name": "",
-          "pathName": "shop/pages/setting/setting",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "shop/pages/addShop/addShop",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "specialZone/pages/search/search",
+          "pathName": "shop/pages/officer/index",
           "query": "",
           "launchMode": "default",
           "scene": null
@@ -27,25 +14,47 @@
           "name": "",
           "pathName": "shop/pages/shopManage/shopManage",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
           "name": "",
-          "pathName": "specialZone/pages/shopCart/shopCart",
+          "pathName": "message/pages/spShop/spShop",
           "query": "",
           "launchMode": "default",
           "scene": null
         },
         {
           "name": "",
-          "pathName": "shop/pages/addActivity/addActivity",
+          "pathName": "gylz/pages/addZt/addZt",
           "query": "",
           "launchMode": "default",
           "scene": null
         },
         {
           "name": "",
-          "pathName": "message/pages/Order/myorder/myorder",
+          "pathName": "pages/studyPlant/studyPlant/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "message/pages/address/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "shop/pages/orderManage/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "gylz/pages/ztDeatil/ztDeatil",
           "query": "",
           "launchMode": "default",
           "scene": null
@@ -53,13 +62,13 @@
         {
           "name": "",
           "pathName": "pages/studyPlant/attestation/index",
-          "query": "",
+          "query": "rz=1",
           "launchMode": "default",
           "scene": null
         },
         {
           "name": "",
-          "pathName": "specialZone/pages/xpcx/xpcx",
+          "pathName": "message/pages/address/index/index",
           "query": "",
           "launchMode": "default",
           "scene": null
@@ -67,5 +76,6 @@
       ]
     }
   },
-  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html"
+  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "libVersion": "2.23.0"
 }

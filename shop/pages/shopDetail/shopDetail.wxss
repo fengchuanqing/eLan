@@ -58,6 +58,7 @@
   margin-top: 20rpx;
   justify-content: space-between;
   box-sizing: border-box;
+  background-color: #ffffff;
 }
 
 .date_name {
@@ -141,4 +142,19 @@ view.van-checkbox {
 .ruleItem{
   /* background-color: rgba(66,143,252,.1); */
   margin-left: 5rpx;
+}
+
+.stationList{
+  padding: 0 35rpx;
+  margin-top: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+.stations{
+  padding: 13rpx 28rpx;
+  background-color: rgba(66,143,252,.1);
+  font-size: 28rpx;
+  color: #428efc;
+  margin-bottom: 16rpx;
+  margin-right: 16rpx;
 }

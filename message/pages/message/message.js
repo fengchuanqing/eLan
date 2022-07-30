@@ -1,5 +1,5 @@
 import {
-  xldtxx
+  wdxxxgyd
 } from '../../../apis/index'
 Page({
 
@@ -13,7 +13,7 @@ Page({
     const params = {
       openid: wx.getStorageSync('thirdSession').openid || ''
     }
-    xldtxx(params).then(res => {
+    wdxxxgyd(params).then(res => {
       if (res) {
         this.setData({
           noticesList: res.data
@@ -53,9 +53,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

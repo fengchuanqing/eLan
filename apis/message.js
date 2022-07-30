@@ -90,32 +90,42 @@ export const sjDetail = () => {
         method: 'post'
     })
 }
+export const sjshopDetail = () => {
+  const bq = wx.getStorageSync('userInfo')?.bq
+    return requset({
+        url: '/xcx/tczq/sj/detail?openid=' + (bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid),
+        method: 'post'
+    })
+}
 // 修改商家信息
 export const updateDetail = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/updateDetail',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
         method: 'post'
     })
 }
 // 添加订单
 export const addOffOnline = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/addOffOnline',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
     })
 }
 // /xcx/tczq/sj/OffOnlineList
 // 线下下单列表
 export const OffOnlineList = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
-        url: '/xcx/tczq/sj/OffOnlineList?openid=' + wx.getStorageSync('thirdSession').openid,
+        url: '/xcx/tczq/sj/OffOnlineList?openid=' + (bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid),
         data: {
             ...data,
             // openid: wx.getStorageSync('thirdSession').openid,
@@ -124,22 +134,24 @@ export const OffOnlineList = (data) => {
 }
 // 新增商品
 export const addGoods = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/addGoods',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
         method: 'post'
     })
 }
 // 商品列表
 export const GoodsList = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/GoodsList',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
     })
 }
@@ -173,22 +185,24 @@ export const deleteGoods = (data) => {
 }
 // 新增活动
 export const addActivity = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/addActivity',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
         method: 'post'
     })
 }
 // 活动商品列表
 export const activityList = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/activityList',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
     })
 }
@@ -222,11 +236,12 @@ export const activityDetail = (data) => {
 }
 // 订单列表
 export const orderList = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/orderList',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
     })
 }
@@ -251,62 +266,68 @@ export const orderDetail = (data) => {
 }
 // 评价列表
 export const pjList = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/pjList',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
     })
 }
 // 店铺统计
 export const count1 = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/count1',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
     })
 }
 // 店铺统计
 export const hdsplb = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/hdsplb',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
     })
 }
 // 待办事项
 export const dbsx = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/dbsx',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
     })
 }
 // 新增沉浸看货
 export const xzcjkh = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/xzcjkh',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
         method: 'post'
     })
 }
 // 新增沉浸看货
 export const khlb = (data) => {
+  const bq = wx.getStorageSync('userInfo')?.bq
     return requset({
         url: '/xcx/tczq/sj/khlb',
         data: {
             ...data,
-            openid: wx.getStorageSync('thirdSession').openid,
+            openid: bq=='店长'?wx.getStorageSync('thirdSession').openid:wx.getStorageSync('thirdSession').dzopenid,
         },
     })
 }
@@ -354,6 +375,18 @@ export const goodsType = (data) => {
         data: {
             ...data,
         },
+    })
+}
+export const kdzlsqxq = (data) => {
+    return requset({
+        url: '/xcx/tczq/kdzlsqxq',
+        data,
+    })
+}
+export const getStoreOpenId = (data) => {
+    return requset({
+        url: '/api/elmg/yggl/getStoreOpenId',
+        data
     })
 }
 export const uploadFile = 'https://szsn.lx.gov.cn/bsApi/common/upload'

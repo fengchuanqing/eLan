@@ -11,9 +11,6 @@ const width = device.windowWidth // 示例为一个与屏幕等宽的正方形�
 const system = device.system;
 let height = device.windowHeight - 100
 
-
-
-
 Page({
 
   /**
@@ -26,7 +23,7 @@ Page({
       rotateI: 0,
       tranlateX: width / 2,
       tranlateY: height / 2,
-      width,  // 画布宽度
+      width, // 画布宽度
       height, // 画布高度
       scale: 2.5, // 最大缩放倍数
       zoom: 8, // 缩放系数,
@@ -47,9 +44,11 @@ Page({
     const self = this;
     this.setData({
       cuttype: options.cuttype,
-      isZ:Number(options.isZ)
+      isZ: Number(options.isZ)
     })
-    const { cropperOpt } = this.data;
+    const {
+      cropperOpt
+    } = this.data;
     new WeCropper(cropperOpt)
       .on('ready', (ctx) => {
         self.wecropper.updateCanvas(this.data.rotateI)
@@ -102,7 +101,7 @@ Page({
   touchEnd(e) {
     this.wecropper.touchEnd(e)
   },
-  uploadA(src){
+  uploadA(src) {
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2]
     wx.showLoading({
@@ -117,14 +116,14 @@ Page({
 
         const data = JSON.parse(res.data)
         console.log(data);
-        if(data.data.code==500){
+        if (data.data.code == 500) {
           wx.showToast({
             title: data.data.msg,
-            icon:'none',
-            success(){
+            icon: 'none',
+            success() {
               setTimeout(() => {
                 wx.navigateBack()
-                }, 2000);
+              }, 2000);
             }
           })
         }
@@ -134,14 +133,14 @@ Page({
           username: data.data.name || "",
           idCard: data.data.id || ''
         })
-       
+
       },
       complete() {
         wx.hideLoading()
       }
     })
   },
-  uploadB(src){
+  uploadB(src) {
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2]
     wx.uploadFile({
@@ -152,19 +151,19 @@ Page({
       success: (res) => {
         console.log(res);
         const data = JSON.parse(res.data)
-        if(data.data.code==500){
+        if (data.data.code == 500) {
           wx.showToast({
             title: data.data.msg,
-            icon:'none',
-            success(){
+            icon: 'none',
+            success() {
               setTimeout(() => {
                 wx.navigateBack()
-                }, 2000);
+              }, 2000);
             }
           })
         }
         prevPage.setData({
-          idCardB:  '/bs' + data.fileName,
+          idCardB: '/bs' + data.fileName,
           cuttype: this.data.cuttype
         })
         wx.navigateBack()
@@ -178,12 +177,12 @@ Page({
         if (src) {
           console.log(src);
           if (this.data.cuttype == 1) {
-            if(this.data.isZ==1){
+            if (this.data.isZ == 1) {
               this.uploadA(src)
-            }else{
+            } else {
               this.uploadB(src)
             }
-          }else{
+          } else {
             wx.navigateBack()
           }
         } else {

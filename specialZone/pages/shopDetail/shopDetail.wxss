@@ -152,10 +152,11 @@
   line-height: 48rpx;
   letter-spacing: 0rpx;
   color: #666666;
-  margin-bottom: 200rpx;
+  margin-bottom: 20rpx;
   padding: 0 30rpx;
   background-color: #ffffff;
   min-height: 1rpx;
+  text-align: center;
 }
 
 .bottom {
@@ -440,4 +441,14 @@ canvas {
 }
 .stepper .van-stepper__minus,.stepper .van-stepper__plus{
   background-color: #ffffff;
+}
+.xdxz{
+  margin: 20rpx 0;
+}
+.xdxzTit{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.xdxzItem{
+  font-size: 28rpx;
 }

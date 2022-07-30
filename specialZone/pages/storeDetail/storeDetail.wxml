@@ -7,7 +7,7 @@
       </view>
       <view class="business_rate">
         评分：
-        <van-rate value="{{pf}}" allow-half void-icon="star"  color="#ffd21e" void-icon="star" void-color="rgb(255,206,31)" readonly size="18px" />
+        <van-rate value="{{pf}}" allow-half  color="#ffd21e" void-icon="star" void-color="#eee" readonly size="18px" />
       </view>
     </view>
   </view>
@@ -29,7 +29,7 @@
         <view class="item">
           <image src="{{domain+item.img[0]}}"></image>
           <view class="item_info">
-            <view class="shop_name"><text> {{item.name}}</text> <text>{{item.gg}}</text></view>
+            <view class="shop_name"><text> {{item.name}}</text> <text>{{item.gg}}斤/件</text></view>
             <view class="shop_tag">
               <text>{{item.trait}} </text><text>￥{{item.jg}}</text>
               <!-- <text wx:for="{{item.trait}}" wx:key="idx">{{item}}</text> -->

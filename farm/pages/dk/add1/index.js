@@ -35,7 +35,6 @@ Page({
         let params = {
             mc: this.data.keyword
         }
-        console.log(params);
         searchMassif(params).then(res => {
             if (res.code == 200) {
                 if (res.data) {
@@ -77,9 +76,7 @@ Page({
     onLoad: function (options) {
         searchMassif().then(res => {
             if (res.code == 200) {
-                console.log(res.data);
                 if(res.data) {
-
                 this.data.polygon.length = 0
                 res.data.forEach(item => {
                     this.data.polygon.push({
@@ -94,7 +91,6 @@ Page({
                     List: res.data
                 })
             }
-                console.log(this.data.polygon);
             }
         })
     },

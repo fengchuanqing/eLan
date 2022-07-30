@@ -1,14 +1,16 @@
 <!--message/pages/message/message.wxml-->
 <view>
-    <view wx:if="{{noticesList.length}}" class="container">
-        <view class="list" wx:for="{{noticesList}}" wx:key="index">
-            <text class="star">*</text>
-            <!-- <view>{{item.bt}}</view> -->
-            <rich-text nodes="{{item.bt}}"></rich-text>
-            <text class="date">{{item.sj}}</text>
-        </view>
+  <view wx:if="{{noticesList.length}}" class="container">
+    <view class="list" wx:for="{{noticesList}}" wx:key="index">
+      <view class="item">
+        <text class="star" wx:if="{{item.isRead!=='1'}}">*</text>
+        <!-- <view>{{item.bt}}</view> -->
+        <rich-text nodes="{{item.bt}}"></rich-text>
+      </view>
+      <text class="date">{{item.sj}}</text>
     </view>
-    <view wx:else class="empty">
-        <image src="/message/pages/assets/message/empty.png"></image>
-    </view>
+  </view>
+  <view wx:else class="empty">
+    <image src="/message/pages/assets/message/empty.png"></image>
+  </view>
 </view>

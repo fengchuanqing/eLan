@@ -27,7 +27,19 @@ Page({
     show3: false,
     show4: false,
     form: {},
-    hideContain: false
+    hideContain: false,
+    imgShow:false,
+  },
+  showImg(e){
+    this.setData({
+      imgShow:true,
+      curImg:e.currentTarget.dataset.img
+    })
+  },
+  hideImg(){
+    this.setData({
+      imgShow:false,
+    })
   },
   check(e){
     let value=e.detail.value
@@ -174,7 +186,7 @@ Page({
         this.setData({
           mobile: res?.data.mobile || '暂无',
           wechat: res?.data.wechat || '暂无',
-          skm: res?.data.skm || '暂无'
+          skm: res?.data.skm.split(',') || '暂无'
         })
       }
     })
@@ -184,6 +196,12 @@ Page({
    */
   onLoad: function (options) {
     this.getData()
+    console.log(options.stationId)
+    if(options.stationId){
+      this.setData({
+        stationId:options.stationId
+      })
+    }
   },
   getAddress() {
     addressList({
@@ -225,15 +243,25 @@ Page({
     data.map(item=>{
       payMoney+=item.num*item.unitPrice
     })
+    let colu = data[0].distribution_type=='1'?['快递配送']:data[0].distribution_type=='2'?['自提']:['自提','快递配送']
     this.setData({
       goodsList:data,
-      payMoney
+      payMoney,
+      columns:colu,
+      type:colu[0],
+      show1:colu[0]=='自提'?true:false
     })
     this.getWx(data[0].storeId)
   },
   OpenCheck() {
     this.setData({
       show: true
+    })
+  },
+  goStations(){
+    console.log(this.data.stationId)
+    wx.navigateTo({
+      url: '/specialZone/pages/selectStations/selectStations?stationId='+(this.data.stationId?this.data.stationId:''),
     })
   },
   GoPhone() {
@@ -303,6 +331,13 @@ Page({
       })
       return
     }
+    if (this.data.type=='自提' && !this.data.stations) {
+      wx.showToast({
+        icon: 'none',
+        title: '请选择自提点',
+      })
+      return
+    }
     if (!this.data.show1 && !this.data.province) {
       wx.showToast({
         icon: 'none',
@@ -323,7 +358,9 @@ Page({
       orderStatus: 1,
       nums: this.data.goodsNum,
       addressId: this.data.addressDeatil?.id,
-      shopCarList:this.data.goodsList
+      shopCarList:this.data.goodsList,
+      templateIdList:['5HD-XrMbh_0ynv0c1lgS0KBRvX51Or9LeEgcl5R6GH8'],
+      // pickId:this.data.type=='自提'?this.data.stations.id:''
     }
     addOrder({
         ...form
@@ -360,6 +397,8 @@ Page({
    */
   onShow: function () {
     this.getAddress()
+    const curStation = wx.getStorageSync('curStation')
+    curStation&&this.setData({stations:curStation})
   },
 
   /**
@@ -373,7 +412,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wx.removeStorageSync('curStation')
   },
 
   /**

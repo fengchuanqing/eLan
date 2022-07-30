@@ -8,7 +8,8 @@ import {
   Qxzxx,
   Cqjczxx,
   domain,
-  xlbbzxb
+  xlbbzxb,
+  Zjdqxz
 } from '../../../../apis/index'
 
 function getOption(xData, unit, data_cur, data_up, data_down) {
@@ -174,11 +175,19 @@ Component({
   },
   ready() {
     if (this.properties.farmRz) {
-      this.getQxzxx()
+      this.Zjdqxz()
       this.Cqjczxx()
     }
   },
   methods: {
+    Zjdqxz(){
+      Zjdqxz({
+        openid:wx.getStorageSync('thirdSession').openid
+      }).then(res=>{
+        // if(res)
+        this.getQxzxx()
+      })
+    },
     Cqjczxx() {
       Cqjczxx({
         openid:wx.getStorageSync('thirdSession').openid

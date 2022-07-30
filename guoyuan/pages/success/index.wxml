@@ -23,13 +23,13 @@
             <view class="group_5">
               <text decode="decode">以下方案仅供参考，具体请咨询您的服务商
               </text>
-          <rich-text nodes="{{obj.fzjy}}"></rich-text>
+              <rich-text nodes="{{obj.fzjy}}"></rich-text>
             </view>
             <view class="flex-col items-center button">
               <text decode="decode" bindtap="goBack">重新拍照</text>
             </view>
           </view>
-          <navigator url="/pages/nanny/nanny/index" decode="decode" class="button_1" >我要农资</navigator>
+          <navigator url="/pages/nanny/nanny/index" decode="decode" class="button_1">我要农资</navigator>
         </view>
       </view>
     </view>

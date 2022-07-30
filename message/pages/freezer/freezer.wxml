@@ -1,0 +1,27 @@
+<van-search value="{{ searchVal }}" placeholder="请输入冷库名称搜索" shape="round" use-right-icon-slot bind:search="onSearch">
+  <view slot="right-icon" class="cancelSearch" bindtap="onCancel">取消</view>
+</van-search>
+<view class="list">
+  <navigator class="freezer" wx:for="{{freezerList}}" wx:key="*this" hover-class="none" url="/message/pages/freezerDeatil/freezerDeatil?id={{item.id}}">
+    <view class="name">
+      <image src="/message/img/lengku.png"></image>
+      {{item.lkmc}}
+    </view>
+    <view class="rl">
+      <text>可共享容量(m³)</text>
+      <text>{{item.kgxrl}}</text>
+    </view>
+    <view class="rl">
+      <text>收费标准</text>
+      <text>{{item.sfbz}}</text>
+    </view>
+    <view class="address">
+      <van-icon name="location-o" color="#428ffc" />
+      <view>
+        {{item.dq}}
+        <text>{{item.jl}}公里</text>
+      </view>
+      <view class="freezerOrder" catchtap="goNext" data-url="/message/pages/freezerOrder/freezerOrder?id={{item.id}}">立即预约</view>
+    </view>
+  </navigator>
+</view>

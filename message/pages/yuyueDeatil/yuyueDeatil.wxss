@@ -1,0 +1,34 @@
+.container{
+  background-color: #ffffff;
+	box-shadow: 0rpx 2rpx 24rpx 0rpx 
+		rgba(47, 111, 247, 0.16);
+}
+.cellArea .content{
+  background-color: #edeff2;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  min-height: 180rpx;
+}
+.finish{
+  width: 86%;
+  height: 96rpx;
+	background-color: #428ffc;
+  border-radius: 48rpx;
+  text-align: center;
+  line-height: 96rpx;
+  color: #ffffff;
+  font-size: 36rpx;
+  margin: 100rpx auto;
+}
+.remark .label text{
+  color: #e63633;
+}
+.remark textarea{
+  background-color: #edeff2;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  min-height: 180rpx;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 36rpx;
+}

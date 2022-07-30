@@ -1,0 +1,70 @@
+.cancelSearch{
+  color: #428ffc;
+  font-size: 28rpx;
+}
+.van-search{
+  background-color: unset !important;
+  padding: 32rpx 29rpx !important;
+}
+.van-search__content{
+  background-color: #ffffff !important;
+}
+.list{
+  margin-top: 10rpx;
+}
+.freezer{
+  padding: 28rpx 30rpx;
+  border-bottom: 1rpx solid #e8e9ec;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  background-color: #ffffff;
+	box-shadow: 0rpx 2rpx 24rpx 0rpx 
+    rgba(47, 111, 247, 0.16);
+}
+.name{
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.name>image{
+  width: 41rpx;
+  height: 33rpx;
+  margin-right: 10rpx;
+}
+.rl{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  margin-top: 25rpx;
+}
+.rl text:first-child{
+  color: #686b73;
+}
+.address{
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #686b73;
+  margin-top: 25rpx;
+}
+.van-icon{
+  margin-right: 11rpx;
+}
+.address text{
+  color: #428ffc;
+  margin-left: 20rpx;
+  width: 200rpx;
+}
+.freezerOrder{
+  width: 161rpx;
+	height: 56rpx;
+	background-color: #428ffc;
+  border-radius: 8rpx;
+  text-align: center;
+  line-height: 56rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  float: right;
+  flex-shrink: 0;
+  margin-left: 30rpx;
+}

@@ -69,6 +69,14 @@
           果园管家
         </view>
       </view>
+      <view class="temp-con-item3" bindtap="goNext" data-url="/message/pages/freezer/freezer">
+        <view class="img">
+          <image src="/assets/images/home/lkgx.png"></image>
+        </view>
+        <view class="temp-con-item3-name">
+          冷库共享
+        </view>
+      </view>
     </view>
   </view>
 </view>
@@ -155,4 +163,4 @@
     </block>
   </view>
 </view>
-<authentication show="{{showAuthentication}}" url="{{authUrl}}"></authentication>
+<authentication show="{{showAuthentication}}" url="{{authUrl}}" content="请先实名认证"></authentication>

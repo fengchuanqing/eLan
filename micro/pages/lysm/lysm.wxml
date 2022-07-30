@@ -1,15 +1,14 @@
 <!--pages/micro/lysm/lysm.wxml-->
 <view>
-    <van-tabs active="{{ active }}" ellipsis="{{false}}" wx:if="{{tabList.length}}" bind:click="selected" swipeable title-active-color="#428ffc" color="#428ffc" line-width="50rpx">
-        <van-tab title="{{item.lxmc}}" name="{{item.id}}" wx:for="{{tabList}}" wx:key="index">
-            <view class="content" wx:for="{{list}}" wx:key="*this" wx:for-item="it" bindtap="navTo" data-dz="{{it.spdz}}" data-bt="{{it.spbt}}" data-lj="{{it.lj}}">
-                <view>
-                    <image src="{{videoSrc+it.fm}}"></image>
-                    <!-- <video  src="{{videoSrc+it.spdz}}" controls="{{false}}" show-center-play-btn="{{false}}"></video> -->
-                    <view class="text">{{it.spbt}}</view>
-                </view>
-            </view>
-
-        </van-tab>
-    </van-tabs>
+  <van-tabs active="{{ active }}" ellipsis="{{false}}" wx:if="{{tabList.length}}" bind:click="selected" swipeable title-active-color="#428ffc" color="#428ffc" line-width="50rpx">
+    <van-tab title="{{item.lxmc}}" name="{{item.id}}" wx:for="{{tabList}}" wx:key="index">
+      <view class="content" wx:for="{{list}}" wx:key="*this" wx:for-item="it" bindtap="navTo" data-dz="{{it.spdz}}" data-bt="{{it.spbt}}" data-lj="{{it.lj}}">
+        <view>
+          <image src="{{videoSrc+it.fm}}" mode="widthFix"></image>
+          <!-- <video  src="{{videoSrc+it.spdz}}" controls="{{false}}" show-center-play-btn="{{false}}"></video> -->
+          <view class="text">{{it.spbt}}</view>
+        </view>
+      </view>
+    </van-tab>
+  </van-tabs>
 </view>

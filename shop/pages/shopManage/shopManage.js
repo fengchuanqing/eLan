@@ -1,15 +1,11 @@
 // pages/MerchantCenter/shopManage/shopManage.js
 import {
   domain,
-  merchantGoodsList,
-  merchantGoodsDeatil,
-  merchantGoodsUp
 } from "../../../utils/api.js"
 import {
   img,
   GoodsList,
   updateGoods,
-  deleteGoods
 } from '../../../apis/message.js'
 Page({
 
@@ -19,15 +15,7 @@ Page({
   data: {
     img,
     domain,
-    shopList: [
-      //   {
-      //   id: '1',
-      //   active: 0,
-      //   time: '2021',
-      //   name: '商品1',
-      //   trait: '商品1',
-      // }
-    ],
+    shopList: [],
     active: 0,
     showMore: false,
     screenPop: false,
@@ -106,37 +94,6 @@ Page({
       }
     })
   },
-  // getData() {
-  //   wx.request({
-  //     url: merchantGoodsList,
-  //     method: 'GET',
-  //     data: {
-  //       pageNum: this.data.pageNum,
-  //       pageSize: this.data.pageSize,
-  //       name: this.data.shopName,
-  //       storeId: wx.getStorageSync('userInfo').id || 1,
-  //       onState: this.data.active + 1,
-  //     },
-  //     success: (res) => {
-  //       if (res.data.code == 200) {
-  //         let arr = res.data.rows
-  //         if (this.data.pageNum * this.data.pageSize >= res.data.total) {
-  //           this.setData({
-  //             isReachBottom: false
-  //           })
-  //         }
-  //         this.setData({
-  //           shopList: [...this.data.shopList, ...arr]
-  //         })
-  //       } else {
-  //         wx.showToast({
-  //           icon: 'error',
-  //           title: res.data.msg,
-  //         })
-  //       }
-  //     }
-  //   })
-  // },
   onChange(event) {
     this.setData({
       active: event.detail.index,
@@ -207,32 +164,6 @@ Page({
             })
             this.getGoodsList()
           })
-          // wx.request({
-          //   url: merchantGoodsUp,
-          //   method: 'PUT',
-          //   data: {
-          //     id: e.currentTarget.dataset.id,
-          //     onState: "1"
-          //   },
-          //   success: (res) => {
-          //     if (res.data.code == 200) {
-          //       wx.showToast({
-          //         title: res.data.msg,
-          //       })
-          //       this.setData({
-          //         pageSize: 10,
-          //         pageNum: 1,
-          //         shopList: []
-          //       })
-          //       this.getData()
-          //     } else {
-          //       wx.showToast({
-          //         icon: 'error',
-          //         title: res.data.msg,
-          //       })
-          //     }
-          //   }
-          // })
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -261,32 +192,6 @@ Page({
             })
             this.getGoodsList()
           })
-          // wx.request({
-          //   url: merchantGoodsUp,
-          //   method: 'PUT',
-          //   data: {
-          //     id: e.currentTarget.dataset.id,
-          //     onState: "2"
-          //   },
-          //   success: (res) => {
-          //     if (res.data.code == 200) {
-          //       wx.showToast({
-          //         title: res.data.msg,
-          //       })
-          //       this.setData({
-          //         pageSize: 10,
-          //         pageNum: 1,
-          //         shopList: []
-          //       })
-          //       this.getData()
-          //     } else {
-          //       wx.showToast({
-          //         icon: 'error',
-          //         title: res.data.msg,
-          //       })
-          //     }
-          //   }
-          // })
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -345,31 +250,6 @@ Page({
               shopList: []
             })
             this.getGoodsList()
-            // wx.request({
-            //   url: merchantGoodsUp,
-            //   method: 'PUT',
-            //   data: {
-            //     id: e.currentTarget.dataset.id,
-            //     sort: Number(res.content)
-            //   },
-            //   success: (res) => {
-            //     if (res.data.code == 200) {
-            //       wx.showToast({
-            //         title: res.data.msg,
-            //       })
-            //       this.setData({
-            //         pageSize: 10,
-            //         pageNum: 1,
-            //         shopList: []
-            //       })
-            //       this.getData()
-            //     } else {
-            //       wx.showToast({
-            //         icon: 'error',
-            //         title: res.data.msg,
-            //       })
-            //     }
-            //   }
           })
         } else if (res.cancel) {
           console.log('用户点击取消')

@@ -5,15 +5,6 @@
 <view hidden="{{forecastActive===1}}">
   <view class="forecast-charts">
     <view class="forecast-charts-top">
-      <!-- <view class="forecast-charts-time {{curYear===1?'forecast-time-act':''}}" bindtap="changeTime" data-idx="{{1}}">
-        近一年
-      </view>
-      <view class="forecast-charts-time {{curYear===3?'forecast-time-act':''}}" bindtap="changeTime" data-idx="{{3}}">
-        近三年
-      </view>
-      <view class="forecast-charts-time {{curYear===5?'forecast-time-act':''}}" bindtap="changeTime" data-idx="{{5}}">
-        近五年
-      </view> -->
     </view>
     <view wx:if="{{!farmRz}}" class="forecast-select" bindtap="showBbColumns">
       <text>{{selectVal}}</text>
