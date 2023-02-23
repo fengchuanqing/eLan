@@ -1,6 +1,0 @@
-<!--pages/micro/video/video.wxml-->
-<view class="video">
-  <video object-fit="cover" wx:if="{{videoKey}}" src="{{img+url}}" custom-cache="{{false}}" autoplay="{{true}}"></video>
-  <video object-fit="cover" wx:else src="{{url}}" custom-cache="{{false}}" autoplay="{{true}}"></video>
-  <view>{{bt}}</view>
-</view>

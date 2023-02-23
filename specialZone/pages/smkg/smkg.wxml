@@ -1,5 +1,0 @@
-<view class="bg">
-  <text class="close" bindtap="goBack">x</text>
-  <image src="/specialZone/assets/sao.png" class="sao" bindtap="sao"></image>
-  <image src="/specialZone/assets/icon_photo.png" class="upload" bindtap="upload"></image>
-</view>

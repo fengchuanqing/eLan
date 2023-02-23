@@ -1,7 +1,0 @@
-<view class="form">
-  <van-field label="手机号" model:value="{{ mobile }}" clearable placeholder="请输入11位手机号码" />
-  <van-field class="password" model:value="{{ yzCode }}" type="number" placeholder="请输入验证码" clearable use-button-slot>
-    <button slot="button" class="getCode" bindtap="getCode" disabled="{{disabled}}">{{codename}}</button>
-  </van-field>
-</view>
-<view bindtap="login" class="submit">确认</view>

@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText":"跟着模型学",
-  "usingComponents": {
-    "Model":"/pages/studyPlant/comp/Model/model",
-    "Demonstrator":"/pages/studyPlant/comp/Demonstrator/index",
-    "Forecast":"/pages/studyPlant/comp/Forecast/index"
-  }
-}
